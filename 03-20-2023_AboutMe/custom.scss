@@ -1,0 +1,55 @@
+/*-- scss:defaults --*/
+
+// fonts
+@font-face {
+  font-family: "DMSans-Regular";
+  src: url(fonts/dm-sans/DMSans-Regular.ttf) format("truetype");
+}
+@font-face {
+  font-family: "DMSans-Medium";
+  src: url(fonts/dm-sans/DMSans-Medium.ttf) format("truetype");
+}
+@font-face {
+  font-family: "DMSans-Bold";
+  src: url(fonts/dm-sans/DMSans-Bold.ttf) format("truetype");
+}
+
+$font-family-sans-serif: "DMSans-Regular", "Times New Roman", "Book Antiqua", Palatino, FreeSerif, serif !default;
+
+// colors
+$body-bg: #6096B4 !default;
+$body-color: #000000 !default;
+$link-color: #BDCDD6 !default;
+$selection-bg: #BDCDD6 !default;
+$code-block-bg: #F9F9F9 !default;
+$code-color: #F9F9F9 !default;
+
+// headings
+$presentation-heading-font: $font-family-sans-serif !default;
+$presentation-heading-color: #F9F9F9 !default;
+$presentation-heading-text-transform: uppercase !default;
+
+// size
+$presentation-font-size-root: 30px;
+
+/*-- scss:rules --*/
+
+title {
+  font-family: "DMSans-Bold" !important;
+}
+
+h1 {
+  font-family: "DMSans-Bold" !important;
+}
+
+h2 {
+  font-family: "DMSans-Bold" !important;
+}
+
+body {
+  font-family: "Times New Roman" !important;
+}
+
+.reveal a {
+  line-height: 1.5em;
+}
