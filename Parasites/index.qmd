@@ -29,10 +29,5 @@ options(
 )
 ```
 
-# Overview
-
-1.  On Git in a Bit More Detail
-2.  AMA
-3.  RMarkdown Driven Development
-4.  Building a Portfolio with Quarto, Distil, or Blogdown
+# Work in Progress
 
