@@ -27,7 +27,7 @@ format:
 
 -   Use Revealjs (this presentation for example)
 
--   You can have images, videos, and iframe backgrounds imbedded in your documents
+-   Have images, videos, and iframe backgrounds imbedded in your documents
 
 . . .
 
