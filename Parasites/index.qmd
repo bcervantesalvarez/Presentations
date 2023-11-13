@@ -29,5 +29,7 @@ options(
 )
 ```
 
-# Work in Progress
+## Video Slide 
+
+{{< video https://youtu.be/wo9vZccmqwc width="100%" height="85%" >}}
 
