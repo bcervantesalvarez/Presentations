@@ -34,7 +34,7 @@ library(ggflags)
 library(downloadthis)
 ```
 
-## Marketing {style="font-size: 1em"}
+## Background & Future Goals {style="font-size: 1em"}
 
 ::: columns
 ::: {.column width="40%"}
@@ -42,39 +42,35 @@ library(downloadthis)
 :::
 
 ::: {.column width="60%"}
-1.  I am a dual citizen of the United States and Mexico with Mexican
-    roots.
 
-2.  I was captivated by the fast-paced evolution of technology from a
-    young age.
+1. Transitioned from a mathematics Bachelor’s at Linfield University to a Master’s in Data Science at Willamette University.
 
-3.  My undergraduate degree in mathematics provided a gateway to the
-    realm of Data Science, which became my passion.
+2. Currently pursuing a second Master’s in Statistics with a focus on machine learning and survival analysis (Ph.D. aspirations at Oregon State University).
 
-4.  With my proficiency in programming and mathematics, I recognized
-    Data Science as the ideal field to pursue post-graduation.
+3. Developed analytical skills in machine learning and survival analysis.
 
-5.  I am currently pursuing a master's degree in Data Science with the
-    aspiration of becoming a pioneering Data Scientist in the next
-    generation.
+4. Adept at communicating data-driven insights for actionable solutions.
+
+5. Passionate about statistical research, particularly focusing on classification problems. Committed to continuous learning in the dynamic field of data science and statistics.
+
 :::
 :::
 
-# Project Highlight {style="font-size: 1.5em; text-align:center"}
+# Project Highlights {style="font-size: 1.5em; text-align:center"}
 
 
 ## Resources for Prospective College Students {style="font-size: 0.8em"}
 
 <iframe src="https://bcervantesalvarez.shinyapps.io/CollegeStudentSalaryDebtTools/" style='height:100%;width:100%' data-autoplay></iframe>
 
-## Pokédex Database {style="text-align:center"}
+## Pokédex Database & Analysis {style="text-align:center"}
 
 ![](pokedex_presentation.jpeg){width=10%}
 
 ## Rating & Pricing Pinot Wines
 
 ```{r}
-#| code-summary: "GT Table Code"
+#| code-summary: "Reveal Code"
 ds <- read_rds("pinot.rds")
 
 ds_starter <- ds %>% 
@@ -139,7 +135,7 @@ fancyTbl <- ds_summary %>%
 fancyTbl
 
 ```
-# Thank you {style="font-size: 1.5em; text-align:center"}
+# Thank you! {style="font-size: 1.5em; text-align:center"}
 
 [![Click the image to go to my website!](icon.png)](https://bcervantesalvarez.github.io/Portfolio/)
 
