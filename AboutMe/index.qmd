@@ -6,9 +6,9 @@ format:
      code-fold: true
      multiplex: true
      preview-links: true
-     theme: [custom.scss]
+     theme: [WillametteUniversityTheme.scss]
      scrollable: true
-     logo: wu_compass.png
+     logo: wuCompass.jpeg
      chalkboard: true
      html-math-method: katex
      incremental: true
@@ -34,7 +34,7 @@ library(ggflags)
 library(downloadthis)
 ```
 
-## My Background
+## Marketing {style="font-size: 1em"}
 
 ::: columns
 ::: {.column width="40%"}
@@ -71,7 +71,7 @@ library(downloadthis)
 
 ![](pokedex_presentation.jpeg){width=10%}
 
-## Rating & Pricing Pinot Wines {background-color="white"}
+## Rating & Pricing Pinot Wines
 
 ```{r}
 #| code-summary: "GT Table Code"

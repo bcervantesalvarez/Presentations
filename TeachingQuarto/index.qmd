@@ -167,6 +167,11 @@ Wanna see everything that quarto's got to offer? Click on the quarto logo!
 
 [![](quarto.png){fig-alt="Alt text"}](https://quarto.org)
 
+
+## Videos? Here's a tutorial
+
+{{< video https://youtu.be/wo9vZccmqwc width="100%" height="80%" >}}
+
 ## References
 
 <https://quarto.org/>
