@@ -5,8 +5,6 @@
 
 https://bcervantesalvarez.github.io/Presentations/AboutMe/#/title-slide
 
-https://bcervantesalvarez.github.io/Presentations/Parasites/#/title-slide
-
 https://bcervantesalvarez.github.io/Presentations/TeachingQuarto/#/title-slide
 
 
