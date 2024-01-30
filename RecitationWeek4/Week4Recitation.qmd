@@ -1,0 +1,197 @@
+---
+title: "RECITATION ST243Z"
+author: "Brian Cervantes Alvarez"
+format: 
+   revealjs:
+     footer: "Recitation ST243Z (Feburary 2, 2024)"
+     code-fold: true
+     multiplex: true
+     preview-links: true
+     theme: [OSUTheme.scss]
+     scrollable: true
+     logo: OSULogo.png
+     smooth-scroll: true
+     chalkboard: true
+     html-math-method: katex
+     incremental: true
+     slide-number: c/t
+     transition: slide
+     
+---
+
+
+
+
+
+## Capybara Weight Distribution{auto-animate=true .r-fit-text}
+
+. . .
+
+::: {style="font-size: 1.1em"}
+Native to South America, capybaras are the largest species of rodent (resembling giant guinea pigs). Suppose the weights of all adult capybaras are normally distributed with an average weight of 108 pounds and a standard deviation of 11.5 pounds.
+:::
+
+![](capy1.jpeg){width=49% height=400}
+![](capy2.jpeg){width=49% height=400}
+
+
+## Capybara Weight Distribution{auto-animate=true}
+
+::: {.panel-tabset}
+
+### Q1
+
+#### Label the Values for the Distribution of Capybara Weights
+
+
+- $\mu_x = \text{Mean weight of adult capybaras} = 108 \text{ pounds}$
+
+- $\mu_x \pm 1\sigma_x = \text{Mean} \pm 1 \text{ standard deviation} = 108 \pm 11.5 \text{ pounds}$
+
+- $\mu_x \pm 2\sigma_x = \text{Mean} \pm 2 \text{ standard deviations} = 108 \pm 2 \times 11.5 \text{ pounds}$
+
+- $\mu_x \pm 3\sigma_x = \text{Mean} \pm 3 \text{ standard deviations} = 108 \pm 3 \times 11.5 \text{ pounds}$
+
+. . .
+
+```{r}
+library(ggplot2)
+
+# Set the mean and standard deviation
+mu <- 0
+sigma <- 1
+
+# Generate x values for the curve
+x <- seq(mu - 4*sigma, mu + 4*sigma, length.out = 1000)
+
+# Create data frame for plotting
+data <- data.frame(x, y = dnorm(x, mean = mu, sd = sigma))
+
+# Plot the normal distribution curve using ggplot2 with LaTeX labels using parse
+ggplot(data, aes(x, y)) +
+  geom_line(size = 1, color = "black") +  # Dark Blue
+  geom_vline(xintercept = mu, linetype = "longdash", color = "#e41a1c", size = 0.75) +  # Red
+  geom_vline(xintercept = c(mu - sigma, mu + sigma), linetype = "dotted", color = "#377eb8", size = 0.75) +  # Light Blue
+  geom_vline(xintercept = c(mu - 2*sigma, mu + 2*sigma), linetype = "dashed", color = "#4daf4a", size = 0.75) +  # Green
+  geom_vline(xintercept = c(mu - 3*sigma, mu + 3*sigma), linetype = "twodash", color = "#984ea3", size = 0.75) +  # Purple
+  annotate("text", x = mu + 0.2, y = -0.025, label = "mu[x]", color = "#e41a1c", parse = TRUE, size = 4.5) +
+  annotate("text", x = mu + sigma + 0.3, y = -0.025, label = "mu[x] + sigma[x]", color = "#377eb8", parse = TRUE, size = 4.5) +
+  annotate("text", x = mu + 2*sigma + 0.35, y = -0.025, label = "mu[x] + 2*sigma[x]", color = "#4daf4a", parse = TRUE, size = 4.5) +
+  annotate("text", x = mu + 3*sigma + 0.4, y = -0.025, label = "mu[x] + 3*sigma[x]", color = "#984ea3", parse = TRUE, size = 4.5) +
+  annotate("text", x = mu - sigma - 0.5, y = -0.025, label = "mu[x] - sigma[x]", color = "#377eb8", parse = TRUE, size = 4.5) +
+  annotate("text", x = mu - 2*sigma - 0.55, y = -0.025, label = "mu[x] - 2*sigma[x]", color = "#4daf4a", parse = TRUE, size = 4.5) +
+  annotate("text", x = mu - 3*sigma - 0.6, y = -0.025, label = "mu[x] - 3*sigma[x]", color = "#984ea3", parse = TRUE, size = 4.5) +
+  labs(x = "Pounds (lbs)",
+       y = NULL,
+       title = "Capybara Weight Distribution") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        panel.grid = element_blank())
+
+
+
+```
+
+### Q2
+
+#### What Proportion of Adult Capybaras Weigh More than 131 Pounds?
+
+. . .
+
+To find the proportion of capybaras weighing more than 131 pounds, we can use the z-score formula and standard normal distribution tables.
+
+. . .
+
+$$
+Z = \frac{{X - \mu}}{{\sigma}}
+$$
+
+. . .
+
+where $X$ is the weight, $\mu$ is the mean, and $\sigma$ is the standard deviation. For $X = 131$:
+
+$$
+Z = \frac{{131 - 108}}{{11.5}}
+$$
+
+. . .
+
+Calculate $Z$ and use the standard normal distribution table to find the corresponding proportion.
+
+### Q3
+
+#### What Proportion of Adult Capybaras Weigh Between 96.5 and 131 Pounds?
+
+. . . 
+
+To find the proportion of capybaras weighing between 96.5 and 131 pounds, we'll again use the z-score formula and standard normal distribution tables.
+
+. . . 
+
+Calculate the z-scores for $X = 96.5$ and $X = 131$, and use the standard normal distribution table to find the corresponding proportions. Subtract the smaller proportion from the larger one to get your solution.
+
+
+
+### Q4 
+
+#### A popular capybara named Dobby was reported to weigh 110 pounds when he was 2.5 years old. What weight percentile was the capybara in when he was 2.5 years old? Round to two places past decimal.
+
+
+. . .
+
+To find the weight percentile for Dobby at $2.5$ years old, we can use the z-score formula and then convert the z-score to a percentile using the standard normal distribution table.
+
+. . .
+
+$$
+Z = \frac{{X - \mu}}{{\sigma}}
+$$
+
+. . .
+
+Where $X$ is Dobby's weight, $\mu$ is the mean, and $\sigma$ is the standard deviation. For $X = 110$:
+
+$$
+Z = \frac{{110 - 108}}{{11.5}}
+$$
+
+. . .
+
+Calculate $Z$ and use the standard normal distribution table to find the corresponding percentile.
+
+### Q5 
+
+#### At five years old, Dobby was reported to be in the $96$th weight percentile. What does this mean conceptually, that the capybara is in the 96th percentile?
+
+. . .
+
+Being in the $96$th weight percentile means that at five years old, Dobby's weight is higher than $96\%$ of the adult capybaras in the population.
+
+### Q6
+
+#### At five years old, what is Dobby’s weight? Show any work and include any units, round to two places past decimal.
+
+. . .
+
+To find Dobby's weight at five years old, we can use the z-score formula again, but this time we know the percentile ($96$th percentile). We need to find the corresponding z-score and then use it to find the weight using the formula:
+
+. . .
+
+
+$$
+X = \mu + Z \times \sigma
+$$
+
+### Q7
+
+#### True or False: The probability of an adult capybara’s weight being 150 pounds or higher is equal to zero.
+
+- False
+
+
+:::
+
+# See you next week!
+
