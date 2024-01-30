@@ -7,8 +7,6 @@ https://bcervantesalvarez.github.io/Presentations/AboutMe/#/title-slide
 
 https://bcervantesalvarez.github.io/Presentations/TeachingQuarto/#/title-slide
 
-https://bcervantesalvarez.github.io/Presentations/RecitationWeek4/#/title-slide
-
 
 ## TO REFERENCE FUTURE REVEAL.JS HTML FILES
 
