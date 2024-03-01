@@ -144,7 +144,7 @@ end
 
 ## Shiny app? No problem!
 
-<iframe src="https://bcervantesalvarez.shinyapps.io/CollegeStudentSalaryDebtTools/" style='height:100%;width:100%' data-autoplay></iframe>
+<iframe src="https://bcervantesalvarez.shinyapps.io/FinalProjectData502/" style='height:100%;width:100%' data-autoplay></iframe>
 
 ## Wanna create a portfolio website? Quarto's got you
 
