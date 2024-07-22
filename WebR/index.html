@@ -11,8 +11,8 @@
   <meta name="generator" content="quarto-1.5.55">
 
   <meta name="author" content="Brian Cervantes Alvarez">
-  <meta name="dcterms.date" content="2024-07-21">
-  <title>Simplifying Teaching with webR</title>
+  <meta name="dcterms.date" content="2024-07-22">
+  <title>Hands-on Statistical Learning with webR</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -1172,7 +1172,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Simplifying Teaching with webR</h1>
+  <h1 class="title">Hands-on Statistical Learning with webR</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -1182,7 +1182,7 @@ Brian Cervantes Alvarez
 </div>
 </div>
 
-  <p class="date">2024-07-21</p>
+  <p class="date">July 22, 2024</p>
 </section>
 <section id="learning-objectives" class="slide level2">
 <h2>Learning Objectives</h2>
@@ -1212,11 +1212,14 @@ Brian Cervantes Alvarez
 <span id="cb1-5"><a href=""></a><span class="co"># Create a simple plot</span></span>
 <span id="cb1-6"><a href=""></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> mpg, <span class="at">y =</span> hp)) <span class="sc">+</span> </span>
 <span id="cb1-7"><a href=""></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="fragment">
+<!-- -->
 <h3 id="code-and-output">Code and Output</h3>
 <ul>
 <li class="fragment">Code is usually shown as static screenshots or pre-written blocks.</li>
 <li class="fragment">Students struggle to follow along without hands-on practice.</li>
 </ul>
+</div>
 </section>
 <section id="traditional-teaching-methods-live-coding" class="slide level2">
 <h2>Traditional Teaching Methods: <em>Live Coding</em></h2>
@@ -1240,22 +1243,43 @@ Brian Cervantes Alvarez
 <section id="introducing-webr" class="slide level2" data-background="#fd7038" data-background-transition="zoom">
 <h2>Introducing webR</h2>
 <h3 id="what-is-webr">What is webR?</h3>
+<p><img data-src="images/webR.webp" class="absolute" style="left: 800px; width: 200px; height: 200px; "></p>
 <ul>
 <li class="fragment"><a href="https://docs.r-wasm.org/webr/latest/">webR</a> is a version of R that runs directly in a <strong>web browser</strong>.</li>
 <li class="fragment">It <strong>eliminates</strong> the need for <span style="text-decoration: underline;">local installation or server setup</span>.</li>
 <li class="fragment">It just works (even on your phone).</li>
+<li class="fragment">Can be easily implemented using quarto.</li>
 </ul>
 </section>
-<section id="using-webr-in-presentations" class="slide level2" data-background="rgb(252, 149, 108)">
-<h2>Using webR in Presentations</h2>
-<h3 id="demo-setup-and-background">Demo Setup and Background</h3>
-<p>The purpose of this document is to explore how webR can be embedded in a Quarto document for teaching R.</p>
+<section id="why-webr-is-a-game-changer" class="slide level2" data-background="rgb(252, 149, 108)">
+<h2>Why webR is a Game Changer</h2>
+<ul>
+<li class="fragment"><code>webR</code> transforms traditional lectures into dynamic and interactive sessions.</li>
+<li class="fragment">It helps maintain student interest and improves comprehension through hands-on practice.</li>
+<li class="fragment">Simplifies the teaching process, allowing instructors to focus on content delivery rather than technical setup.</li>
+</ul>
+</section>
+<section id="benefits-of-webr" class="slide level2" data-background="rgb(252, 149, 108)">
+<h2>Benefits of webR</h2>
+<ul>
+<li class="fragment">Students can run code directly in the browser, fostering interactive learning.</li>
+<li class="fragment">No need for software installation, making it accessible to all students.</li>
+<li class="fragment">Ideal for live coding sessions, demonstrations, and exploratory data analysis.</li>
+</ul>
+</section>
+<section id="downloading-setting-up-webr" class="slide level2" data-background="rgb(252, 149, 108)">
+<h2>Downloading &amp; Setting Up webR</h2>
+<h3 id="webr-documentation">webR Documentation</h3>
+<p>Explore how webR can be embedded in a Quarto document for teaching R in the following links.</p>
 <div>
 <ul>
-<li>WebR Website: <a href="https://docs.r-wasm.org/webr/latest/" class="uri">https://docs.r-wasm.org/webr/latest/</a></li>
-<li>WebR GitHub: <a href="https://github.com/r-wasm/webr/" class="uri">https://github.com/r-wasm/webr/</a></li>
+<li><strong>WebR Website:</strong> <a href="https://docs.r-wasm.org/webr/latest/" class="uri">https://docs.r-wasm.org/webr/latest/</a></li>
+<li><strong>WebR GitHub:</strong> <a href="https://github.com/r-wasm/webr/" class="uri">https://github.com/r-wasm/webr/</a></li>
 </ul>
 </div>
+<h3 id="rstudio-guide-to-deploying-webr">RStudio Guide To Deploying webR</h3>
+<iframe width="600" height="350" src="https://www.youtube.com/embed/DoRR2S5lLvk" frameborder="0" allowfullscreen="">
+</iframe>
 </section>
 <section id="webr-demo-1" class="slide level2" data-background="rgb(252, 149, 108)">
 <h2>webR Demo 1</h2>
@@ -1281,6 +1305,8 @@ summary(fit)`,
   1);
 </script>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<div class="fragment">
+<!-- -->
 <h3 id="retrieving-prior-objects">Retrieving Prior Objects</h3>
 <p>Each webR cell appears to be connected to each other, allowing access to previous outcomes:</p>
 <div id="qwebr-insertion-location-2"></div>
@@ -1302,21 +1328,12 @@ qwebrCreateMonacoEditorInstance(
   2);
 </script>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<h3 id="mixing-active-and-non-active-r-code">Mixing Active and Non-Active R Code</h3>
-<p>For <em>if-else</em> statements:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="cf">if</span> (...) {</span>
-<span id="cb2-2"><a href=""></a>  <span class="co"># Statements for TRUE</span></span>
-<span id="cb2-3"><a href=""></a>} <span class="cf">else</span> {</span>
-<span id="cb2-4"><a href=""></a>  <span class="co"># Statements for FALSE</span></span>
-<span id="cb2-5"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div>
-<ul>
-<li><code>...</code> denotes a condition (either <code>TRUE</code> or <code>FALSE</code>).</li>
-<li>If <code>TRUE</code>, the statements inside <code>{}</code> run.</li>
-<li>Otherwise, the statements inside the <code>else</code> block run.</li>
-</ul>
 </div>
-<p>Let’s classify temperature to print “Hot!” or “Cold!”:</p>
+</section>
+<section id="webr-demo-2" class="slide level2" data-background="rgb(252, 149, 108)">
+<h2>webR Demo 2</h2>
+<h3 id="summarize-data">Summarize Data</h3>
+<p>Glancing at data frames:</p>
 <div id="qwebr-insertion-location-3"></div>
 <script type="module">
 // Retrieve the insertion point
@@ -1332,21 +1349,22 @@ currentDocumentLocation.appendChild(initializedElement);
 
 // Initialize a Monaco Editor Instance
 qwebrCreateMonacoEditorInstance(
-  `temperature = 60
-
-if (temperature > 76) {
-  print("Hot!")
-} else {
-  print("Cold!")
-}`, 
+  `data = mtcars
+summary(data)`, 
   3);
 </script>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</section>
-<section id="webr-demo-2" class="slide level2" data-background="rgb(252, 149, 108)">
-<h2>webR Demo 2</h2>
-<h3 id="summarize-data">Summarize Data</h3>
-<p>Glancing at data frames:</p>
+<div>
+<ul>
+<li>What would happen if you <code>plot(mtcars)</code>?</li>
+<li>Find the overall average miles per gallon for all cars.
+<ul>
+<li>Hint: Use <code>mean()</code></li>
+</ul></li>
+</ul>
+</div>
+<div class="fragment">
+<p>Advanced base R graphing:</p>
 <div id="qwebr-insertion-location-4"></div>
 <script type="module">
 // Retrieve the insertion point
@@ -1355,47 +1373,6 @@ const currentDocumentLocation = document.getElementById("qwebr-insertion-locatio
 // Initalize an interactive element
 const initializedElement =   qwebrCreateInteractiveElement(
     4
-  );
-
-// Add the interactive element into the document scope
-currentDocumentLocation.appendChild(initializedElement);
-
-// Initialize a Monaco Editor Instance
-qwebrCreateMonacoEditorInstance(
-  `summary(mtcars)`, 
-  4);
-</script>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<h3 id="base-graphics">Base Graphics</h3>
-<p>Graphing with base R:</p>
-<div id="qwebr-insertion-location-5"></div>
-<script type="module">
-// Retrieve the insertion point
-const currentDocumentLocation = document.getElementById("qwebr-insertion-location-5");
-
-// Initalize an interactive element
-const initializedElement =   qwebrCreateInteractiveElement(
-    5
-  );
-
-// Add the interactive element into the document scope
-currentDocumentLocation.appendChild(initializedElement);
-
-// Initialize a Monaco Editor Instance
-qwebrCreateMonacoEditorInstance(
-  `plot(pressure)`, 
-  5);
-</script>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<p>More advanced base R graphing:</p>
-<div id="qwebr-insertion-location-6"></div>
-<script type="module">
-// Retrieve the insertion point
-const currentDocumentLocation = document.getElementById("qwebr-insertion-location-6");
-
-// Initalize an interactive element
-const initializedElement =   qwebrCreateInteractiveElement(
-    6
   );
 
 // Add the interactive element into the document scope
@@ -1415,19 +1392,22 @@ plot(0, type = "n",
 
 segments(x1, y1, x2, y2)
 box(col = "grey")`, 
-  6);
+  4);
 </script>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<div class="fragment">
+<!-- -->
 <h3 id="ggplot2-example"><code>ggplot2</code> Example</h3>
 <p>Create a box plot with <code>ggplot2</code>:</p>
-<div id="qwebr-insertion-location-7"></div>
+<div id="qwebr-insertion-location-5"></div>
 <script type="module">
 // Retrieve the insertion point
-const currentDocumentLocation = document.getElementById("qwebr-insertion-location-7");
+const currentDocumentLocation = document.getElementById("qwebr-insertion-location-5");
 
 // Initalize an interactive element
 const initializedElement =   qwebrCreateInteractiveElement(
-    7
+    5
   );
 
 // Add the interactive element into the document scope
@@ -1440,54 +1420,91 @@ g <- ggplot(mpg, aes(x = class, y = cty))
 g + geom_boxplot(varwidth=T, fill="plum") + 
     labs(title="Box plot", 
          subtitle="City Mileage grouped by Class of vehicle",
-         caption="Source: mpg",
+         caption="Source: mtcars dataset",
          x="Class of Vehicle",
          y="City Mileage") +
     theme_classic()`, 
-  7);
+  5);
+</script>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</section>
+<section id="webr-demo-3" class="slide level2" data-background="rgb(252, 149, 108)">
+<h2>webR Demo 3</h2>
+<h3 id="mixing-active-and-non-active-r-code">Mixing Active and Non-Active R Code</h3>
+<p>For <em>if-else</em> statements:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="cf">if</span> (...) {</span>
+<span id="cb2-2"><a href=""></a>  <span class="co"># Statements for TRUE</span></span>
+<span id="cb2-3"><a href=""></a>} <span class="cf">else</span> {</span>
+<span id="cb2-4"><a href=""></a>  <span class="co"># Statements for FALSE</span></span>
+<span id="cb2-5"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div>
+<ul>
+<li><code>...</code> denotes a condition (either <code>TRUE</code> or <code>FALSE</code>).</li>
+<li>If <code>TRUE</code>, the statements inside <code>{}</code> run.</li>
+<li>Otherwise, the statements inside the <code>else</code> block run.</li>
+</ul>
+</div>
+<p>Let’s classify temperature to print “Hot!” or “Cold!”:</p>
+<div id="qwebr-insertion-location-6"></div>
+<script type="module">
+// Retrieve the insertion point
+const currentDocumentLocation = document.getElementById("qwebr-insertion-location-6");
+
+// Initalize an interactive element
+const initializedElement =   qwebrCreateInteractiveElement(
+    6
+  );
+
+// Add the interactive element into the document scope
+currentDocumentLocation.appendChild(initializedElement);
+
+// Initialize a Monaco Editor Instance
+qwebrCreateMonacoEditorInstance(
+  `temperature = 60
+
+if (temperature > 76) {
+  print("Hot!")
+} else {
+  print("Cold!")
+}`, 
+  6);
 </script>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </section>
-<section id="creating-interactive-teaching-materials-with-webr" class="slide level2" data-background="rgb(252, 149, 108)">
-<h2>Creating Interactive Teaching Materials with webR</h2>
-<h3 id="benefits-of-webr">Benefits of webR</h3>
-<ul>
-<li class="fragment">Students can run code directly in the browser, fostering interactive learning.</li>
-<li class="fragment">Easy troubleshooting and no local setup required.</li>
-<li class="fragment">No need for software installation, making it accessible to all students.</li>
-<li class="fragment">Ideal for live coding sessions, demonstrations, and exploratory data analysis.</li>
-</ul>
-</section>
-<section id="what-can-you-do-with-webr" class="slide level2" data-background="rgb(252, 149, 108)">
-<h2>What Can You Do with webR?</h2>
+<section id="what-can-you-currently-do-with-webr" class="slide level2" data-background="rgb(252, 149, 108)">
+<h2>What Can You Currently Do With webR?</h2>
 <h3 id="use-cases">Use Cases</h3>
 <ul>
 <li class="fragment">Download R package datasets to .csv, .xlsx, etc., on-the-fly: <a href="https://tidyverse.r-universe.dev/ggplot2">tidyverse.r-universe.dev/ggplot2</a></li>
 <li class="fragment">Shiny apps without a server: <a href="https://github.com/georgestagg/shiny-standalone-webr-demo">github.com/georgestagg/shiny-standalone-webr-demo</a></li>
 <li class="fragment">Create interactive, engaging teaching materials (that work even in lecture environments).</li>
 </ul>
-</section>
-<section id="revolutionizing-teaching-with-webr" class="slide level2" data-background="rgb(252, 149, 108)">
-<h2>Revolutionizing Teaching with webR</h2>
-<h3 id="why-webr-is-a-game-changer">Why webR is a Game Changer</h3>
+<div class="fragment">
+<!-- -->
+<h3 id="current-limitations">Current Limitations</h3>
+</div>
 <ul>
-<li class="fragment">webR transforms traditional lectures into dynamic and interactive sessions.</li>
-<li class="fragment">It helps maintain student interest and improves comprehension through hands-on practice.</li>
-<li class="fragment">Simplifies the teaching process, allowing instructors to focus on content delivery rather than technical setup.</li>
+<li class="fragment">Not all R packages are supported (e.g.&nbsp;plotly).</li>
+<li class="fragment">May take a few minutes to download all required packages for specific lecture highlights (varies by internet speed).</li>
+<li class="fragment">Time to render revealjs documents are longer (more for older machines).</li>
 </ul>
 </section>
 <section id="summary" class="slide level2" data-background="rgb(252, 149, 108)">
 <h2>Summary</h2>
-<p>In conclusion, webR offers a powerful tool for teaching statistics and data visualization. By enabling interactive coding directly within presentations, it enhances student engagement and simplifies the instructional process.</p>
+<p><code>webR</code> offers a powerful tool for teaching statistics and data visualization. By enabling interactive coding directly within presentations, it enhances student engagement and simplifies the instructional process.</p>
 </section>
 <section id="references" class="slide level2" data-background="rgb(252, 149, 108)">
 <h2>References</h2>
-<h3 id="useful-resources">Useful Resources</h3>
+<div>
 <ul>
-<li class="fragment"><a href="https://docs.r-wasm.org/webr/latest/">webR Documentation</a></li>
-<li class="fragment"><a href="https://nrennie.github.io/teaching-with-webR">Teaching Statistics with webR</a></li>
-<li class="fragment"><a href="https://github.com/georgestagg/shiny-standalone-webr-demo">webR GitHub Repository</a></li>
+<li><a href="https://docs.r-wasm.org/webr/latest/">webR Documentation</a></li>
+<li><a href="https://github.com/georgestagg/shiny-standalone-webr-demo">webR GitHub Repository</a></li>
+<li><a href="https://github.com/bcervantesalvarez/Presentations/blob/main/WebR/index.qmd">Slide Source Code</a></li>
 </ul>
+</div>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/60i9f861HLg?si=nHSjycSMFw3vdsc-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen="">
+</iframe>
 <div class="quarto-auto-generated-content">
 <p><img src="images/OSULogo.png" class="slide-logo"></p>
 <div class="footer footer-default">

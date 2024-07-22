@@ -1,7 +1,8 @@
 ---
-title: "Simplifying Teaching with webR"
+title: "Hands-on Statistical Learning with webR"
 author: "Brian Cervantes Alvarez"
-date: "07-21-2024"
+date: today
+date-format: long
 format:
   LUstyle-revealjs:
     footer: "[https://bcervantesalvarez.github.io/Presentations/WebR](https://bcervantesalvarez.github.io/Presentations/WebR)"
@@ -48,12 +49,14 @@ library(ggplot2)
 ggplot(mtcars, aes(x = mpg, y = hp)) + 
   geom_point()
 ```
+::: {.fragment}
 
 ### Code and Output
 
 - Code is usually shown as static screenshots or pre-written blocks.
 - Students struggle to follow along without hands-on practice.
 
+:::
 
 ## Traditional Teaching Methods: *Live Coding*
 
@@ -86,23 +89,42 @@ ggplot(mtcars, aes(x = mpg, y = hp)) +
 
 ### What is webR?
 
+![](images/webR.webp){.absolute left="800" width="200" height="200"}
+
 - [webR](https://docs.r-wasm.org/webr/latest/) is a version of R that runs directly in a **web browser**.
 - It **eliminates** the need for [local installation or server setup]{style="text-decoration: underline;"}.
 - It just works (even on your phone).
+- Can be easily implemented using quarto.
 
 
-## Using webR in Presentations {data-background="rgb(252, 149, 108)"}
+## Why webR is a Game Changer {data-background="rgb(252, 149, 108)"}
 
-### Demo Setup and Background
+- `webR` transforms traditional lectures into dynamic and interactive sessions.
+- It helps maintain student interest and improves comprehension through hands-on practice.
+- Simplifies the teaching process, allowing instructors to focus on content delivery rather than technical setup.
 
-The purpose of this document is to explore how webR can be embedded in a Quarto document for teaching R.
+
+## Benefits of webR {data-background="rgb(252, 149, 108)"} 
+
+- Students can run code directly in the browser, fostering interactive learning.
+- No need for software installation, making it accessible to all students.
+- Ideal for live coding sessions, demonstrations, and exploratory data analysis.
+
+
+## Downloading & Setting Up webR {data-background="rgb(252, 149, 108)"}
+
+### webR Documentation
+
+Explore how webR can be embedded in a Quarto document for teaching R in the following links.
 
 ::: {.nonincremental}
-
-- WebR Website: <https://docs.r-wasm.org/webr/latest/>
-- WebR GitHub: <https://github.com/r-wasm/webr/>
-
+- **WebR Website:** <https://docs.r-wasm.org/webr/latest/>
+- **WebR GitHub:** <https://github.com/r-wasm/webr/>
 :::
+
+### RStudio Guide To Deploying webR
+
+<iframe width="600" height="350" src="https://www.youtube.com/embed/DoRR2S5lLvk" frameborder="0" allowfullscreen></iframe>
 
 
 ## webR Demo 1 {data-background="rgb(252, 149, 108)"}
@@ -116,6 +138,8 @@ fit = lm(mpg ~ am, data=mtcars)
 summary(fit)
 ```
 
+::: {.fragment}
+
 ### Retrieving Prior Objects
 
 Each webR cell appears to be connected to each other, allowing access to previous outcomes:
@@ -123,6 +147,71 @@ Each webR cell appears to be connected to each other, allowing access to previou
 ```{webr}
 coef(fit)
 ```
+
+:::
+
+## webR Demo 2 {data-background="rgb(252, 149, 108)"}
+
+### Summarize Data
+
+Glancing at data frames:
+
+```{webr}
+data = mtcars
+summary(data)
+```
+
+::: {.nonincremental}
+
+- What would happen if you `plot(mtcars)`?
+- Find the overall average miles per gallon for all cars.
+  - Hint: Use `mean()`
+
+:::
+
+::: {.fragment}
+
+Advanced base R graphing:
+
+```{webr}
+x1 = seq(0, 1, length = 20)
+y1 = rep(0, 20)
+x2 = rep(0, 20)
+y2 = seq(0.75, 0, length = 20)
+
+plot(0, type = "n",
+     axes = FALSE, ylab = "", xlab = "", 
+     xlim = c(0, 1), ylim = c(0, 0.75), asp = 1,
+     main = "Straight Lines as a Curve")
+
+segments(x1, y1, x2, y2)
+box(col = "grey")
+```
+
+:::
+
+::: {.fragment}
+
+### `ggplot2` Example
+
+Create a box plot with `ggplot2`:
+
+```{webr}
+# Plot
+g <- ggplot(mpg, aes(x = class, y = cty))
+g + geom_boxplot(varwidth=T, fill="plum") + 
+    labs(title="Box plot", 
+         subtitle="City Mileage grouped by Class of vehicle",
+         caption="Source: mtcars dataset",
+         x="Class of Vehicle",
+         y="City Mileage") +
+    theme_classic()
+```
+
+:::
+
+## webR Demo 3 {data-background="rgb(252, 149, 108)"}
+
 
 ### Mixing Active and Non-Active R Code
 
@@ -157,70 +246,8 @@ if (temperature > 76) {
 }
 ```
 
-## webR Demo 2 {data-background="rgb(252, 149, 108)"}
 
-### Summarize Data
-
-Glancing at data frames:
-
-```{webr}
-summary(mtcars)
-```
-
-### Base Graphics
-
-Graphing with base R:
-
-```{webr}
-plot(pressure)
-```
-
-More advanced base R graphing:
-
-```{webr}
-x1 = seq(0, 1, length = 20)
-y1 = rep(0, 20)
-x2 = rep(0, 20)
-y2 = seq(0.75, 0, length = 20)
-
-plot(0, type = "n",
-     axes = FALSE, ylab = "", xlab = "", 
-     xlim = c(0, 1), ylim = c(0, 0.75), asp = 1,
-     main = "Straight Lines as a Curve")
-
-segments(x1, y1, x2, y2)
-box(col = "grey")
-```
-
-### `ggplot2` Example
-
-Create a box plot with `ggplot2`:
-
-```{webr}
-# Plot
-g <- ggplot(mpg, aes(x = class, y = cty))
-g + geom_boxplot(varwidth=T, fill="plum") + 
-    labs(title="Box plot", 
-         subtitle="City Mileage grouped by Class of vehicle",
-         caption="Source: mpg",
-         x="Class of Vehicle",
-         y="City Mileage") +
-    theme_classic()
-```
-
-
-
-## Creating Interactive Teaching Materials with webR {data-background="rgb(252, 149, 108)"}
-
-### Benefits of webR
-
-- Students can run code directly in the browser, fostering interactive learning.
-- Easy troubleshooting and no local setup required.
-- No need for software installation, making it accessible to all students.
-- Ideal for live coding sessions, demonstrations, and exploratory data analysis.
-
-
-## What Can You Do with webR? {data-background="rgb(252, 149, 108)"}
+## What Can You Currently Do With webR? {data-background="rgb(252, 149, 108)"}
 
 ### Use Cases
 
@@ -228,30 +255,33 @@ g + geom_boxplot(varwidth=T, fill="plum") +
 * Shiny apps without a server: [github.com/georgestagg/shiny-standalone-webr-demo](https://github.com/georgestagg/shiny-standalone-webr-demo)
 * Create interactive, engaging teaching materials (that work even in lecture environments).
 
+::: {.fragment}
 
+### Current Limitations 
 
+:::
 
-
-## Revolutionizing Teaching with webR {data-background="rgb(252, 149, 108)"}
-
-### Why webR is a Game Changer
-
-- webR transforms traditional lectures into dynamic and interactive sessions.
-- It helps maintain student interest and improves comprehension through hands-on practice.
-- Simplifies the teaching process, allowing instructors to focus on content delivery rather than technical setup.
+- Not all R packages are supported (e.g. plotly).
+- May take a few minutes to download all required packages for specific lecture highlights (varies by internet speed).
+- Time to render revealjs documents are longer (more for older machines).
 
 
 ## Summary {data-background="rgb(252, 149, 108)"}
 
-In conclusion, webR offers a powerful tool for teaching statistics and data visualization. By enabling interactive coding directly within presentations, it enhances student engagement and simplifies the instructional process.
+`webR` offers a powerful tool for teaching statistics and data visualization. By enabling interactive coding directly within presentations, it enhances student engagement and simplifies the instructional process.
 
 
 ## References {data-background="rgb(252, 149, 108)"}
 
-### Useful Resources
+::: {.nonincremental}
 
 - [webR Documentation](https://docs.r-wasm.org/webr/latest/)
-- [Teaching Statistics with webR](https://nrennie.github.io/teaching-with-webR)
 - [webR GitHub Repository](https://github.com/georgestagg/shiny-standalone-webr-demo)
+- [Slide Source Code](https://github.com/bcervantesalvarez/Presentations/blob/main/WebR/index.qmd)
+
+:::
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/60i9f861HLg?si=nHSjycSMFw3vdsc-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 
 
