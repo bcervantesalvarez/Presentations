@@ -1,5 +1,5 @@
 ---
-title: "Hands-on Statistical Learning with webR"
+title: "Hands-on Teaching with webR"
 author: "Brian Cervantes Alvarez"
 date: today
 date-format: long
@@ -122,10 +122,13 @@ Explore how webR can be embedded in a Quarto document for teaching R in the foll
 - **WebR GitHub:** <https://github.com/r-wasm/webr/>
 :::
 
+::: {.fragment}
+
 ### RStudio Guide To Deploying webR
 
-<iframe width="600" height="350" src="https://www.youtube.com/embed/DoRR2S5lLvk" frameborder="0" allowfullscreen></iframe>
+<iframe width="1200" height="600" src="https://www.youtube.com/embed/DoRR2S5lLvk" frameborder="0" allowfullscreen></iframe>
 
+:::
 
 ## webR Demo 1 {data-background="rgb(252, 149, 108)"}
 
@@ -271,6 +274,9 @@ if (temperature > 76) {
 `webR` offers a powerful tool for teaching statistics and data visualization. By enabling interactive coding directly within presentations, it enhances student engagement and simplifies the instructional process.
 
 
+![](images/webR.webp){.absolute width="200" height="200"}
+
+
 ## References {data-background="rgb(252, 149, 108)"}
 
 ::: {.nonincremental}
@@ -281,7 +287,7 @@ if (temperature > 76) {
 
 :::
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/60i9f861HLg?si=nHSjycSMFw3vdsc-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="1200" height="600" src="https://www.youtube.com/embed/60i9f861HLg?si=nHSjycSMFw3vdsc-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 
 
