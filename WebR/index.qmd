@@ -4,7 +4,7 @@ author: "Brian Cervantes Alvarez"
 date: "07-21-2024"
 format:
   LUstyle-revealjs:
-    footer: "ST 437 Data Visualization"
+    footer: "[https://bcervantesalvarez.github.io/Presentations/WebR](https://bcervantesalvarez.github.io/Presentations/WebR)"
     logo: "images/OSULogo.png"
     auto-stretch: false
     scrollable: true

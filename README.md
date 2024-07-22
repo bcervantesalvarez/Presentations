@@ -3,14 +3,14 @@
 ## ACTIVE PRESENTATIONS
 
 
-https://bcervantesalvarez.github.io/Presentations/AboutMe/#/title-slide
+https://bcervantesalvarez.github.io/Presentations/AboutMe
 
-https://bcervantesalvarez.github.io/Presentations/TeachingQuarto/#/title-slide
+https://bcervantesalvarez.github.io/Presentations/TeachingQuarto
 
-https://bcervantesalvarez.github.io/Presentations/WebR/#/title-slide
+https://bcervantesalvarez.github.io/Presentations/WebR/
 
 
-## TO REFERENCE FUTURE REVEAL.JS HTML FILES
+## HOW TO ACCESS LIVE REVEAL.JS PRESENTATIONS [TEMPLATE]
 
-https://[github username].github.io/[REPO NAME/[INSERT FOLDER NAME]/#/title-slide
+https://**[GITHUB USERNAME]**.github.io/**[REPO NAME]**/**[FOLDER NAME]**
 
