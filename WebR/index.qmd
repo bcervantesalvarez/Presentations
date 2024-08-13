@@ -4,10 +4,10 @@ author: "Brian Cervantes Alvarez"
 date: today
 date-format: long
 format:
-  LUstyle-revealjs:
+  OSUStyle-revealjs:
     footer: "[https://bcervantesalvarez.github.io/Presentations/WebR](https://bcervantesalvarez.github.io/Presentations/WebR)"
     logo: "images/OSULogo.png"
-    auto-stretch: false
+    auto-stretch: true
     scrollable: true
     incremental: true
 execute: 
@@ -126,7 +126,7 @@ Explore how webR can be embedded in a Quarto document for teaching R in the foll
 
 ### RStudio Guide To Deploying webR
 
-<iframe width="1200" height="600" src="https://www.youtube.com/embed/DoRR2S5lLvk" frameborder="0" allowfullscreen></iframe>
+<iframe width="1400" height="600" src="https://www.youtube.com/embed/DoRR2S5lLvk" frameborder="0" allowfullscreen></iframe>
 
 :::
 
@@ -264,7 +264,7 @@ if (temperature > 76) {
 
 :::
 
-- Not all R packages are supported (e.g. plotly).
+- Not all R packages are properly supported/implemented yet (e.g. plotly, leaflet).
 - May take a few minutes to download all required packages for specific lecture highlights (varies by internet speed).
 - Time to render revealjs documents are longer (more for older machines).
 

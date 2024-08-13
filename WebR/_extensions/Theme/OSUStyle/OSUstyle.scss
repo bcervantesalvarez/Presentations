@@ -28,10 +28,10 @@ $body-bg: #ffffff;
 
 /*-- scss:rules --*/
 
-/* Adjust the dimensions and scaling of the qwebr-interactive-area */
-
-.reveal .slides {
-  width: 60% !important;
+/* General styles */
+.reveal {
+  max-height: calc(100vh - 15vh - bottomValue);
+  overflow-y: scroll;
 }
 
 .reveal pre {
@@ -59,7 +59,6 @@ $body-bg: #ffffff;
   padding-top: 10px;
 }
 
-
 .author {
   color: $body-bg;
   font-size: $presentation-h4-font-size;
@@ -72,14 +71,14 @@ $body-bg: #ffffff;
   font-family: $font-family-sans-serif;
 }
 
-section.has-dark-background a, section.has-dark-background a:hover {
+section.has-dark-background a,
+section.has-dark-background a:hover {
   color: $body-bg;
 }
 
 .reveal .slide-background-content {
   background-color: #edebebe7;
 }
-
 
 .reveal .footer {
   color: #b4b7b8;
@@ -94,11 +93,11 @@ section.has-dark-background a, section.has-dark-background a:hover {
 }
 
 .reveal .slide-menu-button {
-    left: 5px;
-    top: 15px;
-    padding-left: 10px;
-    color: #b4b7b8;
-  }
+  left: 5px;
+  top: 15px;
+  padding-left: 10px;
+  color: #b4b7b8;
+}
 
 .reveal .progress {
   background: rgba(0, 0, 0, 0.2);
@@ -107,5 +106,34 @@ section.has-dark-background a, section.has-dark-background a:hover {
 }
 
 .right {
-  text-align: right !important
+  text-align: right;
+}
+
+/*-- Mobile Responsiveness --*/
+
+@media (max-width: 768px) {
+  :root {
+    --slide-width: 100vw;
+    --slide-height: 56.25vw; /* 16:9 aspect ratio */
+    --slide-scale: calc(100vw / 1050);
+  }
+
+  .reveal .slides {
+    width: var(--slide-width);
+    height: var(--slide-height);
+    transform: translate(-50%, -50%) scale(var(--slide-scale));
+  }
+
+  /* Adjust font sizes for smaller screens */
+  .reveal h1, .reveal h2, .reveal h3 {
+    font-size: calc($presentation-font-size-root * 0.8); /* Scale down font size */
+  }
+
+  .reveal .footer {
+    padding-bottom: 15px;
+  }
+
+  .reveal .slide-logo {
+    max-height: 60px !important;
+  }
 }

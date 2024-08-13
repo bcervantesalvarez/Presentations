@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.55">
 
   <meta name="author" content="Brian Cervantes Alvarez">
-  <meta name="dcterms.date" content="2024-07-22">
+  <meta name="dcterms.date" content="2024-08-13">
   <title>Hands-on Teaching with webR</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -390,18 +390,21 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.43.0/min/vs/editor/editor.main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
     
-  <style type="text/css">.monaco-editor pre {
+  <style type="text/css">/* Monaco Editor Styling */
+  .monaco-editor pre {
     background-color: unset !important;
   }
 
+  /* QWebR Icon Colors */
   .qwebr-icon-status-spinner {
     color: #7894c4;
   }
 
   .qwebr-icon-run-code {
-    color: #0d9c29
+    color: #0d9c29;
   }
 
+  /* QWebR Output Colors */
   .qwebr-output-code-stdout {
     color: #111;
   }
@@ -410,15 +413,18 @@
     color: #db4133;
   }
 
+  /* QWebR Editor Styling */
   .qwebr-editor {
     border: 5px solid #D73F09;
     margin-top: 5px;
-    font-size: 16px !important;
+    font-size: 1.6vw !important; /* Responsive font size */
     overflow: auto;
+    max-width: 100%; /* Ensure editor scales with container */
   }
 
+  /* Run Button Styling */
   .qwebr-button-run {
-    background-color: #EEEEEE;
+    background-color: #eeeeee;
     border: 2px solid #d74009;
     border-radius: 0.1rem;
     display: inline-block;
@@ -450,12 +456,12 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) inset;
   }
 
-  .qwebr-button-run:disabled,.qwebr-button-run.disabled,fieldset:disabled .qwebr-button-run {
+  .qwebr-button-run:disabled, .qwebr-button-run.disabled, fieldset:disabled .qwebr-button-run {
     pointer-events: none;
-    opacity: .65
+    opacity: 0.65;
   }
 
-  /* Custom styling for RevealJS Presentations*/
+  /* Custom Styling for RevealJS Presentations */
 
   /* Reset the style of the interactive area */
   .reveal div.qwebr-interactive-area {
@@ -465,8 +471,8 @@
     max-height: 100%;
     margin: 0;
     padding: 0;
-    font-size: 16px !important;
-  } 
+    font-size: 1.6vw !important; /* Responsive font size */
+  }
 
   /* Provide space to entries */
   .reveal div.qwebr-output-code-area pre div {
@@ -477,32 +483,68 @@
   .reveal pre div code.qwebr-output-code-stdout, .reveal pre div code.qwebr-output-code-stderr {
     padding: 0;
     display: contents;
+    font-size: 1.6vw !important; /* Responsive font size */
   }
 
   .reveal pre div code.qwebr-output-code-stdout {
     color: #111;
-    font-size: 16px !important;
   }
 
   .reveal pre div code.qwebr-output-code-stderr {
     color: #db4133;
-    font-size: 16px !important;
   }
 
-
-  /* Create a border around console and output (does not effect graphs) */
+  /* Create a border around console and output (does not affect graphs) */
   .reveal div.qwebr-console-area {
-    border: 1px solid #EEEEEE;
-    box-shadow: 2px 2px 10px #EEEEEE;
-    font-size: 16px !important;
+    border: 1px solid #eeeeee;
+    box-shadow: 2px 2px 10px #eeeeee;
+    font-size: 1.6vw !important; /* Responsive font size */
   }
 
   /* Cap output height and allow text to scroll */
-  /* TODO: Is there a better way to fit contents/max it parallel to the monaco editor size? */
   .reveal div.qwebr-output-code-area pre {
     max-height: 400px;
     overflow: scroll;
-    font-size: 16px !important;
+    font-size: 1.6vw !important; /* Responsive font size */
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .qwebr-editor {
+      font-size: 2vw !important; /* Increase font size for smaller screens */
+    }
+
+    .reveal div.qwebr-interactive-area,
+    .reveal pre div code.qwebr-output-code-stdout,
+    .reveal pre div code.qwebr-output-code-stderr,
+    .reveal div.qwebr-console-area,
+    .reveal div.qwebr-output-code-area pre {
+      font-size: 2vw !important; /* Adjust font size for smaller screens */
+    }
+
+    .qwebr-button-run {
+      font-size: 1.2rem; /* Slightly larger button text */
+      padding: 0.5rem 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .qwebr-editor {
+      font-size: 2.5vw !important; /* Further increase font size for extra small screens */
+    }
+
+    .reveal div.qwebr-interactive-area,
+    .reveal pre div code.qwebr-output-code-stdout,
+    .reveal pre div code.qwebr-output-code-stderr,
+    .reveal div.qwebr-console-area,
+    .reveal div.qwebr-output-code-area pre {
+      font-size: 2.5vw !important; /* Adjust font size for extra small screens */
+    }
+
+    .qwebr-button-run {
+      font-size: 1.3rem;
+      padding: 0.6rem 1.2rem;
+    }
   }
   </style>
   <script type="module">// Start a timer
@@ -1182,7 +1224,7 @@ Brian Cervantes Alvarez
 </div>
 </div>
 
-  <p class="date">July 22, 2024</p>
+  <p class="date">August 13, 2024</p>
 </section>
 <section id="learning-objectives" class="slide level2">
 <h2>Learning Objectives</h2>
@@ -1280,7 +1322,7 @@ Brian Cervantes Alvarez
 <div class="fragment">
 <!-- -->
 <h3 id="rstudio-guide-to-deploying-webr">RStudio Guide To Deploying webR</h3>
-<iframe width="1200" height="600" src="https://www.youtube.com/embed/DoRR2S5lLvk" frameborder="0" allowfullscreen="">
+<iframe width="1400" height="600" src="https://www.youtube.com/embed/DoRR2S5lLvk" frameborder="0" allowfullscreen="">
 </iframe>
 </div>
 </section>
@@ -1488,7 +1530,7 @@ if (temperature > 76) {
 <h3 id="current-limitations">Current Limitations</h3>
 </div>
 <ul>
-<li class="fragment">Not all R packages are supported (e.g.&nbsp;plotly).</li>
+<li class="fragment">Not all R packages are properly supported/implemented yet (e.g.&nbsp;plotly, leaflet).</li>
 <li class="fragment">May take a few minutes to download all required packages for specific lecture highlights (varies by internet speed).</li>
 <li class="fragment">Time to render revealjs documents are longer (more for older machines).</li>
 </ul>

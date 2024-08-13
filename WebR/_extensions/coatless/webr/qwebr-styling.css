@@ -1,15 +1,18 @@
+/* Monaco Editor Styling */
 .monaco-editor pre {
   background-color: unset !important;
 }
 
+/* QWebR Icon Colors */
 .qwebr-icon-status-spinner {
   color: #7894c4;
 }
 
 .qwebr-icon-run-code {
-  color: #0d9c29
+  color: #0d9c29;
 }
 
+/* QWebR Output Colors */
 .qwebr-output-code-stdout {
   color: #111;
 }
@@ -18,15 +21,18 @@
   color: #db4133;
 }
 
+/* QWebR Editor Styling */
 .qwebr-editor {
   border: 5px solid #D73F09;
   margin-top: 5px;
-  font-size: 16px !important;
+  font-size: 1.6vw !important; /* Responsive font size */
   overflow: auto;
+  max-width: 100%; /* Ensure editor scales with container */
 }
 
+/* Run Button Styling */
 .qwebr-button-run {
-  background-color: #EEEEEE;
+  background-color: #eeeeee;
   border: 2px solid #d74009;
   border-radius: 0.1rem;
   display: inline-block;
@@ -58,12 +64,12 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) inset;
 }
 
-.qwebr-button-run:disabled,.qwebr-button-run.disabled,fieldset:disabled .qwebr-button-run {
+.qwebr-button-run:disabled, .qwebr-button-run.disabled, fieldset:disabled .qwebr-button-run {
   pointer-events: none;
-  opacity: .65
+  opacity: 0.65;
 }
 
-/* Custom styling for RevealJS Presentations*/
+/* Custom Styling for RevealJS Presentations */
 
 /* Reset the style of the interactive area */
 .reveal div.qwebr-interactive-area {
@@ -73,8 +79,8 @@
   max-height: 100%;
   margin: 0;
   padding: 0;
-  font-size: 16px !important;
-} 
+  font-size: 1.6vw !important; /* Responsive font size */
+}
 
 /* Provide space to entries */
 .reveal div.qwebr-output-code-area pre div {
@@ -85,30 +91,66 @@
 .reveal pre div code.qwebr-output-code-stdout, .reveal pre div code.qwebr-output-code-stderr {
   padding: 0;
   display: contents;
+  font-size: 1.6vw !important; /* Responsive font size */
 }
 
 .reveal pre div code.qwebr-output-code-stdout {
   color: #111;
-  font-size: 16px !important;
 }
 
 .reveal pre div code.qwebr-output-code-stderr {
   color: #db4133;
-  font-size: 16px !important;
 }
 
-
-/* Create a border around console and output (does not effect graphs) */
+/* Create a border around console and output (does not affect graphs) */
 .reveal div.qwebr-console-area {
-  border: 1px solid #EEEEEE;
-  box-shadow: 2px 2px 10px #EEEEEE;
-  font-size: 16px !important;
+  border: 1px solid #eeeeee;
+  box-shadow: 2px 2px 10px #eeeeee;
+  font-size: 1.6vw !important; /* Responsive font size */
 }
 
 /* Cap output height and allow text to scroll */
-/* TODO: Is there a better way to fit contents/max it parallel to the monaco editor size? */
 .reveal div.qwebr-output-code-area pre {
   max-height: 400px;
   overflow: scroll;
-  font-size: 16px !important;
+  font-size: 1.6vw !important; /* Responsive font size */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .qwebr-editor {
+    font-size: 2vw !important; /* Increase font size for smaller screens */
+  }
+
+  .reveal div.qwebr-interactive-area,
+  .reveal pre div code.qwebr-output-code-stdout,
+  .reveal pre div code.qwebr-output-code-stderr,
+  .reveal div.qwebr-console-area,
+  .reveal div.qwebr-output-code-area pre {
+    font-size: 2vw !important; /* Adjust font size for smaller screens */
+  }
+
+  .qwebr-button-run {
+    font-size: 1.2rem; /* Slightly larger button text */
+    padding: 0.5rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .qwebr-editor {
+    font-size: 2.5vw !important; /* Further increase font size for extra small screens */
+  }
+
+  .reveal div.qwebr-interactive-area,
+  .reveal pre div code.qwebr-output-code-stdout,
+  .reveal pre div code.qwebr-output-code-stderr,
+  .reveal div.qwebr-console-area,
+  .reveal div.qwebr-output-code-area pre {
+    font-size: 2.5vw !important; /* Adjust font size for extra small screens */
+  }
+
+  .qwebr-button-run {
+    font-size: 1.3rem;
+    padding: 0.6rem 1.2rem;
+  }
 }
