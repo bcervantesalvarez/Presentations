@@ -109,6 +109,11 @@ section.has-dark-background a:hover {
   text-align: right;
 }
 
+.reveal .footer a {
+  color: #d73f09;
+  opacity: 0.7;
+}
+
 /*-- Mobile Responsiveness --*/
 
 @media (max-width: 768px) {
@@ -129,8 +134,8 @@ section.has-dark-background a:hover {
     font-size: calc($presentation-font-size-root * 0.8); /* Scale down font size */
   }
 
-  .reveal .footer {
-    padding-bottom: 15px;
+  .reveal .a {
+    opacity: 0.5;
   }
 
   .reveal .slide-logo {
