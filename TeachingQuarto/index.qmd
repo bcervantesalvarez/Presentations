@@ -1,0 +1,182 @@
+---
+title: "Quarto 101"
+author: "Brian Cervantes Alvarez"
+format: 
+   revealjs:
+     footer: "Quarto 101 (November 13, 2023)"
+     code-fold: true
+     multiplex: true
+     preview-links: true
+     theme: [OregonStateTheme.scss]
+     scrollable: true
+     logo: OSULogo.png
+     chalkboard: true
+     html-math-method: katex
+     incremental: true
+     slide-number: c/t
+     transition: slide
+---
+
+# What is Quarto?
+
+![](quarto.png){.absolute top=200 right=400 width="300" height="100"}
+
+## Quarto allows you to
+
+-   Present your findings in R, Python, Julia, & Observable
+
+-   Use Revealjs (this presentation for example)
+
+-   Have images, videos, and iframe backgrounds imbedded in your documents
+
+. . .
+
+"Publish reproducible, production quality articles, presentations, dashboards, websites, blogs, and books in HTML, PDF, MS Word, ePub, and more." - quarto.org
+
+
+## Power of using quarto {auto-animate="true"}
+
+```r
+# Fill in the spot we created for a plot
+output$phonePlot <- renderPlot({
+  # Render a barplot
+})
+```
+
+## Power of using quarto {auto-animate=true}
+
+```r
+# Fill in the spot we created for a plot
+output$phonePlot <- renderPlot({
+  # Render a barplot
+  barplot(WorldPhones[,input$region]*1000, 
+          main=input$region,
+          ylab="Number of Telephones",
+          xlab="Year")
+})
+```
+
+## Power of using quarto {auto-animate=true}
+
+```r
+# Fill in the spot we created for a plot
+output$phonePlot <- renderPlot({
+  # Render a barplot
+  barplot(WorldPhones[,input$region]*1000, 
+          main=input$region,
+          ylab="Number of Telephones",
+          xlab="Year")
+})
+
+# And it keeps on getting better!
+```
+
+## Power of using quarto {auto-animate=true}
+
+::: {.panel-tabset}
+
+### R
+
+``` {.r}
+fizz_buzz <- function(fbnums = 1:50) {
+  output <- dplyr::case_when(
+    fbnums %% 15 == 0 ~ "FizzBuzz",
+    fbnums %% 3 == 0 ~ "Fizz",
+    fbnums %% 5 == 0 ~ "Buzz",
+    TRUE ~ as.character(fbnums)
+  )
+  print(output)
+}
+```
+
+### Python
+
+``` {.python}
+def fizz_buzz(num):
+  if num % 15 == 0:
+    print("FizzBuzz")
+  elif num % 5 == 0:
+    print("Buzz")
+  elif num % 3 == 0:
+    print("Fizz")
+  else:
+    print(num)
+```
+
+### Java
+
+```{.java}
+public class FizzBuzz
+{
+  public static void fizzBuzz(int num)
+  {
+    if (num % 15 == 0) {
+      System.out.println("FizzBuzz");
+    } else if (num % 5 == 0) {
+      System.out.println("Buzz");
+    } else if (num % 3 == 0) {
+      System.out.println("Fizz");
+    } else {
+      System.out.println(num);
+    }
+  }
+}
+```
+
+### Julia
+
+```{.julia}
+function FizzBuzz(num)
+  if num % 15 == 0
+    println("FizzBuzz")
+  elseif num % 5 == 0
+    println("Buzz")
+  elseif num % 3 == 0
+    println("Fizz")
+  else
+    println(num)
+  end
+end
+```
+
+:::
+
+
+## Shiny app? No problem!
+
+<iframe src="https://bcervantesalvarez.shinyapps.io/FinalProjectData502/" style='height:100%;width:100%' data-autoplay></iframe>
+
+## Wanna create a portfolio website? Quarto's got you
+
+<iframe src="https://bcervantesalvarez.github.io/Portfolio/" style='height:100%;width:100%' data-autoplay></iframe>
+
+## Videos? Here's a tutorial
+
+{{< video https://www.youtube.com/watch?v=_f3latmOhew&ab_channel=PositPBC width="100%" height="80%" >}}
+
+## Wanna learn more?
+
+. . .
+
+Here are some pro tips before you jump into using quarto:
+
+-   Understand how github works (push/pull/commits)
+-   Learn and master how to use Rmarkdown
+-   Understand how to create shiny/interactive applications
+-   Then, jump into learning Quarto!
+
+. . .
+
+Wanna see everything that quarto's got to offer? Click on the quarto logo!
+
+[![](quarto.png){fig-alt="Alt text"}](https://quarto.org)
+
+## References
+
+<https://quarto.org/>
+
+<https://quarto.org/docs/presentations/revealjs/>
+
+<https://quarto.org/docs/presentations/revealjs/advanced.html>
+
+<https://quarto.org/docs/authoring/markdown-basics.html>

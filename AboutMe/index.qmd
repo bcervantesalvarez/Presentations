@@ -1,0 +1,142 @@
+---
+title: "Towards Data Science"
+author: "Brian Cervantes Alvarez"
+format: 
+   revealjs:
+     code-fold: true
+     multiplex: true
+     preview-links: true
+     theme: [WillametteUniversityTheme.scss]
+     scrollable: true
+     logo: wuCompass.jpeg
+     chalkboard: true
+     html-math-method: katex
+     incremental: true
+     slide-number: c/t
+     transition: slide
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning=FALSE, message=FALSE, echo=TRUE, tidy=TRUE, comment=NA, prompt=FALSE,fig.height=6, fig.width=6.5, fig.retina = 3, dev = 'png', eval=TRUE)
+library(tidyverse)
+library(htmltools)
+library(tinytex)
+library(tidyverse)
+library(magrittr)
+library(DT)
+library(gt)
+library(gtExtras)
+library(countrycode)
+library(ggflags) 
+library(downloadthis)
+```
+
+## Background & Future Goals {style="font-size: 1em"}
+
+::: columns
+::: {.column width="40%"}
+![](profile.jpeg)
+:::
+
+::: {.column width="60%"}
+
+1. Transitioned from a mathematics Bachelor’s at Linfield University to a Master’s in Data Science at Willamette University.
+
+2. Currently pursuing a second Master’s in Statistics with a focus on machine learning and survival analysis (Ph.D. aspirations at Oregon State University).
+
+3. Developed analytical skills in machine learning and survival analysis.
+
+4. Adept at communicating data-driven insights for actionable solutions.
+
+5. Passionate about statistical research, particularly focusing on classification problems. Committed to continuous learning in the dynamic field of data science and statistics.
+
+:::
+:::
+
+# Project Highlights {style="font-size: 1.5em; text-align:center"}
+
+
+## Resources for Prospective College Students {style="font-size: 0.8em"}
+
+<iframe src="https://bcervantesalvarez.shinyapps.io/CollegeStudentSalaryDebtTools/" style='height:100%;width:100%' data-autoplay></iframe>
+
+## Pokédex Database & Analysis {style="text-align:center"}
+
+![](pokedex_presentation.jpeg){width=10%}
+
+## Rating & Pricing Pinot Wines
+
+```{r}
+#| code-summary: "Reveal Code"
+ds <- read_rds("pinot.rds")
+
+ds_starter <- ds %>% 
+  mutate(province = as.factor(province),
+         price = price,
+         thetaPointMean = mean(points),
+         thetaPriceMean = mean(price))
+
+ds_summary <- ds_starter %>% 
+  group_by(province) %>% 
+  arrange(year) %>%
+  summarise(pointsMean = mean(points, na.rm=TRUE), 
+            pointsSD = sd(points),
+            priceMean = mean(price, na.rm=TRUE), 
+            priceSD = sd(price),
+            points = list(points),
+            price = list(price),
+            .groups = "drop")
+
+excel_file_attachment <- ds_summary %>%
+  download_this(
+    output_name = "Pinot_Noir_Summary",
+    output_extension = ".xlsx", # Excel file type
+    button_label = "Download Excel",
+    button_type = "primary", # change button type
+  )
+
+fancyTbl <- ds_summary %>%
+  gt() %>%
+# format the numeric output to 3 digit rounding  
+  fmt_number(columns = c(pointsMean, pointsSD, priceMean, priceSD),
+             decimals = 3) %>%
+# create nice labels for a few ugly variable names
+  cols_label(province = "Province",
+             pointsMean = "Avg. Points",
+             pointsSD = "Std. Dev. Points",
+             priceMean = "Avg. Price",
+             priceSD = "Std. Dev. Price",
+             points = "Points Trend",
+             price = "Price Trend",) %>%
+# Plot the sparklines from the list column
+  gt_plt_sparkline(points, 
+                   type="ref_median", 
+                   same_limit = TRUE
+                   ) %>%
+  gt_plt_sparkline(price, 
+                   type="ref_median", 
+                   same_limit = TRUE
+                   ) %>%
+# use the guardian's table theme
+  gt_theme_nytimes() %>% 
+# give hulk coloring to the Mean Human Rights Score
+  gt_hulk_col_numeric(pointsMean) %>%
+  gt_hulk_col_numeric(priceMean) %>%
+# create a header and subheader
+  tab_header(title="Province Pinot Wine Summary", subtitle = "Source: Dr. Hendrick") %>%
+# attach excel file
+  tab_source_note(excel_file_attachment)
+# save the original as an image
+#gtsave(fancyTbl, "table.png")
+# show the table themed in accordance with the page
+fancyTbl
+
+```
+# Thank you! {style="font-size: 1.5em; text-align:center"}
+
+[![Click the image to go to my website!](icon.png)](https://bcervantesalvarez.github.io/Portfolio/)
+
+

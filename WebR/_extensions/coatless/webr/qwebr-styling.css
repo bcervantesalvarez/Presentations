@@ -1,0 +1,155 @@
+/* Monaco Editor Styling */
+.monaco-editor pre {
+  background-color: unset !important;
+}
+
+/* QWebR Icon Colors */
+.qwebr-icon-status-spinner {
+  color: #7894c4;
+}
+
+.qwebr-icon-run-code {
+  color: #0d9c29;
+}
+
+/* QWebR Output Colors */
+.qwebr-output-code-stdout {
+  color: #111;
+}
+
+.qwebr-output-code-stderr {
+  color: #db4133;
+}
+
+/* QWebR Editor Styling */
+.qwebr-editor {
+  border: 0.1vw solid #D73F09;  /* Use vw for border */
+  font-size: 1.6vw !important;  /* Responsive font size using vw */
+  overflow: auto;
+  max-width: 100%;  /* Ensure editor scales with container */
+}
+
+/* Run Button Styling */
+.qwebr-button-run {
+  background-color: #eeeeee;
+  border: 0.1vw solid #d74009;  /* Use vw for border */
+  border-radius: 0.1vw;  /* Use vw for border radius */
+  display: inline-block;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #000;
+  text-align: center;
+  text-decoration: none;
+  -webkit-user-select: none;
+  padding: 0.375vw 0.75vw;  /* Use vw for padding */
+  font-size: 0.8vw;  /* Use vw for font size */
+  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  cursor: pointer;
+
+  /* Enhanced styling */
+  box-shadow: 0 0.4vw 0.6vw rgba(0, 0, 0, 0.1);  /* Use vw for box shadow */
+}
+
+.qwebr-button-run:hover {
+  color: #000;
+  background-color: #ffa07a;  /* Lighter shade of #D73F09 */
+  border-color: #D73F09;
+  box-shadow: 0 0.6vw 0.8vw rgba(0, 0, 0, 0.15);  /* Use vw for hover box shadow */
+}
+
+.qwebr-button-run:active {
+  background-color: #D73F09;
+  border-color: #B23000;
+  box-shadow: 0 0.2vw 0.4vw rgba(0, 0, 0, 0.2) inset;  /* Use vw for active box shadow */
+}
+
+.qwebr-button-run:disabled, .qwebr-button-run.disabled, fieldset:disabled .qwebr-button-run {
+  pointer-events: none;
+  opacity: 0.65;
+}
+
+/* Custom Styling for RevealJS Presentations */
+
+/* Reset the style of the interactive area */
+.reveal div.qwebr-interactive-area {
+  display: block;
+  box-shadow: none;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 1.6vw !important;  /* Responsive font size using vw */
+}
+
+/* Provide space to entries */
+.reveal div.qwebr-output-code-area pre div {
+  margin: 0.1vw 0.2vw 0.1vw 1vw;  /* Use vw for margins */
+}
+
+/* Collapse the inside code tags to avoid extra space between line outputs */
+.reveal pre div code.qwebr-output-code-stdout, .reveal pre div code.qwebr-output-code-stderr {
+  padding: 0;
+  display: contents;
+  font-size: 0.9vw !important;  /* Responsive font size using vw */
+}
+
+.reveal pre div code.qwebr-output-code-stdout {
+  color: #111;
+}
+
+.reveal pre div code.qwebr-output-code-stderr {
+  color: #db4133;
+}
+
+/* Create a border around console and output (does not affect graphs) */
+.reveal div.qwebr-console-area {
+  border: 0.1vw solid #eeeeee;  /* Use vw for border */
+  box-shadow: 0.2vw 0.2vw 1vw #eeeeee;  /* Use vw for box shadow */
+  font-size: 0.9vw !important;  /* Responsive font size using vw */
+}
+
+/* Cap output height and allow text to scroll */
+.reveal div.qwebr-output-code-area pre {
+  max-height: 40vw;  /* Adjust max height using vw */
+  overflow: scroll;
+  font-size: 0.9vw !important;  /* Responsive font size using vw */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .qwebr-editor {
+    font-size: 2vw !important;  /* Increase font size for smaller screens */
+  }
+
+  .reveal div.qwebr-interactive-area,
+  .reveal pre div code.qwebr-output-code-stdout,
+  .reveal pre div code.qwebr-output-code-stderr,
+  .reveal div.qwebr-console-area,
+  .reveal div.qwebr-output-code-area pre {
+    font-size: 2vw !important;  /* Adjust font size for smaller screens */
+  }
+
+  .qwebr-button-run {
+    font-size: 1.2vw;  /* Slightly larger button text */
+    padding: 0.5vw 1vw;  /* Adjust padding */
+  }
+}
+
+@media (max-width: 480px) {
+  .qwebr-editor {
+    font-size: 2.5vw !important;  /* Further increase font size for extra small screens */
+  }
+
+  .reveal div.qwebr-interactive-area,
+  .reveal pre div code.qwebr-output-code-stdout,
+  .reveal pre div code.qwebr-output-code-stderr,
+  .reveal div.qwebr-console-area,
+  .reveal div.qwebr-output-code-area pre {
+    font-size: 2.5vw !important;  /* Adjust font size for extra small screens */
+  }
+
+  .qwebr-button-run {
+    font-size: 1.3vw;  /* Adjust button text */
+    padding: 0.6vw 1.2vw;  /* Adjust padding */
+  }
+}
