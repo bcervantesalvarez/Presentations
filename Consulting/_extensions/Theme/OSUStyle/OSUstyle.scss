@@ -1,0 +1,1159 @@
+/*-- scss:defaults --*/
+
+/*
+  ===========================
+  Importing Fonts
+  ===========================
+  Import necessary fonts from Google Fonts and local sources.
+*/
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+
+/*
+  ===========================
+  SCSS Variable Declarations
+  ===========================
+  Define all variables used throughout the stylesheet for easy maintenance.
+*/
+$background-color: #eeeeee !important;
+$main-font: 'Open Sans', sans-serif !important; // Updated from 'Roboto', Arial, sans-serif
+$main-font-size: 40px;
+$main-color: #000000;
+$block-margin: 12px;
+$heading-margin: 20px 0 12px 0 !important;
+$heading-font: 'Georgia', serif !important; // Updated from 'Roboto Slab', 'Times New Roman', serif
+$heading-color: #000000;
+$heading-line-height: 1.5;
+$heading-letter-spacing: normal;
+$heading-text-transform: none;
+$heading-text-shadow: none;
+$heading-font-weight: 600;
+$heading1-text-shadow: none;
+
+/*
+  ===========================
+  Custom Font Sizes
+  ===========================
+  Use the clamp() function for responsive typography.
+*/
+$headingTitle-size: clamp(2rem, 6vw, 4rem) !important;
+$heading1-size: clamp(2rem, 5vw, 3rem) !important;
+$heading2-size: clamp(1.6rem, 5vw, 2.5rem) !important;
+$heading3-size: clamp(1.3rem, 3vw, 2rem) !important;
+$heading4-size: clamp(1rem, 2vw, 1.5rem) !important;
+$heading5-size: clamp(1.25rem, 2.5vw, 1.75rem) !important;
+$heading6-size: clamp(1rem, 2vw, 1.5rem) !important;
+$body-size: 1em !important;
+
+/*
+  ===========================
+  Code Block Font Size
+  ===========================
+  Defines the font size for code blocks.
+*/
+$code-font: 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+$code-block-font-size: 1rem; // Equivalent to 16px
+
+/*
+  ===========================
+  Link Colors
+  ===========================
+  Define colors for links in different states.
+*/
+$link-color: #D73F09;
+$link-color-dark: #8e2906;
+$link-color-hover: #f6561d;
+
+/*
+  ===========================
+  Selection Colors
+  ===========================
+  Define colors for text selection.
+*/
+$selection-background-color: #f98d67;
+$selection-color: #ffffff;
+
+/*
+  ===========================
+  Body and Text Colors
+  ===========================
+  Define colors for the body and muted text.
+*/
+$body-bg: #ffffff;
+$body-color: #000000;
+$text-muted: #4d4d4d;
+
+/*
+  ===========================
+  Border Styles
+  ===========================
+  Define border color, width, and radius.
+*/
+$border-color: #000000;
+$border-width: 1px;
+$border-radius: 4px;
+
+/*
+  ===========================
+  Mermaid Diagram Styles
+  ===========================
+  Define styles specific to Mermaid diagrams.
+*/
+$mermaid-bg-color: #ffffff;
+$mermaid-edge-color: #999;
+$mermaid-node-fg-color: #000000;
+$mermaid-fg-color: #000000;
+$mermaid-fg-color-lighter: #1a1a1a;
+$mermaid-fg-color-lightest: #333333;
+$mermaid-font-family: 'Open Sans', sans-serif; // Updated from 'Roboto', Arial, sans-serif
+$mermaid-label-bg-color: #ffffff;
+$mermaid-label-fg-color: #468;
+$mermaid-node-bg-color: rgba(68, 102, 136, 0.1);
+
+/*
+  ===========================
+  Setting CSS Variables
+  ===========================
+  Override Quarto's default CSS variables with custom SCSS variables.
+  Ensure all variables are defined before usage.
+*/
+:root {
+  /* 
+    Background and Main Colors 
+    These define the overall background and main text colors.
+  */
+  --r-background-color: #{$background-color};
+  --r-main-font: #{$main-font};
+  --r-main-font-size: #{$main-font-size};
+  --r-main-color: #{$main-color};
+  --r-block-margin: #{$block-margin};
+  --r-heading-margin: #{$heading-margin};
+  --r-heading-font: #{$heading-font};
+  --r-heading-color: #{$heading-color};
+  --r-heading-line-height: #{$heading-line-height};
+  --r-heading-letter-spacing: #{$heading-letter-spacing};
+  --r-heading-text-transform: #{$heading-text-transform};
+  --r-heading-text-shadow: #{$heading-text-shadow};
+  --r-heading-font-weight: #{$heading-font-weight};
+  --r-heading1-text-shadow: #{$heading1-text-shadow};
+  
+  /* 
+    Override default heading sizes with custom sizes 
+    These variables set responsive font sizes using clamp().
+  */
+  --r-headingTitle-size: #{$headingTitle-size} !important;
+  --r-heading1-size: #{$heading1-size};
+  --r-heading2-size: #{$heading2-size};
+  --r-heading3-size: #{$heading3-size};
+  --r-heading4-size: #{$heading4-size};
+  --r-heading5-size: #{$heading5-size};
+  --r-heading6-size: #{$heading6-size};
+  --r-body-size: #{$body-size};
+  
+  /* 
+    Code Font 
+    Defines the CSS variable for code font using the SCSS variable.
+  */
+  --r-code-font: #{$code-font};
+  
+  /* 
+    Link Colors 
+    Sets the colors for links in different states.
+  */
+  --r-link-color: #{$link-color};
+  --r-link-color-dark: #{$link-color-dark};
+  --r-link-color-hover: #{$link-color-hover};
+  
+  /* 
+    Selection Colors 
+    Sets the colors for text selection.
+  */
+  --r-selection-background-color: #{$selection-background-color};
+  --r-selection-color: #{$selection-color};
+  
+  /* 
+    Body and Text Colors 
+    Sets the background and text colors for the body.
+  */
+  --quarto-body-bg: #{$body-bg};
+  --quarto-body-color: #{$body-color};
+  --quarto-text-muted: #{$text-muted};
+  
+  /* 
+    Border Styles 
+    Sets the default border styles.
+  */
+  --quarto-border-color: #{$border-color};
+  --quarto-border-width: #{$border-width};
+  --quarto-border-radius: #{$border-radius};
+  
+  /* 
+    Mermaid Variables 
+    Sets the styles specific to Mermaid diagrams.
+  */
+  --mermaid-bg-color: #{$mermaid-bg-color};
+  --mermaid-edge-color: #{$mermaid-edge-color};
+  --mermaid-node-fg-color: #{$mermaid-node-fg-color};
+  --mermaid-fg-color: #{$mermaid-fg-color};
+  --mermaid-fg-color--lighter: #{$mermaid-fg-color-lighter};
+  --mermaid-fg-color--lightest: #{$mermaid-fg-color-lightest};
+  --mermaid-font-family: #{$mermaid-font-family};
+  --mermaid-label-bg-color: #{$mermaid-label-bg-color};
+  --mermaid-label-fg-color: #{$mermaid-label-fg-color};
+  --mermaid-node-bg-color: #{$mermaid-node-bg-color};
+  --mermaid-node-fg-color: #{$mermaid-node-fg-color};
+}
+
+/*-- scss:rules --*/
+
+/*
+  ===========================
+  General Reveal.js Styles
+  ===========================
+  These styles apply to the overall presentation structure.
+*/
+.reveal {
+  /* 
+    Font Settings
+    Applies the main font and color to the presentation.
+  */
+  font-family: var(--r-main-font);
+  font-size: var(--r-main-font-size);
+  font-weight: normal;
+  color: var(--r-main-color);
+
+  /* 
+    Selection Styling
+    Applies to text selections within the presentation.
+  */
+  ::selection,
+  ::-moz-selection {
+    color: var(--r-selection-color);
+    background: var(--r-selection-background-color);
+    text-shadow: none;
+  }
+
+  /* 
+    Viewport Styling
+    Sets the background color of the presentation viewport.
+  */
+  &-viewport {
+    background: #fff;
+    background-color: var(--r-background-color);
+  }
+
+  /* 
+    Slides Container
+    Styles all sections within slides.
+  */
+  .slides {
+    text-align: left;
+
+    section,
+    section > section {
+      line-height: 1.5;
+      font-weight: inherit;
+    }
+
+    /* 
+      Title Slide Specific Styles
+      Adjusts the title slide's heading and responsiveness.
+    */
+    .title-slide {
+      /* 
+        Responsive Title Heading
+        Ensures the title adjusts based on navigation mode.
+      */
+      h1 {
+        font-size: var(--r-headingTitle-size);
+      }
+
+      /* 
+        Smaller Context Adjustments
+        Applies when the `.smaller` class is present.
+      */
+      &.smaller {
+        h1.title {
+          font-size: var(--r-heading2-size); // Custom smaller size
+        }
+        h2 {
+          font-size: var(--r-heading2-size); // Equivalent to calc(1.6em / 0.7)
+        }
+        h3 {
+          font-size: var(--r-heading3-size); // Equivalent to calc(1.3em / 0.7)
+        }
+      }
+    }
+
+    /* 
+      Responsive Adjustments for Slides
+      Reduces font size in smaller contexts.
+    */
+    &.smaller .slides section,
+    &.smaller .slides section .callout {
+      font-size: 0.7em;
+    }
+
+    &.smaller .slides section section {
+      font-size: inherit;
+    }
+  }
+
+  /* 
+    Heading Styles
+    Applies to all heading levels.
+  */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: var(--r-heading-margin);
+    color: var(--r-heading-color);
+    font-family: var(--r-heading-font);
+    font-weight: var(--r-heading-font-weight);
+    line-height: var(--r-heading-line-height);
+    letter-spacing: var(--r-heading-letter-spacing);
+    text-transform: var(--r-heading-text-transform);
+    text-shadow: var(--r-heading-text-shadow);
+    word-wrap: break-word;
+  }
+
+  /* 
+    Specific Heading Sizes
+    Overrides default sizes with custom clamp() values.
+  */
+  h1 {
+    font-size: var(--r-heading1-size) !important;
+    text-shadow: var(--r-heading1-text-shadow) !important;
+  }
+
+  h2 {
+    font-size: var(--r-heading2-size) !important;
+  }
+
+  h3 {
+    font-size: var(--r-heading3-size) !important;
+  }
+
+  h4 {
+    font-size: var(--r-heading4-size) !important;
+  }
+
+  /* Paragraph Styles */
+  p {
+    font-size: var(--r-body-size);
+    margin: var(--r-block-margin) 0;
+    line-height: 1.5;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  /* Media Elements */
+  img,
+  video,
+  iframe {
+    max-width: 95%;
+    max-height: 95%;
+  }
+
+  /* Text Styling */
+  strong,
+  b {
+    font-weight: bold;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  /* List Styles */
+  ol,
+  dl,
+  ul {
+    display: inline-block;
+    text-align: left;
+    margin: 0 0 0 1em;
+
+    ul {
+      list-style-type: disc; // Updated from square/circle if necessary
+
+      ul {
+        list-style-type: square;
+
+        ul {
+          list-style-type: circle;
+        }
+      }
+    }
+  }
+
+  ol {
+    list-style-type: decimal;
+
+    &[type='a'],
+    &[type='a s'],
+    &[type='A s'],
+    &[type='i'],
+    &[type='i s'],
+    &[type='I s'] {
+      /* 
+        Adjust list style based on type attribute
+        - 'a' for lower-alpha
+        - 'i' for lower-roman
+      */
+      @if & == "[type='a']" or & == "[type='a s']" or & == "[type='A s']" {
+        list-style-type: lower-alpha;
+      }
+      @else if & == "[type='i']" or & == "[type='i s']" or & == "[type='I s']" {
+        list-style-type: lower-roman;
+      }
+      @else {
+        list-style-type: decimal;
+      }
+    }
+  }
+
+  ul {
+    list-style-type: disc;
+
+    &.task-list {
+      list-style: none;
+
+      li {
+        input[type='checkbox'] {
+          width: 2em;
+          height: 2em;
+          margin: 0 1em 0.5em -1.6em;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+
+  /* Definition Lists */
+  dt {
+    font-weight: bold;
+  }
+
+  dd {
+    margin-left: 40px;
+  }
+
+  /* Blockquotes */
+  blockquote {
+    display: block;
+    position: relative;
+    color: #4d4d4d;
+    width: unset;
+    margin: var(--r-block-margin) auto;
+    padding: 0.625rem 1.75rem;
+    border-left: 0.25rem solid #4d4d4d;
+    font-style: normal;
+    background: none;
+    box-shadow: none;
+
+    p:first-child,
+    p:last-child {
+      display: block;
+    }
+  }
+
+  /* Inline Quotes */
+  q {
+    font-style: italic;
+  }
+
+  /* Code Blocks */
+  pre {
+    display: block;
+    position: relative;
+    width: 90%;
+    margin: var(--r-block-margin) auto;
+    text-align: left;
+    font-size: 1rem;
+    font-family: var(--r-code-font);
+    line-height: 1.2em;
+    word-wrap: break-word;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+    background-color: #f9f9f9;
+    border: none;
+    margin: 0;
+
+    code {
+      background-color: #fff;
+      color: #000;
+      white-space: pre-wrap;
+      padding: 6px 9px;
+      max-height: 500px;
+      white-space: pre;
+
+      &:not(.sourceCode) {
+        white-space: pre-wrap;
+      }
+    }
+
+    &.sourceCode {
+      padding-top: 0;
+      padding-bottom: 0;
+
+      code {
+        z-index: 3;
+        padding-left: 0px;
+      }
+    }
+
+    &:hover {
+      box-shadow: none;
+      background-color: #f9f9f9;
+      border: none;
+      margin: 0;
+      font-size: 1rem;
+    }
+  }
+
+  /* Inline Code */
+  code {
+    font-family: var(--r-code-font);
+    text-transform: none;
+    tab-size: 2;
+    background-color: rgba(0, 0, 0, 0);
+    color: #d73f09;
+    white-space: pre;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+
+      &:hover {
+        color: inherit;
+        text-decoration: underline;
+      }
+
+      &.code-annotation-anchor {
+        text-align: center;
+        vertical-align: middle;
+        text-decoration: none;
+        cursor: default;
+        height: 1.2em;
+        width: 1.2em;
+
+        &::before {
+          font-family: 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+          color: var(--quarto-hl-co-color);
+          border: solid var(--quarto-hl-co-color) 1px;
+          border-radius: 50%;
+          font-size: 0.7em;
+          line-height: 1.2em;
+          margin-top: 2px;
+          user-select: none;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          -o-user-select: none;
+        }
+      }
+    }
+  }
+
+  /* Link Styles */
+  a {
+    color: var(--r-link-color);
+    text-decoration: none;
+    transition: color 0.15s ease;
+    text-underline-offset: 3px;
+
+    &:hover {
+      color: var(--r-link-color-hover);
+      text-shadow: none;
+      border: none;
+    }
+  }
+
+  /* Table Styles */
+  table {
+    margin: auto;
+    border-collapse: collapse;
+    border-spacing: 0;
+
+    th,
+    td {
+      text-align: left;
+      padding: 0.2em 0.5em;
+      border-bottom: 1px solid var(--quarto-border-color);
+    }
+
+    th[align='center'],
+    td[align='center'] {
+      text-align: center;
+    }
+
+    th[align='right'],
+    td[align='right'] {
+      text-align: right;
+    }
+
+    tbody tr:last-child th,
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* GT Table Specific Styles */
+    &.gt_table {
+      color: var(--quarto-body-color);
+      font-size: 1em;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0);
+      border-top-width: inherit;
+      border-bottom-width: inherit;
+      border-color: var(--quarto-border-color);
+
+      th.gt_column_spanner_outer,
+      th.gt_col_heading {
+        color: var(--quarto-body-color);
+        background-color: rgba(0, 0, 0, 0);
+        border-top-width: inherit;
+        border-bottom-width: inherit;
+      }
+
+      th.gt_col_heading {
+        font-weight: bold;
+        background-color: rgba(0, 0, 0, 0);
+      }
+
+      thead.gt_col_headings {
+        border-bottom: 1px solid currentColor;
+        border-top-width: inherit;
+        border-top-color: var(--quarto-border-color);
+
+        &:not(:first-child) {
+          border-top-width: 1px;
+          border-top-color: var(--quarto-border-color);
+        }
+      }
+
+      tbody.gt_table_body {
+        border-top-width: 1px;
+        border-bottom-width: 1px;
+        border-bottom-color: var(--quarto-border-color);
+        border-top-color: currentColor;
+      }
+    }
+  }
+
+  /* Footer and Slide Number Styles */
+  .footer {
+    color: #4d4d4d;
+
+    a {
+      color: #d73f09;
+    }
+
+    &.has-dark-background {
+      color: #fff;
+
+      a {
+        color: #7bc6fa;
+      }
+    }
+
+    &.has-light-background {
+      color: #505050;
+
+      a {
+        color: #6a9bdd;
+      }
+    }
+  }
+
+  .slide-number {
+    color: #4d4d4d;
+    background-color: #fff;
+
+    &.has-dark-background {
+      color: #fff;
+    }
+
+    &.has-light-background {
+      color: #505050;
+    }
+  }
+
+  /* Title Block Styles */
+  .quarto-title-block {
+    text-align: center;
+    max-height: 90vh;
+    overflow-y: auto;
+
+    /* Authors Section */
+    .quarto-title-authors {
+      display: flex;
+      justify-content: center;
+
+      .quarto-title-author {
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+
+        a {
+          color: inherit;
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
+        .quarto-title-author-name {
+          margin-bottom: 0.1rem;
+        }
+
+        .quarto-title-author-email {
+          margin-top: 0px;
+          margin-bottom: 0.4em;
+          font-size: 0.6em;
+        }
+
+        .quarto-title-author-orcid img {
+          margin-bottom: 4px;
+        }
+
+        .quarto-title-affiliation {
+          font-size: 0.7em;
+          margin-top: 0px;
+          margin-bottom: 8px;
+
+          &:first-child {
+            margin-top: 12px;
+          }
+        }
+      }
+    }
+
+    /* 
+      Title Heading
+      Updated to use Georgia
+    */
+    h1.title {
+      font-family: "Georgia", serif; // Updated from "Roboto Slab", "Times New Roman", serif
+      color: #d73f09 !important;
+      line-height: 1.5;
+      margin-top: -0.5em;
+      margin-bottom: 0.5em;
+      font-size: var(--r-headingTitle-size);
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    /* 
+      Other Headings within Title Block
+      Ensures consistent styling for h2 to h6.
+    */
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: "Georgia", serif; // Updated from "Roboto Slab", "Times New Roman", serif
+      color: #000;
+      line-height: 1.5;
+      margin-top: 1.5em;
+      margin-bottom: 0.5em;
+    }
+  }
+
+  /* Subtitle Styles */
+  .subtitle {
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    font-family: "Open Sans", sans-serif; // Updated from "Roboto", Arial, sans-serif
+    margin-bottom: 2.5rem;
+  }
+
+  /* Author Styles */
+  .author {
+    color: #fff;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-family: "Open Sans", sans-serif; // Updated from "Roboto", Arial, sans-serif
+
+    a {
+      color: #fff;
+      font-size: inherit;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  /* Dark Background Links */
+  section.has-dark-background {
+    a,
+    a:hover {
+      color: #fff;
+    }
+  }
+
+  /* Right Aligned Text */
+  .right {
+    text-align: right;
+  }
+
+  /* Utility Classes */
+  .visually-hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: auto;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    white-space: nowrap;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  .zindex-bottom {
+    z-index: -1 !important;
+  }
+}
+
+/*
+  ===========================
+  Additional Components
+  ===========================
+  Styles for panels, tabs, code annotations, and other interactive elements.
+*/
+.reveal {
+  /* Panel Tabset Styles */
+  .panel-tabset {
+    [role='tablist'] {
+      border-bottom: 1px solid #000;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+
+      * {
+        box-sizing: border-box;
+      }
+
+      @media (min-width: 30em) {
+        li {
+          display: inline-block;
+        }
+      }
+
+      [role='tab'] {
+        border: 1px solid rgba(0, 0, 0, 0);
+        border-top-color: #000;
+        display: block;
+        padding: 0.25em 0.7em;
+        text-decoration: none;
+
+        @media (min-width: 30em) {
+          border-top-color: rgba(0, 0, 0, 0);
+          display: inline-block;
+          margin-bottom: -1px;
+        }
+
+        &[aria-selected='true'] {
+          background-color: #000;
+
+          @media (min-width: 30em) {
+            background-color: rgba(0, 0, 0, 0);
+            border: 1px solid #000;
+            border-bottom-color: #fff;
+          }
+        }
+
+        &:hover:not([aria-selected='true']) {
+          @media (min-width: 30em) {
+            border: 1px solid #000;
+          }
+        }
+      }
+    }
+
+    [role='tab'] {
+      cursor: pointer;
+    }
+  }
+
+  /* Code with Filename Styles */
+  .code-with-filename {
+    .code-with-filename-file {
+      margin-bottom: 0;
+      padding: 2px 0 2px 0.7em;
+      border: $border-width solid $border-color;
+      border-radius: $border-radius;
+      border-bottom: 0;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      background-color: rgba(219, 219, 219, 0.8);
+
+      strong {
+        font-weight: 400;
+      }
+    }
+
+    div.sourceCode,
+    .reveal .code-with-filename div.sourceCode {
+      margin-top: 0;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+
+    .code-with-filename-file pre {
+      margin-bottom: 0;
+      background-color: unset;
+    }
+  }
+
+  /* Code Annotation Container Hidden */
+  .code-annotation-container-hidden {
+    display: none;
+  }
+
+  /* Code Copy Button Styles */
+  .code-copy-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 0;
+    margin-top: 5px;
+    margin-right: 5px;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 3;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .code-copy-button-tooltip {
+    font-size: 0.75em;
+  }
+
+  /* Additional Styles for Code Annotations and Buttons */
+}
+
+/*
+  ===========================
+  Media Queries and Responsive Styles
+  ===========================
+  Handles responsiveness for various components.
+*/
+@media (min-width: 500px) {
+  .reveal .controls[data-controls-layout='edges'] {
+    .navigate-left {
+      left: 0.2em;
+    }
+
+    .navigate-right {
+      right: 0.2em;
+    }
+
+    .navigate-up {
+      top: 0.4em;
+    }
+
+    .navigate-down {
+      bottom: 2.3em;
+    }
+  }
+}
+
+/*
+  ===========================
+  Tippy.js Styles
+  ===========================
+  Styles for tooltips using Tippy.js.
+*/
+.tippy-box[data-theme~='light-border'] {
+  background-color: #fff;
+  color: #000;
+  border-radius: 4px;
+  border: solid 1px #4d4d4d;
+  font-size: 0.6em;
+
+  .tippy-arrow {
+    color: #4d4d4d;
+  }
+
+  &[data-placement^='bottom'] > .tippy-content {
+    padding: 7px 10px;
+    z-index: 1;
+  }
+}
+
+/*
+  ===========================
+  Mermaid Diagram Styles
+  ===========================
+  Applies styles to Mermaid diagrams.
+*/
+:root {
+  --mermaid-bg-color: #{$mermaid-bg-color};
+  --mermaid-edge-color: #{$mermaid-edge-color};
+  --mermaid-node-fg-color: #{$mermaid-node-fg-color};
+  --mermaid-fg-color: #{$mermaid-fg-color};
+  --mermaid-fg-color--lighter: #{$mermaid-fg-color-lighter};
+  --mermaid-fg-color--lightest: #{$mermaid-fg-color-lightest};
+  --mermaid-font-family: #{$mermaid-font-family};
+  --mermaid-label-bg-color: #{$mermaid-label-bg-color};
+  --mermaid-label-fg-color: #{$mermaid-label-fg-color};
+  --mermaid-node-bg-color: #{$mermaid-node-bg-color};
+  --mermaid-node-fg-color: #{$mermaid-node-fg-color};
+}
+
+/*
+  ===========================
+  Footer and Slide Number Styles
+  ===========================
+  Reiterates styles for footers and slide numbers.
+*/
+.reveal .slide-logo {
+  display: block;
+  position: fixed;
+  bottom: 0;
+  right: 12px;
+  max-height: 6rem !important;
+  height: 100%;
+  width: auto;
+  z-index: 2;
+}
+
+.reveal .footer {
+  display: block;
+  position: fixed;
+  bottom: 18px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 18px;
+  z-index: 2;
+}
+
+.reveal .footer > * {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.reveal .slide .footer {
+  display: none;
+}
+
+.reveal .slide-number {
+  bottom: 10px;
+  right: 10px;
+  font-size: 16px;
+  background-color: transparent;
+}
+
+.reveal.has-logo .slide-number {
+  bottom: initial;
+  top: 8px;
+  right: 8px;
+}
+
+.reveal .slide-number .slide-number-delimiter {
+  margin: 0;
+}
+
+.reveal .slide-menu-button {
+  left: 8px;
+  bottom: 8px;
+}
+
+.reveal .slide-chalkboard-buttons {
+  position: fixed;
+  left: 12px;
+  bottom: 8px;
+  z-index: 30;
+  font-size: 24px;
+}
+
+.reveal .slide-chalkboard-buttons.slide-menu-offset {
+  left: 54px;
+}
+
+.reveal .slide-chalkboard-buttons > span {
+  margin-right: 14px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 800px) {
+  .reveal .slide-logo {
+    max-height: 1.1rem;
+    bottom: -2px;
+    right: 10px;
+  }
+  .reveal .footer {
+    font-size: 14px;
+    bottom: 12px;
+  }
+  .reveal .slide-number {
+    font-size: 12px;
+    bottom: 7px;
+  }
+  .reveal .slide-menu-button .fas::before {
+    height: 1.3rem;
+    width: 1.3rem;
+    vertical-align: -0.125em;
+    background-size: 1.3rem 1.3rem;
+  }
+
+  .reveal .slide-chalkboard-buttons .fas::before {
+    height: 0.95rem;
+    width: 0.95rem;
+    background-size: 0.95rem 0.95rem;
+    vertical-align: -0em;
+  }
+
+  .reveal .slide-chalkboard-buttons.slide-menu-offset {
+    left: 36px;
+  }
+  .reveal .slide-chalkboard-buttons > span {
+    margin-right: 9px;
+  }
+}
+
+html.print-pdf .reveal .slide-menu-button,
+html.print-pdf .reveal .slide-chalkboard-buttons {
+  display: none;
+}
+
+
+/*
+  ===========================
+  Additional Interactive Elements
+  ===========================
+  Styles for buttons, icons, and other interactive components.
+*/
+.reveal {
+  /* Slide Menu Button */
+  .slide-menu-button {
+    position: absolute;
+    left: 5px;
+    top: 15px;
+    padding-left: 10px;
+    color: var(--quarto-text-muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    /* Icon Styles */
+    .fa-bars::before,
+    .fa-easel2::before,
+    .fa-brush::before {
+      /* Customize icons as needed */
+    }
+  }
+
+  /* Additional Interactive Elements */
+}
