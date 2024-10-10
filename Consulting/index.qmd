@@ -5,6 +5,7 @@ date: today
 date-format: long
 format: 
     OSUStyle-revealjs:
+        logo: OSULogo.png
         slide-number: true
         incremental: true
         transition: convex
