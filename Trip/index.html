@@ -1,0 +1,2636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Optimized viewport for iPhone users -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Europe Misadventures 2024</title>    
+    <style>
+        /* Global Styles */
+        body, html {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
+            line-height: 1.3;
+            font-size: 16px;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            box-sizing: border-box;
+        }
+        
+        /* Viewport Height Variable for Mobile Devices */
+        :root {
+            --vh: 1vh; /* Fallback value */
+        }
+        
+        body {
+            margin: 0;
+        }
+        
+        /* Site Title */
+        .siteTitle {
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 30px;
+            margin: 20px 0;
+            text-align: center;
+            background: inherit;
+        }
+        
+        @media (min-width: 768px) {
+            .siteTitle {
+            font-size: 60px;
+            background: inherit;
+            }
+        }
+        
+        /* Countdown Timer Styles */
+        #countdown {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 30vh;
+            flex-direction: column;
+            text-align: center;
+            background: inherit;
+        }
+        
+        #countdown h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        #countdown p {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        
+        /* FlipDown Integration */
+        .flipdown {
+            margin: auto;
+        }
+        
+        .flipdown__theme-light {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        
+        .flipdown__theme-dark {
+            color: #fff;
+        }
+        
+        /* Override FlipDown Styles if Needed */
+        .flipdown .rotor-group {
+            margin: 0 0px;
+        }
+        
+        .flipdown .rotor {
+            background: #fff;
+            border-radius: 5px;
+        }
+        
+        .flipdown .rotor-top,
+        .flipdown .rotor-bottom,
+        .flipdown .rotor-leaf-front,
+        .flipdown .rotor-leaf-rear {
+            background: #fff;
+        }
+        
+        .flipdown .rotor-top::before,
+        .flipdown .rotor-bottom::after {
+            background: #e6e6e6;
+        }
+        
+        .flipdown .rotor-leaf-front,
+        .flipdown .rotor-leaf-rear {
+            border-bottom: 1px solid #e6e6e6;
+        }
+        
+        .flipdown .rotor-group-heading {
+            color: #333;
+        }
+        
+        .flipdown .rotor-group-heading:before {
+            font-size: .9rem;
+            height: 20px;
+            line-height: 20px;
+        }
+        
+        /* Light Theme Styling */
+        body.light-theme {
+            background-color: #151515;
+        }
+        
+        body.light-theme #countdown h1,
+        body.light-theme #countdown p {
+            color: #FFFFFF;
+        }
+        
+        body.light-theme .flipdown__theme-light {
+            background-color: #151515;
+            color: #fff;
+        }
+        
+        /* Flip Card Container Styles */
+        .flip-card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 40px;
+            box-sizing: border-box;
+        }
+        
+        /* Flip Card Styles */
+        .flip-card {
+            background-color: transparent;
+            width: 90%;
+            max-width: 300px;
+            height: 0;
+            padding-bottom: 75%;
+            perspective: 1000px;
+            position: relative;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+        
+        /* Flip Card Inner Styles */
+        .flip-card-inner {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s ease;
+            transform-style: preserve-3d;
+        }
+        
+        /* Flip Effect */
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        /* Flip Card Front and Back */
+        .flip-card-front,
+        .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            overflow: hidden;
+            box-sizing: border-box;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .flip-card-front {
+            background-color: #c6c6c6;
+            z-index: 2;
+        }
+        
+        .flip-card-front .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .flip-card-front .inner {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 25%;
+            background: rgba(247, 249, 255, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            box-sizing: border-box;
+            z-index: 3;
+        }
+        
+        .flip-card-front .title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6em;
+            color: #181818;
+            text-align: center;
+            font-weight: 800;
+            margin: 0 0 8px 0;
+        }
+        
+        .flip-card-front .subtitle {
+            color: #555;
+            text-align: center;
+            font-weight: 400;
+            font-size: 1.1em;
+        }
+        
+        /* Flip Indicator */
+        .flip-indicator {
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            z-index: 4;
+            animation: arrowShift 3s infinite;
+        }
+        
+        .flip-indicator img {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.2s, fill 0.3s;
+        }
+        
+        @keyframes arrowShift {
+            0%, 100% { transform: translateX(0);}
+            50% { transform: translateX(10px);}
+        }
+        
+        /* Flip Card Back */
+        .flip-card-back {
+            background-color: #fff;
+            color: black;
+            transform: rotateY(180deg);
+            overflow-y: auto;
+            z-index: 1;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        .flip-card-back h2 {
+            background-color: #ffffff;
+            color: #000000;
+            text-align: center;
+            padding: 20px 20px;
+            font-size: 1.6em;
+            margin-bottom: 25px;
+            margin-top: 0;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        
+        .flip-card-back h3 {
+            color: rgb(255, 255, 255);
+            background-color: black;
+        }
+        
+        .flip-card-back h2::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 2px;
+            background-color: #fff;
+            margin: 10px auto 0 auto;
+            border-radius: 1px;
+        }
+        
+        /* Flip Card Back Content Wrapper */
+        .flip-card-back .content-wrapper {
+            padding: 0 20px 20px 20px;
+        }
+        
+        .flight-info {
+            margin: 20px;
+        }
+        
+        /* Timeline Styles */
+        .timeline {
+            position: relative;
+            margin: 20px 0;
+            padding-left: 40px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #ffffff;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: flex-start;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideIn 0.6s forwards;
+            flex-direction: column;
+        }
+        
+        @keyframes slideIn {
+            to {
+            opacity: 1;
+            transform: translateY(0);
+            }
+        }
+        
+        .timeline-time {
+            font-weight: 600;
+            color: #007BFF;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+        
+        .timeline-content {
+            background-color: #f9f9f9 !important;
+            color: #151515 !important;
+            padding: 10px 15px;
+            margin-right: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 0px 2px rgb(46, 42, 43),
+            8px 8px 0px 0px rgb(31, 30, 30);
+            flex: 1;
+            transition: background-color 0.3s ease, transform 0.3s ease, border-left 0.3s ease;
+        }
+        
+        /* Smooth Scrolling within the Flip Card Back */
+        body.card-focused .flip-card.flipped .flip-card-back {
+            scrollbar-width: thin;
+        }
+        
+        body.card-focused .flip-card.flipped .flip-card-back::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        body.card-focused .flip-card.flipped .flip-card-back::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 123, 255, 0.5);
+            border-radius: 3px;
+        }
+        
+        /* Focused Card Styles */
+        body.card-focused .flip-card.flipped {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            width: auto;
+            height: auto;
+            padding-bottom: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: none;
+        }
+        
+        body.card-focused .flip-card.flipped .flip-card-inner {
+            width: 100%;
+            height: 100%;
+            transform: rotateY(180deg);
+        }
+        
+        body.card-focused .flip-card.flipped .flip-card-back {
+            width: 100%;
+            height: 100%;
+            transform: rotateY(180deg);
+        }
+        
+        /* Hide other elements when a card is focused */
+        body.card-focused .flip-card:not(.flipped),
+        body.card-focused header,
+        body.card-focused #countdown,
+        body.card-focused #preview-button {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .siteTitle {
+            font-size: 30px;
+            font-weight: 800;
+            }
+        
+            .flip-card-container {
+            flex-direction: column;
+            align-items: center;
+            }
+        
+            .flip-card {
+            padding-bottom: 100%;
+            max-width: 90%;
+            }
+        
+            .flip-card-front .title {
+            font-size: 1.4em;
+            }
+        
+            #preview-button {
+            padding: 8px 16px;
+            font-size: 0.9em;
+            }
+        
+            .modal-content {
+            padding: 15px 20px;
+            }
+        
+            body.card-focused .flip-card.flipped {
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            }
+        }
+        
+        /* Preview Button Styles */
+        #preview-button {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            z-index: 1000;
+            animation: pulse 2s infinite;
+        }
+        
+        #preview-button:hover {
+            transform: translateX(-50%) scale(1.05);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Pulse Animation for Preview Button */
+        @keyframes pulse {
+            0% {
+            transform: translateX(-50%) scale(1);
+            box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
+            }
+            70% {
+            transform: translateX(-50%) scale(1);
+            box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
+            }
+            100% {
+            transform: translateX(-50%) scale(1);
+            box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+            }
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: #fefefe;
+            margin: 0;
+            padding: 20px 30px;
+            border: 1px solid #888;
+            width: 90%;
+            max-width: 400px;
+            border-radius: 10px;
+            text-align: center;
+            position: relative;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .close-modal {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .close-modal:hover,
+        .close-modal:focus {
+            color: #000;
+            text-decoration: none;
+        }
+        
+        .modal-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+        }
+        
+        .modal-buttons button {
+            width: 40%;
+            padding: 10px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        
+        .modal-buttons .confirm-btn {
+            background-color: #28a745;
+            color: #fff;
+        }
+        
+        .modal-buttons .confirm-btn:hover {
+            background-color: #218838;
+        }
+        
+        .modal-buttons .cancel-btn {
+            background-color: #dc3545;
+            color: #fff;
+        }
+        
+        .modal-buttons .cancel-btn:hover {
+            background-color: #c82333;
+        }
+        
+        
+        /* Tip Animation Styles */
+        
+        /* Container for the Tip */
+        .tip-container {
+            perspective: 1000px; /* Enable 3D perspective */
+        }
+        
+        /* Tip Styling */
+        .tip {
+            display: inline-block;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            opacity: 1;
+        }
+        
+        /* Flip Out Animation */
+        .flip-out {
+            transform: rotateY(90deg);
+            opacity: 0;
+        }
+        
+        /* Flip In Animation */
+        .flip-in {
+            transform: rotateY(0deg);
+            opacity: 1;
+        }
+        
+        /* FlipDown Countdown Styles */
+
+        /* Dark Theme */
+        .flipdown.flipdown__theme-dark {
+            font-family: sans-serif;
+            font-weight: bold;
+        }
+        .flipdown.flipdown__theme-dark .rotor-group-heading:before {
+            color: #000;
+        }
+        .flipdown.flipdown__theme-dark .rotor-group:nth-child(n+2):nth-child(-n+3):before,
+        .flipdown.flipdown__theme-dark .rotor-group:nth-child(n+2):nth-child(-n+3):after {
+            background-color: #151515;
+        }
+        .flipdown.flipdown__theme-dark .rotor,
+        .flipdown.flipdown__theme-dark .rotor-top,
+        .flipdown.flipdown__theme-dark .rotor-leaf-front {
+            color: #fff;
+            background-color: #151515;
+        }
+        .flipdown.flipdown__theme-dark .rotor-bottom,
+        .flipdown.flipdown__theme-dark .rotor-leaf-rear {
+            color: #efefef;
+            background-color: #202020;
+        }
+        .flipdown.flipdown__theme-dark .rotor:after {
+            border-top: solid 1px #151515;
+        }
+
+        /* Light Theme */
+        .flipdown.flipdown__theme-light {
+            font-family: sans-serif;
+            font-weight: bold;
+        }
+        .flipdown.flipdown__theme-light .rotor-group-heading:before {
+            color: #eee;
+        }
+        .flipdown.flipdown__theme-light .rotor-group:nth-child(n+2):nth-child(-n+3):before,
+        .flipdown.flipdown__theme-light .rotor-group:nth-child(n+2):nth-child(-n+3):after {
+            background-color: #ddd;
+        }
+        .flipdown.flipdown__theme-light .rotor,
+        .flipdown.flipdown__theme-light .rotor-top,
+        .flipdown.flipdown__theme-light .rotor-leaf-front {
+            color: #222;
+            background-color: #ddd;
+        }
+        .flipdown.flipdown__theme-light .rotor-bottom,
+        .flipdown.flipdown__theme-light .rotor-leaf-rear {
+            color: #333;
+            background-color: #eee;
+        }
+        .flipdown.flipdown__theme-light .rotor:after {
+            border-top: solid 1px #222;
+        }
+
+        /* General FlipDown Styles */
+        .flipdown {
+            overflow: visible;
+            width: 510px;
+            height: 110px;
+        }
+        .flipdown .rotor-group {
+            position: relative;
+            float: left;
+            padding-right: 30px;
+        }
+        .flipdown .rotor-group:last-child {
+            padding-right: 0;
+        }
+        .flipdown .rotor-group-heading:before {
+            display: block;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+        }
+        .flipdown .rotor-group:nth-child(n+2):nth-child(-n+3):before {
+            content: '';
+            position: absolute;
+            bottom: 20px;
+            left: 115px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        .flipdown .rotor-group:nth-child(n+2):nth-child(-n+3):after {
+            content: '';
+            position: absolute;
+            bottom: 50px;
+            left: 115px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        .flipdown .rotor {
+            position: relative;
+            float: left;
+            width: 50px;
+            height: 80px;
+            margin: 0 5px 0 0;
+            border-radius: 4px;
+            font-size: 4rem;
+            text-align: center;
+            perspective: 200px;
+        }
+        .flipdown .rotor:last-child {
+            margin-right: 0;
+        }
+        .flipdown .rotor-top,
+        .flipdown .rotor-bottom {
+            overflow: hidden;
+            position: absolute;
+            width: 50px;
+            height: 40px;
+        }
+        .flipdown .rotor-leaf {
+            z-index: 1;
+            position: absolute;
+            width: 50px;
+            height: 80px;
+            transform-style: preserve-3d;
+            transition: transform 0s;
+        }
+        .flipdown .rotor-leaf.flipped {
+            transform: rotateX(-180deg);
+            transition: all 0.5s ease-in-out;
+        }
+        .flipdown .rotor-leaf-front,
+        .flipdown .rotor-leaf-rear {
+            overflow: hidden;
+            position: absolute;
+            width: 50px;
+            height: 40px;
+            margin: 0;
+            transform: rotateX(0);
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .flipdown .rotor-leaf-front {
+            line-height: 80px;
+            border-radius: 4px 4px 0 0;
+        }
+        .flipdown .rotor-leaf-rear {
+            line-height: 0;
+            border-radius: 0 0 4px 4px;
+            transform: rotateX(-180deg);
+        }
+        .flipdown .rotor-top {
+            line-height: 80px;
+            border-radius: 4px 4px 0 0;
+        }
+        .flipdown .rotor-bottom {
+            bottom: 0;
+            line-height: 0;
+            border-radius: 0 0 4px 4px;
+        }
+        .flipdown .rotor:after {
+            content: '';
+            z-index: 2;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 40px;
+            border-radius: 0 0 4px 4px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 550px) {
+            .flipdown {
+                width: 312px;
+                height: 70px;
+            }
+            .flipdown .rotor {
+                font-size: 2.2rem;
+                margin-right: 3px;
+            }
+            .flipdown .rotor,
+            .flipdown .rotor-leaf,
+            .flipdown .rotor-leaf-front,
+            .flipdown .rotor-leaf-rear,
+            .flipdown .rotor-top,
+            .flipdown .rotor-bottom,
+            .flipdown .rotor:after {
+                width: 30px;
+            }
+            .flipdown .rotor-group {
+                padding-right: 20px;
+            }
+            .flipdown .rotor-group:last-child {
+                padding-right: 0;
+            }
+            .flipdown .rotor-group-heading:before {
+                font-size: 0.8rem;
+                height: 20px;
+                line-height: 20px;
+            }
+            .flipdown .rotor-group:nth-child(n+2):nth-child(-n+3):before,
+            .flipdown .rotor-group:nth-child(n+2):nth-child(-n+3):after {
+                left: 69px;
+            }
+            .flipdown .rotor-group:nth-child(n+2):nth-child(-n+3):before {
+                bottom: 13px;
+                height: 8px;
+                width: 8px;
+            }
+            .flipdown .rotor-group:nth-child(n+2):nth-child(-n+3):after {
+                bottom: 29px;
+                height: 8px;
+                width: 8px;
+            }
+            .flipdown .rotor-leaf-front,
+            .flipdown .rotor-top {
+                line-height: 50px;
+            }
+            .flipdown .rotor-leaf,
+            .flipdown .rotor {
+                height: 50px;
+            }
+            .flipdown .rotor-leaf-front,
+            .flipdown .rotor-leaf-rear,
+            .flipdown .rotor-top,
+            .flipdown .rotor-bottom,
+            .flipdown .rotor:after {
+                height: 25px;
+            }
+        }
+
+        
+        </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header style="background: inherit;">
+        <span class="siteTitle">Europe Misadventures 2024</span>
+    </header>
+
+    <!-- Countdown Timer -->
+    <div id="countdown">
+        <h1>Countdown to Europe!</h1>
+        <div id="flipdown" class="flipdown"></div>
+        <!-- Additional paragraphs will be appended by JavaScript -->
+    </div>
+
+    <!-- Itinerary Display -->
+    <main id="itinerary" style="display: none; padding: 20px; background: inherit;">
+        <!-- Parent Container for Flip-Cards -->
+        <div class="flip-card-container">
+
+            <!-- Flip-Card for Day 0 -->
+            <div class="flip-card" id="day0">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="https://github.com/bcervantesalvarez/MS-Statistics/blob/87ef0ff23b1cee160d2207ac32814e529997596b/images/image0.jpg?raw=true" alt="Departing to Europe" class="card-image">
+                        <div class="inner">
+                            <h2 class="title">Departing to Europe</h2>
+                            <time class="subtitle">Wed, Dec 11th</time>
+                            <!-- Front Flip Indicator -->
+                            <div class="flip-indicator" tabindex="0" role="button" aria-label="Flip Card">
+                                <img src="https://raw.githubusercontent.com/bcervantesalvarez/MS-Statistics/87ef0ff23b1cee160d2207ac32814e529997596b/images/rightArrow.svg" alt="Flip Indicator" class="flip-icon">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flip-card-back">
+                        <h2>Day 0: Depart to Europe (Wed, Dec 11th)</h2>
+
+                        <!-- Flight Information (Collapsible Section) -->
+                        <details class="flight-info">
+                            <summary>Flight Information</summary>
+                            <ul>
+                                <li><strong>Flight 1</strong>: Portland International Airport (PDX) → Adolfo Suárez Madrid-Barajas Airport (MAD)
+                                    <ul>
+                                        <li><strong>Departure</strong>: 7:05 AM PST (PDX)</li>
+                                        <li><strong>Layover</strong>: 3:28 PM EST (JFK)</li>
+                                        <li><strong>Arrival</strong>: 8:00 AM CET (MAD), Dec 12th</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </details>
+
+                        <!-- Itinerary Content with Timeline -->
+                        <div class="timeline">
+                            <!-- Morning Block -->
+                            <h3 class="timeline-block">Morning</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-time">5:00 AM</div>
+                                <div class="timeline-content">
+                                    <p>Start packing essentials.</p>
+                                </div>
+                            </div>
+                            <!-- Afternoon Block -->
+                            <h3 class="timeline-block">Afternoon</h3>
+                            <!-- Flight departs -->
+                            <!-- Evening Block -->
+                            <h3 class="timeline-block">Evening</h3>
+                            <!-- Arrival in Portland -->
+                        </div>
+
+                        <!-- Back Flip Indicator -->
+                        <div class="flip-indicator" tabindex="0" role="button" aria-label="Flip Back">
+                            <img src="https://raw.githubusercontent.com/bcervantesalvarez/MS-Statistics/87ef0ff23b1cee160d2207ac32814e529997596b/images/leftArrow.svg" alt="Flip Indicator" class="flip-icon">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flip-Card for Day 1 -->
+            <div class="flip-card" id="day1">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="https://github.com/bcervantesalvarez/MS-Statistics/blob/main/images/image3.png?raw=true" alt="Madrid Journey Begins" class="card-image">
+                        <div class="inner">
+                            <h2 class="title">Madrid, Spain</h2>
+                            <time class="subtitle">Thu, Dec 12th</time>
+                            <!-- Front Flip Indicator -->
+                            <div class="flip-indicator" tabindex="0" role="button" aria-label="Flip Card">
+                                <img src="https://raw.githubusercontent.com/bcervantesalvarez/MS-Statistics/87ef0ff23b1cee160d2207ac32814e529997596b/images/rightArrow.svg" alt="Flip Indicator" class="flip-icon">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Back Side with 'country-spain' class -->
+                    <div class="flip-card-back country-spain">
+                        <h2>Day 1: Madrid, Spain (Thu, Dec 12th)</h2>
+
+                        <!-- Itinerary Content with Timeline -->
+                        <div class="timeline">
+                            <!-- Morning Block -->
+                            <h3 class="timeline-block">Morning</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-time">9:30 AM - 10:30 AM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Check-in at Airbnb</strong></p>
+                                    <p><strong>Travel Time</strong>: From airport to Airbnb — ~30 minutes by taxi.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">10:30 AM - 11:30 AM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Breakfast at Carmencita Brunch Lavapiés</strong></p>
+                                    <p><strong>Travel Time</strong>: Airbnb to Carmencita Brunch — ~15 minutes walk.</p>
+                                </div>
+                            </div>
+                            <!-- Afternoon Block -->
+                            <h3 class="timeline-block">Afternoon</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-time">12:00 PM - 2:00 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Royal Palace of Madrid</strong></p>
+                                    <p><strong>Travel Time</strong>: Breakfast spot to Royal Palace — ~25 minutes by metro.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">2:15 PM - 3:15 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Almudena Cathedral</strong></p>
+                                    <p>Located next to the Royal Palace.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">4:00 PM - 5:00 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Plaza Mayor and Puerta del Sol</strong></p>
+                                    <p><strong>Travel Time</strong>: Royal Palace to Plaza Mayor — ~15 minutes walk.</p>
+                                </div>
+                            </div>
+                            <!-- Evening Block -->
+                            <h3 class="timeline-block">Evening</h3>
+                            <!-- Arrival in Portland -->
+                        </div>
+
+                        <!-- Back Flip Indicator -->
+                        <div class="flip-indicator" tabindex="0" role="button" aria-label="Flip Back">
+                            <img src="https://raw.githubusercontent.com/bcervantesalvarez/MS-Statistics/87ef0ff23b1cee160d2207ac32814e529997596b/images/leftArrow.svg" alt="Flip Indicator" class="flip-icon">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flip-Card for Day 2 -->
+            <div class="flip-card" id="day2">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="https://github.com/bcervantesalvarez/MS-Statistics/blob/main/images/image26.png?raw=true" alt="Exploring Madrid's Museums" class="card-image">
+                        <div class="inner">
+                            <h2 class="title">Madrid, Spain</h2>
+                            <time class="subtitle">Fri, Dec 13th</time>
+                            <!-- Front Flip Indicator -->
+                            <div class="flip-indicator" tabindex="0" role="button" aria-label="Flip Card">
+                                <img src="https://raw.githubusercontent.com/bcervantesalvarez/MS-Statistics/87ef0ff23b1cee160d2207ac32814e529997596b/images/rightArrow.svg" alt="Flip Indicator" class="flip-icon">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Back Side with 'country-spain' class -->
+                    <div class="flip-card-back country-spain">
+                        <h2>Day 2: Madrid, Spain (Fri, Dec 13th)</h2>
+
+                        <!-- Itinerary Content with Timeline -->
+                        <div class="timeline">
+                            <!-- Morning Block -->
+                            <h3 class="timeline-block">Morning</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-time">9:30 AM - 11:00 AM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Prado Museum</strong></p>
+                                    <p><strong>Travel Time</strong>: Airbnb to Prado Museum — ~20 minutes by metro.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">11:15 AM - 12:15 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Thyssen-Bornemisza Museum</strong></p>
+                                    <p><strong>Travel Time</strong>: 5-minute walk from Prado Museum.</p>
+                                </div>
+                            </div>
+                            <!-- Afternoon Block -->
+                            <h3 class="timeline-block">Afternoon</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-time">12:30 PM - 1:30 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Lunch at El Club Allard</strong></p>
+                                    <p><strong>Travel Time</strong>: Museum area to restaurant — ~15 minutes by taxi.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">2:00 PM - 4:00 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Reina Sofia Museum</strong></p>
+                                    <p><strong>Travel Time</strong>: Restaurant to Reina Sofia — ~20 minutes by metro.</p>
+                                </div>
+                            </div>
+                            <!-- Evening Block -->
+                            <h3 class="timeline-block">Evening</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-time">4:30 PM - 6:00 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Parque del Retiro</strong></p>
+                                    <p><strong>Travel Time</strong>: Reina Sofia to Retiro Park — ~15 minutes walk.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Back Flip Indicator -->
+                        <div class="flip-indicator" tabindex="0" role="button" aria-label="Flip Back">
+                            <img src="https://raw.githubusercontent.com/bcervantesalvarez/MS-Statistics/87ef0ff23b1cee160d2207ac32814e529997596b/images/leftArrow.svg" alt="Flip Indicator" class="flip-icon">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flip-Card for Day 3 -->
+            <div class="flip-card" id="day3">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="https://github.com/bcervantesalvarez/MS-Statistics/blob/main/images/image65.png?raw=true" alt="Barcelona Day Trip" class="card-image">
+                        <div class="inner">
+                            <h2 class="title">Madrid → Barcelona Day Trip</h2>
+                            <time class="subtitle">Sat, Dec 14th</time>
+                            <!-- Front Flip Indicator -->
+                            <div class="flip-indicator" tabindex="0" role="button" aria-label="Flip Card">
+                                <img src="https://raw.githubusercontent.com/bcervantesalvarez/MS-Statistics/87ef0ff23b1cee160d2207ac32814e529997596b/images/rightArrow.svg" alt="Flip Indicator" class="flip-icon">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Back Side with 'country-spain' class (day trip within Spain) -->
+                    <div class="flip-card-back country-spain">
+                        <h2>Day 3: Madrid → Barcelona Day Trip (Sat, Dec 14th)</h2>
+
+                        <!-- Itinerary Content with Timeline -->
+                        <div class="timeline">
+                            <!-- Morning Block -->
+                            <h3 class="timeline-block">Morning</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-time">5:00 AM - 5:45 AM</div>
+                                <div class="timeline-content">
+                                    <p>Get ready for train travel</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">5:45 AM - 6:10 AM</div>
+                                <div class="timeline-content">
+                                    <p>Walk to the train station</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">6:15 AM - 8:45 AM</div>
+                                <div class="timeline-content">
+                                    <p>Travel to Barcelona by High-Speed Rail</p>
+                                    <ul>
+                                        <li><strong>Departure Location</strong>: Pta. Atocha - Almudena Grandes Station, Madrid</li>
+                                        <li><strong>Train Service</strong>: Renfe AVLO Express Train #06301</li>
+                                        <li><strong>Seat Class</strong>: Economy Class Seat</li>
+                                        <li><strong>Features</strong>: Reclining seats, ample legroom, table seating, large windows</li>
+                                        <li><strong>Arrival Location</strong>: Sants Station, Barcelona</li>
+                                        <li><strong>Fare</strong>: $45 per passenger</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">9:00 AM - 9:45 AM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Breakfast at El Nacional</strong></p>
+                                </div>
+                            </div>
+                            <!-- Afternoon Block -->
+                            <h3 class="timeline-block">Afternoon</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-time">10:00 AM - 10:15 AM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Walk by La Pedrera - Casa Milà</strong></p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">10:30 AM - 12:00 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Visit La Sagrada Familia</strong></p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">12:15 PM - 1:30 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Explore Passeig de Gràcia</strong></p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">1:45 PM - 3:00 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Lunch at Cervecería Catalana</strong></p>
+                                </div>
+                            </div>
+                            <!-- Evening Block -->
+                            <h3 class="timeline-block">Evening</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-time">3:15 PM - 4:45 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Visit Park Güell</strong></p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">5:00 PM - 6:30 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Explore the Gothic Quarter (Barri Gòtic)</strong></p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">6:45 PM - 7:45 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Early Dinner at Els 4 Gats</strong></p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">8:15 PM - 8:45 PM</div>
+                                <div class="timeline-content">
+                                    <p>Return to Train Station (Barcelona Sants)</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">9:00 PM - 11:45 PM</div>
+                                <div class="timeline-content">
+                                    <p>Travel back to Madrid by High-Speed Rail</p>
+                                    <ul>
+                                        <li><strong>Train Service</strong>: Renfe AVE Bullet Train #03212</li>
+                                        <li><strong>Seat Class</strong>: 1st Class Seat (Saver Option)</li>
+                                        <li><strong>Features</strong>: Spacious reclining seats, free WiFi, power sockets</li>
+                                        <li><strong>Fare</strong>: $66 per passenger</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">Total Travel Cost</div>
+                                <div class="timeline-content">
+                                    <p><strong>Total Travel Cost for Round Trip</strong>: $111 per passenger</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Back Flip Indicator -->
+                        <div class="flip-indicator" tabindex="0" role="button" aria-label="Flip Back">
+                            <img src="https://raw.githubusercontent.com/bcervantesalvarez/MS-Statistics/87ef0ff23b1cee160d2207ac32814e529997596b/images/leftArrow.svg" alt="Flip Indicator" class="flip-icon">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flip-Card for Day 4 -->
+            <div class="flip-card" id="day4">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="https://github.com/bcervantesalvarez/MS-Statistics/blob/main/images/image11.jpg?raw=true" alt="Travel to Venice" class="card-image">
+                        <div class="inner">
+                            <h2 class="title">Madrid → Venice</h2>
+                            <time class="subtitle">Sun, Dec 15th</time>
+                            <!-- Front Flip Indicator -->
+                            <div class="flip-indicator" tabindex="0" role="button" aria-label="Flip Card">
+                                <img src="https://raw.githubusercontent.com/bcervantesalvarez/MS-Statistics/87ef0ff23b1cee160d2207ac32814e529997596b/images/rightArrow.svg" alt="Flip Indicator" class="flip-icon">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Back Side with 'country-italy' class -->
+                    <div class="flip-card-back country-italy">
+                        <h2>Day 4: Madrid → Venice (Sun, Dec 15th)</h2>
+
+                        <!-- Flight Information (Collapsible Section) -->
+                        <details class="flight-info">
+                            <summary>Flight Information</summary>
+                            <ul>
+                                <li><strong>Flight 2</strong>: Adolfo Suárez Madrid-Barajas Airport (MAD) → Venice Marco Polo Airport (VCE)
+                                    <ul>
+                                        <li><strong>Departure</strong>: 6:55 AM CET</li>
+                                        <li><strong>Arrival</strong>: 9:25 AM CET</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </details>
+
+                        <!-- Itinerary Content with Timeline -->
+                        <div class="timeline">
+                            <!-- Morning Block -->
+                            <h3 class="timeline-block">Morning</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-time">11:00 AM - 12:00 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Check-in at Accommodation</strong></p>
+                                    <p><strong>Travel Time</strong>: Airport to hotel in Venice — ~30 minutes by water taxi.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">12:30 PM - 1:30 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Lunch near Rialto Bridge</strong></p>
+                                </div>
+                            </div>
+                            <!-- Afternoon Block -->
+                            <h3 class="timeline-block">Afternoon</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-time">1:30 PM - 2:30 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Rialto Bridge and Market</strong></p>
+                                    <p><strong>Travel Time</strong>: Hotel to Rialto Bridge — ~15 minutes walk.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">3:00 PM - 4:00 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>St. Mark's Basilica</strong></p>
+                                    <p><strong>Travel Time</strong>: 10-minute walk from Rialto Bridge.</p>
+                                </div>
+                            </div>
+                            <!-- Evening Block -->
+                            <h3 class="timeline-block">Evening</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-time">4:15 PM - 5:15 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Doge's Palace</strong></p>
+                                    <p>Located next to St. Mark's Basilica.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">5:30 PM - 6:00 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Bridge of Sighs</strong></p>
+                                    <p>Adjacent to Doge's Palace.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Back Flip Indicator -->
+                        <div class="flip-indicator" tabindex="0" role="button" aria-label="Flip Back">
+                            <img src="https://raw.githubusercontent.com/bcervantesalvarez/MS-Statistics/87ef0ff23b1cee160d2207ac32814e529997596b/images/leftArrow.svg" alt="Flip Indicator" class="flip-icon">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flip-Card for Day 5 -->
+            <div class="flip-card" id="day5">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="https://github.com/bcervantesalvarez/MS-Statistics/blob/main/images/image44.jpg?raw=true" alt="Murano Island" class="card-image">
+                        <div class="inner">
+                            <h2 class="title">Venice, Italy</h2>
+                            <time class="subtitle">Mon, Dec 16th</time>
+                            <!-- Front Flip Indicator -->
+                            <div class="flip-indicator" tabindex="0" role="button" aria-label="Flip Card">
+                                <img src="https://raw.githubusercontent.com/bcervantesalvarez/MS-Statistics/87ef0ff23b1cee160d2207ac32814e529997596b/images/rightArrow.svg" alt="Flip Indicator" class="flip-icon">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Back Side with 'country-italy' class -->
+                    <div class="flip-card-back country-italy">
+                        <h2>Day 5: Venice, Italy (Mon, Dec 16th)</h2>
+
+                        <!-- Itinerary Content with Timeline -->
+                        <div class="timeline">
+                            <!-- Morning Block -->
+                            <h3 class="timeline-block">Morning</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-time">9:00 AM - 10:30 AM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Murano Island</strong></p>
+                                    <p><strong>Travel Time</strong>: From Venice to Murano — ~30 minutes by vaporetto (water bus).</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">10:30 AM - 12:00 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Glass Factory Tour and Shopping</strong></p>
+                                </div>
+                            </div>
+                            <!-- Afternoon Block -->
+                            <h3 class="timeline-block">Afternoon</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-time">12:30 PM - 2:00 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Burano Island</strong></p>
+                                    <p><strong>Travel Time</strong>: Murano to Burano — ~30 minutes by vaporetto.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">2:00 PM - 3:00 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Lunch in Burano</strong></p>
+                                </div>
+                            </div>
+                            <!-- Evening Block -->
+                            <h3 class="timeline-block">Evening</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-time">3:30 PM - 4:30 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Explore Burano's Colorful Streets</strong></p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">5:00 PM - 5:45 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Return to Venice</strong></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Back Flip Indicator -->
+                        <div class="flip-indicator" tabindex="0" role="button" aria-label="Flip Back">
+                            <img src="https://raw.githubusercontent.com/bcervantesalvarez/MS-Statistics/87ef0ff23b1cee160d2207ac32814e529997596b/images/leftArrow.svg" alt="Flip Indicator" class="flip-icon">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flip-Card for Day 6 -->
+            <div class="flip-card" id="day6">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="https://github.com/bcervantesalvarez/MS-Statistics/blob/main/images/image51.jpg?raw=true" alt="Palazzo Grimani" class="card-image">
+                        <div class="inner">
+                            <h2 class="title">Venice, Italy</h2>
+                            <time class="subtitle">Tue, Dec 17th</time>
+                            <!-- Front Flip Indicator -->
+                            <div class="flip-indicator" tabindex="0" role="button" aria-label="Flip Card">
+                                <img src="https://raw.githubusercontent.com/bcervantesalvarez/MS-Statistics/87ef0ff23b1cee160d2207ac32814e529997596b/images/rightArrow.svg" alt="Flip Indicator" class="flip-icon">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Back Side with 'country-italy' class -->
+                    <div class="flip-card-back country-italy">
+                        <h2>Day 6: Venice, Italy (Tue, Dec 17th)</h2>
+
+                        <!-- Itinerary Content with Timeline -->
+                        <div class="timeline">
+                            <!-- Morning Block -->
+                            <h3 class="timeline-block">Morning</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-time">9:30 AM - 11:00 AM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Palazzo Grimani Museum</strong></p>
+                                    <p><strong>Travel Time</strong>: Hotel to Palazzo Grimani — ~15 minutes walk.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">11:15 AM - 12:15 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Libreria Acqua Alta</strong></p>
+                                    <p>Unique bookstore.</p>
+                                </div>
+                            </div>
+                            <!-- Afternoon Block -->
+                            <h3 class="timeline-block">Afternoon</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-time">12:30 PM - 1:30 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Lunch at Local Trattoria</strong></p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">2:00 PM - 3:30 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Peggy Guggenheim Collection</strong></p>
+                                    <p><strong>Travel Time</strong>: 25 minutes walk or 15 minutes by vaporetto.</p>
+                                </div>
+                            </div>
+                            <!-- Evening Block -->
+                            <h3 class="timeline-block">Evening</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-time">4:00 PM - 5:30 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Gondola Ride and Explore Dorsoduro Neighborhood</strong></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Back Flip Indicator -->
+                        <div class="flip-indicator" tabindex="0" role="button" aria-label="Flip Back">
+                            <img src="https://raw.githubusercontent.com/bcervantesalvarez/MS-Statistics/87ef0ff23b1cee160d2207ac32814e529997596b/images/leftArrow.svg" alt="Flip Indicator" class="flip-icon">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flip-Card for Day 7 -->
+            <div class="flip-card" id="day7">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="https://github.com/bcervantesalvarez/MS-Statistics/blob/main/images/image43.png?raw=true" alt="Flight to Rome" class="card-image">
+                        <div class="inner">
+                            <h2 class="title">Venice → Rome</h2>
+                            <time class="subtitle">Wed, Dec 18th</time>
+                            <!-- Front Flip Indicator -->
+                            <div class="flip-indicator" tabindex="0" role="button" aria-label="Flip Card">
+                                <img src="https://raw.githubusercontent.com/bcervantesalvarez/MS-Statistics/87ef0ff23b1cee160d2207ac32814e529997596b/images/rightArrow.svg" alt="Flip Indicator" class="flip-icon">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Back Side with 'country-italy' class -->
+                    <div class="flip-card-back country-italy">
+                        <h2>Day 7: Venice → Rome (Wed, Dec 18th)</h2>
+
+                        <!-- Flight Information (Collapsible Section) -->
+                        <details class="flight-info">
+                            <summary>Flight Information</summary>
+                            <ul>
+                                <li><strong>Flight 3</strong>: Venice Marco Polo Airport (VCE) → Leonardo da Vinci–Fiumicino Airport (FCO), Rome
+                                    <ul>
+                                        <li><strong>Departure</strong>: 6:15 AM CET</li>
+                                        <li><strong>Arrival</strong>: 7:25 AM CET</li>
+                                        <li><strong>Airline</strong>: ITA Airways (AZ 1460)</li>
+                                        <li><strong>Aircraft</strong>: Airbus A320neo</li>
+                                        <li><strong>Emissions Estimate</strong>: 151 kg CO₂e (65% lower than average)</li>
+                                        <li><strong>Amenities</strong>: Below-average legroom (29 inches), in-seat USB outlets, media streaming to your device.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </details>
+
+                        <!-- Itinerary Content with Timeline -->
+                        <div class="timeline">
+                            <!-- Morning Block -->
+                            <h3 class="timeline-block">Morning</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-time">8:00 AM - 9:00 AM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Travel to Accommodation and Check-in</strong></p>
+                                    <p><strong>Travel Time</strong>: Airport to hotel in Rome — ~30 minutes by train (Leonardo Express) or 45 minutes by taxi.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">9:30 AM - 11:30 AM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Colosseum & Roman Forum</strong></p>
+                                    <p><strong>Travel Time</strong>: Hotel to Colosseum — ~15 minutes by metro or taxi.</p>
+                                    <p><strong>Tip</strong>: Pre-book a combined ticket to skip the lines.</p>
+                                </div>
+                            </div>
+                            <!-- Afternoon Block -->
+                            <h3 class="timeline-block">Afternoon</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-time">11:45 AM - 12:30 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Palatine Hill</strong></p>
+                                    <p>Adjacent to the Roman Forum.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">12:45 PM - 1:45 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Lunch near the Colosseum</strong></p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">2:00 PM - 3:00 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Piazza Venezia & Vittoriano Monument</strong></p>
+                                    <p><strong>Travel Time</strong>: 15-minute walk from Colosseum.</p>
+                                </div>
+                            </div>
+                            <!-- Evening Block -->
+                            <h3 class="timeline-block">Evening</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-time">3:30 PM - 4:30 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Trevi Fountain</strong></p>
+                                    <p><strong>Travel Time</strong>: 15-minute walk from Piazza Venezia.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">5:00 PM - 6:00 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Spanish Steps</strong></p>
+                                    <p><strong>Travel Time</strong>: 15-minute walk from Trevi Fountain.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Back Flip Indicator -->
+                        <div class="flip-indicator" tabindex="0" role="button" aria-label="Flip Back">
+                            <img src="https://raw.githubusercontent.com/bcervantesalvarez/MS-Statistics/87ef0ff23b1cee160d2207ac32814e529997596b/images/leftArrow.svg" alt="Flip Indicator" class="flip-icon">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flip-Card for Day 8 -->
+            <div class="flip-card" id="day8">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="https://github.com/bcervantesalvarez/MS-Statistics/blob/main/images/image79.png?raw=true" alt="Vatican Museums" class="card-image">
+                        <div class="inner">
+                            <h2 class="title">Rome, Italy</h2>
+                            <time class="subtitle">Thu, Dec 19th</time>
+                            <!-- Front Flip Indicator -->
+                            <div class="flip-indicator" tabindex="0" role="button" aria-label="Flip Card">
+                                <img src="https://raw.githubusercontent.com/bcervantesalvarez/MS-Statistics/87ef0ff23b1cee160d2207ac32814e529997596b/images/rightArrow.svg" alt="Flip Indicator" class="flip-icon">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Back Side with 'country-italy' class -->
+                    <div class="flip-card-back country-italy">
+                        <h2>Day 8: Rome, Italy (Thu, Dec 19th)</h2>
+
+                        <!-- Itinerary Content with Timeline -->
+                        <div class="timeline">
+                            <!-- Morning Block -->
+                            <h3 class="timeline-block">Morning</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-time">9:00 AM - 12:00 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Vatican Museums & Sistine Chapel</strong></p>
+                                    <p><strong>Travel Time</strong>: Hotel to Vatican — ~30 minutes by metro.</p>
+                                    <p><strong>Tip</strong>: Pre-book tickets for early entry.</p>
+                                </div>
+                            </div>
+                            <!-- Afternoon Block -->
+                            <h3 class="timeline-block">Afternoon</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-time">12:15 PM - 1:30 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>St. Peter's Basilica</strong></p>
+                                    <p><strong>Activity</strong>: Climb to the dome for panoramic views.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">1:45 PM - 2:45 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Lunch near Vatican City</strong></p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">3:00 PM - 4:00 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Castel Sant'Angelo</strong></p>
+                                    <p><strong>Travel Time</strong>: 10-minute walk from St. Peter's Square.</p>
+                                </div>
+                            </div>
+                            <!-- Evening Block -->
+                            <h3 class="timeline-block">Evening</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-time">4:30 PM - 5:30 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Piazza Navona</strong></p>
+                                    <p><strong>Travel Time</strong>: 20-minute walk or 10-minute taxi.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Back Flip Indicator -->
+                        <div class="flip-indicator" tabindex="0" role="button" aria-label="Flip Back">
+                            <img src="https://raw.githubusercontent.com/bcervantesalvarez/MS-Statistics/87ef0ff23b1cee160d2207ac32814e529997596b/images/leftArrow.svg" alt="Flip Indicator" class="flip-icon">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flip-Card for Day 9 -->
+            <div class="flip-card" id="day9">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="https://github.com/bcervantesalvarez/MS-Statistics/blob/main/images/image18.png?raw=true" alt="Pantheon" class="card-image">
+                        <div class="inner">
+                            <h2 class="title">Rome, Italy</h2>
+                            <time class="subtitle">Fri, Dec 20th</time>
+                            <!-- Front Flip Indicator -->
+                            <div class="flip-indicator" tabindex="0" role="button" aria-label="Flip Card">
+                                <img src="https://raw.githubusercontent.com/bcervantesalvarez/MS-Statistics/87ef0ff23b1cee160d2207ac32814e529997596b/images/rightArrow.svg" alt="Flip Indicator" class="flip-icon">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Back Side with 'country-italy' class -->
+                    <div class="flip-card-back country-italy">
+                        <h2>Day 9: Rome, Italy (Fri, Dec 20th)</h2>
+
+                        <!-- Itinerary Content with Timeline -->
+                        <div class="timeline">
+                            <!-- Morning Block -->
+                            <h3 class="timeline-block">Morning</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-time">9:00 AM - 10:00 AM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Pantheon</strong></p>
+                                    <p><strong>Travel Time</strong>: Hotel to Pantheon — ~20 minutes by metro.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">10:15 AM - 11:00 AM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Campo de' Fiori</strong></p>
+                                    <p>Explore the open-air market.</p>
+                                    <p><strong>Travel Time</strong>: 10-minute walk from Pantheon.</p>
+                                </div>
+                            </div>
+                            <!-- Afternoon Block -->
+                            <h3 class="timeline-block">Afternoon</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-time">11:15 AM - 12:00 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Lunch in Trastevere</strong></p>
+                                    <p><strong>Travel Time</strong>: 15-minute walk across the Tiber River.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">12:30 PM - 2:00 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Explore Trastevere Neighborhood</strong></p>
+                                    <p>Charming streets, local shops, and cafes.</p>
+                                </div>
+                            </div>
+                            <!-- Evening Block -->
+                            <h3 class="timeline-block">Evening</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-time">2:30 PM - 4:00 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Villa Borghese & Borghese Gallery</strong></p>
+                                    <p><strong>Travel Time</strong>: 30 minutes by bus or taxi.</p>
+                                    <p><strong>Tip</strong>: Reservation required for Borghese Gallery.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">4:30 PM - 5:30 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Pincio Terrace</strong></p>
+                                    <p>Enjoy sunset views over Rome.</p>
+                                    <p>Located within Villa Borghese.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Back Flip Indicator -->
+                        <div class="flip-indicator" tabindex="0" role="button" aria-label="Flip Back">
+                            <img src="https://raw.githubusercontent.com/bcervantesalvarez/MS-Statistics/87ef0ff23b1cee160d2207ac32814e529997596b/images/leftArrow.svg" alt="Flip Indicator" class="flip-icon">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flip-Card for Day 10 -->
+            <div class="flip-card" id="day10">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="https://github.com/bcervantesalvarez/MS-Statistics/blob/main/images/image52.png?raw=true" alt="Flight to Paris" class="card-image">
+                        <div class="inner">
+                            <h2 class="title">Rome → Paris</h2>
+                            <time class="subtitle">Sat, Dec 21st</time>
+                            <!-- Front Flip Indicator -->
+                            <div class="flip-indicator" tabindex="0" role="button" aria-label="Flip Card">
+                                <img src="https://raw.githubusercontent.com/bcervantesalvarez/MS-Statistics/87ef0ff23b1cee160d2207ac32814e529997596b/images/rightArrow.svg" alt="Flip Indicator" class="flip-icon">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Back Side with 'country-france' class -->
+                    <div class="flip-card-back country-france">
+                        <h2>Day 10: Rome → Paris (Sat, Dec 21st)</h2>
+
+                        <!-- Flight Information (Collapsible Section) -->
+                        <details class="flight-info">
+                            <summary>Flight Information</summary>
+                            <ul>
+                                <li><strong>Flight 4</strong>: Leonardo da Vinci–Fiumicino Airport (FCO) → Paris Charles de Gaulle Airport (CDG)
+                                    <ul>
+                                        <li><strong>Departure</strong>: 6:00 AM CET</li>
+                                        <li><strong>Arrival</strong>: 8:15 AM CET</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </details>
+
+                        <!-- Itinerary Content with Timeline -->
+                        <div class="timeline">
+                            <!-- Morning Block -->
+                            <h3 class="timeline-block">Morning</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-time">10:00 AM - 11:00 AM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Check-in at Accommodation</strong></p>
+                                    <p><strong>Travel Time</strong>: Airport to hotel in Paris — ~45 minutes by RER train.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">11:30 AM - 12:30 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Lunch near Hotel</strong></p>
+                                </div>
+                            </div>
+                            <!-- Afternoon Block -->
+                            <h3 class="timeline-block">Afternoon</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-time">1:00 PM - 1:45 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Travel to Disneyland Paris</strong></p>
+                                    <p><strong>Travel Time</strong>: Approximately 45 minutes by RER A train.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">2:00 PM - Closing</div>
+                                <div class="timeline-content">
+                                    <p><strong>Disneyland Paris</strong></p>
+                                    <p><strong>Activities</strong>: Enjoy rides, shows, and parades.</p>
+                                    <p><strong>Note</strong>: With an afternoon arrival, prioritize must-see attractions.</p>
+                                    <p><strong>Dinner</strong>: Options available within the park.</p>
+                                </div>
+                            </div>
+                            <!-- Evening Block -->
+                            <h3 class="timeline-block">Evening</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-time">Return to Paris</div>
+                                <div class="timeline-content">
+                                    <p>Ensure you catch the last RER train back to the city.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Back Flip Indicator -->
+                        <div class="flip-indicator" tabindex="0" role="button" aria-label="Flip Back">
+                            <img src="https://raw.githubusercontent.com/bcervantesalvarez/MS-Statistics/87ef0ff23b1cee160d2207ac32814e529997596b/images/leftArrow.svg" alt="Flip Indicator" class="flip-icon">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flip-Card for Day 11 -->
+            <div class="flip-card" id="day11">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="https://github.com/bcervantesalvarez/MS-Statistics/blob/main/images/image15.png?raw=true" alt="Eiffel Tower" class="card-image">
+                        <div class="inner">
+                            <h2 class="title">Paris, France</h2>
+                            <time class="subtitle">Sun, Dec 22nd</time>
+                            <!-- Front Flip Indicator -->
+                            <div class="flip-indicator" tabindex="0" role="button" aria-label="Flip Card">
+                                <img src="https://raw.githubusercontent.com/bcervantesalvarez/MS-Statistics/87ef0ff23b1cee160d2207ac32814e529997596b/images/rightArrow.svg" alt="Flip Indicator" class="flip-icon">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Back Side with 'country-france' class -->
+                    <div class="flip-card-back country-france">
+                        <h2>Day 11: Paris, France (Sun, Dec 22nd)</h2>
+
+                        <!-- Itinerary Content with Timeline -->
+                        <div class="timeline">
+                            <!-- Morning Block -->
+                            <h3 class="timeline-block">Morning</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-time">8:30 AM - 10:00 AM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Eiffel Tower</strong></p>
+                                    <p><strong>Travel Time</strong>: Hotel to Eiffel Tower — ~20 minutes by metro.</p>
+                                    <p><strong>Tip</strong>: Book early morning tickets to avoid crowds.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">10:15 AM - 11:00 AM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Champ de Mars</strong></p>
+                                    <p>Relax and take photos.</p>
+                                </div>
+                            </div>
+                            <!-- Afternoon Block -->
+                            <h3 class="timeline-block">Afternoon</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-time">11:30 AM - 12:30 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Louvre Museum (Exterior) and Tuileries Garden</strong></p>
+                                    <p><strong>Travel Time</strong>: 15-minute metro ride.</p>
+                                    <p><strong>Note</strong>: Given limited time, consider viewing the Louvre's exterior and enjoying the gardens.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">12:45 PM - 1:45 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Lunch near the Louvre</strong></p>
+                                </div>
+                            </div>
+                            <!-- Evening Block -->
+                            <h3 class="timeline-block">Evening</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-time">2:00 PM - 3:00 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Notre-Dame Cathedral (Exterior Viewing)</strong></p>
+                                    <p><strong>Travel Time</strong>: 15-minute metro ride.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">3:15 PM - 4:15 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Sainte-Chapelle</strong></p>
+                                    <p><strong>Tip</strong>: Admire the stunning stained-glass windows.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">4:30 PM - 5:30 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Walk along the Seine River</strong></p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">5:45 PM - 7:00 PM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Montmartre and Sacré-Cœur Basilica</strong></p>
+                                    <p><strong>Travel Time</strong>: 30-minute metro ride.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-time">7:15 PM onwards</div>
+                                <div class="timeline-content">
+                                    <p><strong>Dinner in Montmartre</strong></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Back Flip Indicator -->
+                        <div class="flip-indicator" tabindex="0" role="button" aria-label="Flip Back">
+                            <img src="https://raw.githubusercontent.com/bcervantesalvarez/MS-Statistics/87ef0ff23b1cee160d2207ac32814e529997596b/images/leftArrow.svg" alt="Flip Indicator" class="flip-icon">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flip-Card for Day 12 -->
+            <div class="flip-card" id="day12">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="https://github.com/bcervantesalvarez/MS-Statistics/blob/main/images/image86.jpg?raw=true" alt="Return to Portland" class="card-image">
+                        <div class="inner">
+                            <h2 class="title">Paris → Portland</h2>
+                            <time class="subtitle">Mon, Dec 23rd</time>
+                            <!-- Front Flip Indicator -->
+                            <div class="flip-indicator" tabindex="0" role="button" aria-label="Flip Card">
+                                <img src="https://raw.githubusercontent.com/bcervantesalvarez/MS-Statistics/87ef0ff23b1cee160d2207ac32814e529997596b/images/rightArrow.svg" alt="Flip Indicator" class="flip-icon">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Back Side without country-specific class -->
+                    <div class="flip-card-back">
+                        <h2>Day 12: Paris → Portland (Mon, Dec 23rd)</h2>
+
+                        <!-- Flight Information (Collapsible Section) -->
+                        <details class="flight-info">
+                            <summary>Flight Information</summary>
+                            <ul>
+                                <li><strong>Flight 5</strong>: Paris Charles de Gaulle Airport (CDG) → Portland International Airport (PDX)
+                                    <ul>
+                                        <li><strong>First Segment</strong>: Paris (CDG) → Los Angeles (LAX)
+                                            <ul>
+                                                <li><strong>Departure</strong>: 11:35 AM CET</li>
+                                                <li><strong>Arrival</strong>: 2:05 PM PST (LAX)</li>
+                                                <li><strong>Airline</strong>: Air Tahiti Nui (TN 7)</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Second Segment</strong>: Los Angeles (LAX) → Portland (PDX)
+                                            <ul>
+                                                <li><strong>Departure</strong>: 5:29 PM PST</li>
+                                                <li><strong>Arrival</strong>: 8:00 PM PST</li>
+                                                <li><strong>Airline</strong>: Alaska Airlines (AS 1012)</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </details>
+
+                        <!-- Itinerary Content with Timeline -->
+                        <div class="timeline">
+                            <!-- Morning Block -->
+                            <h3 class="timeline-block">Morning</h3>
+                            <div class="timeline-item">
+                                <div class="timeline-time">7:00 AM</div>
+                                <div class="timeline-content">
+                                    <p><strong>Check-out and Travel to Airport</strong></p>
+                                    <p><strong>Travel Time</strong>: Approximately 45 minutes to 1 hour to Charles de Gaulle Airport via RER B train or taxi.</p>
+                                </div>
+                            </div>
+                            <!-- Afternoon Block -->
+                            <h3 class="timeline-block">Afternoon</h3>
+                            <!-- Flight departs -->
+                            <!-- Evening Block -->
+                            <h3 class="timeline-block">Evening</h3>
+                            <!-- Arrival in Portland -->
+                        </div>
+
+                        <!-- Back Flip Indicator -->
+                        <div class="flip-indicator" tabindex="0" role="button" aria-label="Flip Back">
+                            <img src="https://raw.githubusercontent.com/bcervantesalvarez/MS-Statistics/87ef0ff23b1cee160d2207ac32814e529997596b/images/leftArrow.svg" alt="Flip Indicator" class="flip-icon">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Preview Itinerary Button -->
+    <button id="preview-button">Preview Itinerary Early</button>
+
+    <!-- Modal Structure -->
+    <div id="preview-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Preview Itinerary Early</h2>
+            <p>Are you sure you want to preview the itinerary now?</p>
+            <div class="modal-buttons">
+                <button class="confirm-btn">Yes</button>
+                <button class="cancel-btn">No</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FlipDown.js Library -->
+    <script>
+        "use strict";
+
+        // Utility functions
+        function _typeof(a) {
+            return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (a) {
+                return typeof a;
+            } : function (a) {
+                return a && "function" == typeof Symbol && a.constructor === Symbol && a !== Symbol.prototype ? "symbol" : typeof a;
+            }, _typeof(a);
+        }
+
+        function _classCallCheck(instance, Constructor) {
+            if (!(instance instanceof Constructor)) {
+                throw new TypeError("Cannot call a class as a function");
+            }
+        }
+
+        function _defineProperties(target, props) {
+            for (var i = 0; i < props.length; i++) {
+                var descriptor = props[i];
+                descriptor.enumerable = descriptor.enumerable || false;
+                descriptor.configurable = true;
+                if ("value" in descriptor) descriptor.writable = true;
+                Object.defineProperty(target, descriptor.key, descriptor);
+            }
+        }
+
+        function _createClass(Constructor, protoProps, staticProps) {
+            if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+            if (staticProps) _defineProperties(Constructor, staticProps);
+            return Constructor;
+        }
+
+        // FlipDown Countdown Timer
+        var FlipDown = function () {
+            var floor = Math.floor;
+
+            function FlipDown(epoch, elementId = "flipdown", options = {}) {
+                _classCallCheck(this, FlipDown);
+
+                if (typeof epoch !== "number") {
+                    throw new Error("FlipDown: Constructor expected unix timestamp, got ".concat(_typeof(epoch), " instead."));
+                }
+
+                // Handle optional parameters
+                if (_typeof(elementId) === "object") {
+                    options = elementId;
+                    elementId = "flipdown";
+                }
+
+                this.version = "0.3.2";
+                this.initialised = false;
+                this.now = this._getTime();
+                this.epoch = epoch;
+                this.countdownEnded = false;
+                this.hasEndedCallback = null;
+                this.element = document.getElementById(elementId);
+                this.rotors = [];
+                this.rotorLeafFront = [];
+                this.rotorLeafRear = [];
+                this.rotorTops = [];
+                this.rotorBottoms = [];
+                this.countdown = null;
+                this.daysRemaining = 0;
+                this.clockValues = {};
+                this.clockStrings = {};
+                this.clockValuesAsString = [];
+                this.prevClockValuesAsString = [];
+                this.opts = this._parseOptions(options);
+                this._setOptions();
+
+                console.log("FlipDown ".concat(this.version, " (Theme: ").concat(this.opts.theme, ")"));
+            }
+
+            _createClass(FlipDown, [{
+                key: "start",
+                value: function start() {
+                    if (!this.initialised) this._init();
+                    this.countdown = setInterval(this._tick.bind(this), 1000);
+                    return this;
+                }
+            }, {
+                key: "ifEnded",
+                value: function ifEnded(callback) {
+                    this.hasEndedCallback = function () {
+                        callback();
+                        this.hasEndedCallback = null;
+                    };
+                    return this;
+                }
+            }, {
+                key: "_getTime",
+                value: function _getTime() {
+                    return new Date().getTime() / 1000;
+                }
+            }, {
+                key: "_hasCountdownEnded",
+                value: function _hasCountdownEnded() {
+                    if (this.epoch - this.now < 0) {
+                        this.countdownEnded = true;
+                        if (this.hasEndedCallback != null) {
+                            this.hasEndedCallback();
+                            this.hasEndedCallback = null;
+                        }
+                        return true;
+                    } else {
+                        this.countdownEnded = false;
+                        return false;
+                    }
+                }
+            }, {
+                key: "_parseOptions",
+                value: function _parseOptions(options) {
+                    var headings = ["Days", "Hours", "Minutes", "Seconds"];
+                    if (options.headings && options.headings.length === 4) {
+                        headings = options.headings;
+                    }
+                    return {
+                        theme: options.hasOwnProperty("theme") ? options.theme : "dark",
+                        headings: headings
+                    };
+                }
+            }, {
+                key: "_setOptions",
+                value: function _setOptions() {
+                    this.element.classList.add("flipdown__theme-".concat(this.opts.theme));
+                }
+            }, {
+                key: "_init",
+                value: function _init() {
+                    this.initialised = true;
+                    this.daysRemaining = this._hasCountdownEnded() ? 0 : floor((this.epoch - this.now) / 86400).toString().length;
+
+                    // Create rotors
+                    var rotorCount = this.daysRemaining <= 2 ? 2 : this.daysRemaining;
+                    for (var i = 0; i < rotorCount + 6; i++) {
+                        this.rotors.push(this._createRotor(0));
+                    }
+
+                    // Create rotor groups
+                    var rotorGroups = [];
+                    for (var j = 0; j < rotorCount; j++) {
+                        rotorGroups.push(this.rotors[j]);
+                    }
+                    this.element.appendChild(this._createRotorGroup(rotorGroups, 0));
+
+                    var rotorGroupIndex = rotorCount;
+                    for (var k = 0; k < 3; k++) {
+                        var rotorPairs = [];
+                        for (var l = 0; l < 2; l++) {
+                            rotorPairs.push(this.rotors[rotorGroupIndex]);
+                            rotorGroupIndex++;
+                        }
+                        this.element.appendChild(this._createRotorGroup(rotorPairs, k + 1));
+                    }
+
+                    // Cache rotor elements
+                    this.rotorLeafFront = Array.prototype.slice.call(this.element.getElementsByClassName("rotor-leaf-front"));
+                    this.rotorLeafRear = Array.prototype.slice.call(this.element.getElementsByClassName("rotor-leaf-rear"));
+                    this.rotorTop = Array.prototype.slice.call(this.element.getElementsByClassName("rotor-top"));
+                    this.rotorBottom = Array.prototype.slice.call(this.element.getElementsByClassName("rotor-bottom"));
+
+                    // Start ticking
+                    this._tick();
+                    this._updateClockValues(true);
+                }
+            }, {
+                key: "_createRotorGroup",
+                value: function _createRotorGroup(rotors, index) {
+                    var group = document.createElement("div");
+                    group.className = "rotor-group";
+
+                    var heading = document.createElement("div");
+                    heading.className = "rotor-group-heading";
+                    heading.setAttribute("data-before", this.opts.headings[index]);
+
+                    group.appendChild(heading);
+                    appendChildren(group, rotors);
+                    return group;
+                }
+            }, {
+                key: "_createRotor",
+                value: function _createRotor(value = 0) {
+                    var rotor = document.createElement("div");
+                    var leaf = document.createElement("div");
+                    var rearFigure = document.createElement("figure");
+                    var frontFigure = document.createElement("figure");
+                    var top = document.createElement("div");
+                    var bottom = document.createElement("div");
+
+                    rotor.className = "rotor";
+                    leaf.className = "rotor-leaf";
+                    rearFigure.className = "rotor-leaf-rear";
+                    frontFigure.className = "rotor-leaf-front";
+                    top.className = "rotor-top";
+                    bottom.className = "rotor-bottom";
+
+                    rearFigure.textContent = value;
+                    top.textContent = value;
+                    bottom.textContent = value;
+
+                    appendChildren(rotor, [leaf, top, bottom]);
+                    appendChildren(leaf, [rearFigure, frontFigure]);
+
+                    return rotor;
+                }
+            }, {
+                key: "_tick",
+                value: function _tick() {
+                    this.now = this._getTime();
+                    var remaining = Math.max(0, this.epoch - this.now);
+
+                    this.clockValues.d = floor(remaining / 86400);
+                    remaining -= this.clockValues.d * 86400;
+                    this.clockValues.h = floor(remaining / 3600);
+                    remaining -= this.clockValues.h * 3600;
+                    this.clockValues.m = floor(remaining / 60);
+                    remaining -= this.clockValues.m * 60;
+                    this.clockValues.s = floor(remaining);
+
+                    this._updateClockValues();
+                    this._hasCountdownEnded();
+                }
+            }, {
+                key: "_updateClockValues",
+                value: function _updateClockValues(initialUpdate = false) {
+                    var c = this;
+
+                    this.clockStrings.d = pad(this.clockValues.d, 2);
+                    this.clockStrings.h = pad(this.clockValues.h, 2);
+                    this.clockStrings.m = pad(this.clockValues.m, 2);
+                    this.clockStrings.s = pad(this.clockValues.s, 2);
+
+                    this.clockValuesAsString = (this.clockStrings.d + this.clockStrings.h + this.clockStrings.m + this.clockStrings.s).split("");
+
+                    this.rotorLeafFront.forEach(function (leaf, index) {
+                        leaf.textContent = c.prevClockValuesAsString[index];
+                    });
+                    this.rotorBottom.forEach(function (bottom, index) {
+                        bottom.textContent = c.prevClockValuesAsString[index];
+                    });
+
+                    if (initialUpdate) {
+                        this._updateRotorContents.call(this);
+                        this._updateRotorAnimations.call(this);
+                    } else {
+                        setTimeout(this._updateRotorContents.bind(this), 500);
+                        setTimeout(this._updateRotorAnimations.bind(this), 500);
+                    }
+
+                    this.prevClockValuesAsString = this.clockValuesAsString;
+                }
+            }, {
+                key: "_updateRotorContents",
+                value: function _updateRotorContents() {
+                    var c = this;
+                    this.rotorTop.forEach(function (top, index) {
+                        if (top.textContent !== c.clockValuesAsString[index]) {
+                            top.textContent = c.clockValuesAsString[index];
+                        }
+                    });
+                }
+            }, {
+                key: "_updateRotorAnimations",
+                value: function _updateRotorAnimations() {
+                    var c = this;
+                    this.rotorLeafRear.forEach(function (rear, index) {
+                        if (rear.textContent !== c.clockValuesAsString[index]) {
+                            rear.textContent = c.clockValuesAsString[index];
+                            rear.parentElement.classList.add("flipped");
+
+                            var interval = setInterval(function () {
+                                rear.parentElement.classList.remove("flipped");
+                                clearInterval(interval);
+                            }, 500);
+                        }
+                    });
+                }
+            }]);
+
+            return FlipDown;
+        }();
+
+        // Utility functions
+        function pad(num, size) {
+            var s = num.toString();
+            while (s.length < size) s = "0" + s;
+            return s;
+        }
+
+        function appendChildren(parent, children) {
+            children.forEach(function (child) {
+                parent.appendChild(child);
+            });
+        }
+
+    </script>
+
+    
+    <!-- My Scripts -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Set your departure date and time here
+            const departureDate = new Date("2024-12-11T07:05:00-08:00"); // Departure DateTime
+            const promptEndDate = new Date("2024-12-01T00:00:00"); // After this date, no longer show the prompt
+            const now = new Date();
+        
+            const countdownContainer = document.getElementById("countdown");
+            const itineraryContainer = document.getElementById("itinerary");
+            const previewButton = document.getElementById("preview-button");
+            const previewModal = document.getElementById("preview-modal");
+            const closeModal = document.querySelector(".close-modal");
+            const confirmBtn = document.querySelector(".confirm-btn");
+            const cancelBtn = document.querySelector(".cancel-btn");
+        
+            // Set Adaptive Background Based on Day
+            const dayOfWeek = now.getDay();
+            const body = document.body;
+        
+            if (dayOfWeek >= 1 && dayOfWeek <= 3) {
+                // Monday-Wednesday: Spain
+                body.style.backgroundImage = 'linear-gradient(to right, rgba(255, 0, 0, 0.2), rgba(255, 255, 0, 0.2), rgba(255, 0, 0, 0.2))';
+            } else if (dayOfWeek >= 4 && dayOfWeek <= 6) {
+                // Thursday-Saturday: Italy
+                body.style.backgroundImage = 'linear-gradient(to right, rgba(0, 146, 70, 0.2), rgba(255, 255, 255, 0.2), rgba(206, 43, 55, 0.2))';
+            } else if (dayOfWeek === 0) {
+                // Sunday: France
+                body.style.backgroundImage = 'linear-gradient(to right, rgba(0, 35, 149, 0.2), rgba(255, 255, 255, 0.2), rgba(237, 41, 57, 0.2))';
+            }
+        
+            // Expanded Travel Tips
+            const travelTips = [
+                "Remember to pack light and bring only essentials.",
+                "Check your passport's expiration date.",
+                "Make copies of important documents.",
+                "Learn basic phrases in the local languages.",
+                "Notify your bank of your travel plans.",
+                "Consider travel insurance for peace of mind.",
+                "Research local customs and etiquette.",
+                "Download offline maps and translation apps.",
+                "Bring a universal power adapter.",
+                "Stay hydrated and keep snacks handy.",
+                "Plan your itinerary but stay flexible.",
+                "Secure your belongings with anti-theft gear.",
+                "Inform family or friends of your travel plans.",
+                "Check the weather forecast and pack accordingly.",
+                "Keep digital and physical copies of important documents."
+            ];
+        
+            let currentTipIndex = 0; // To keep track of the current tip
+        
+            // Countdown Logic
+            if (now < departureDate) {
+                // Initialize FlipDown Countdown
+                const countdownEnd = Math.floor(departureDate.getTime() / 1000); // Departure date in Unix timestamp
+        
+                const flipdown = new FlipDown(countdownEnd, 'flipdown')
+                    .start()
+                    .ifEnded(() => {
+                        countdownContainer.style.display = "none";
+                        itineraryContainer.style.display = "block";
+                        previewButton.style.display = "none"; // Hide preview button if already past departure
+                        clearInterval(tipInterval); // Clear the tip rotation interval
+                    });
+        
+                // Update the tip and additional info below the countdown with animation
+                const infoParagraph = document.createElement('p');
+                infoParagraph.textContent = "The fully finished Itinerary will be completed by December 1st.";
+                countdownContainer.appendChild(infoParagraph);
+        
+                // Create Tip Container
+                const tipContainer = document.createElement('div');
+                tipContainer.classList.add('tip-container');
+        
+                // Create Tip Paragraph
+                const tipParagraph = document.createElement('p');
+                tipParagraph.classList.add('tip'); // Assign a class for styling and animation
+                tipParagraph.textContent = `Tip: ${travelTips[currentTipIndex]}`;
+                tipContainer.appendChild(tipParagraph);
+                countdownContainer.appendChild(tipContainer);
+        
+                // Function to update the tip with flip animation
+                function updateTip() {
+                    // Add the 'flip-out' class to start flip-out animation
+                    tipParagraph.classList.add('flip-out');
+        
+                    // After the flip-out animation ends, update the tip and flip it back in
+                    tipParagraph.addEventListener('transitionend', function handleTransitionEnd() {
+                        // Remove the event listener to prevent multiple triggers
+                        tipParagraph.removeEventListener('transitionend', handleTransitionEnd);
+        
+                        // Update the tip index
+                        currentTipIndex = (currentTipIndex + 1) % travelTips.length;
+        
+                        // Update the tip text
+                        tipParagraph.textContent = `Tip: ${travelTips[currentTipIndex]}`;
+        
+                        // Remove 'flip-out' and add 'flip-in' to start flip-in animation
+                        tipParagraph.classList.remove('flip-out');
+                        tipParagraph.classList.add('flip-in');
+        
+                        // Remove 'flip-in' class after animation completes to reset
+                        tipParagraph.addEventListener('transitionend', function handleFlipInEnd() {
+                            tipParagraph.classList.remove('flip-in');
+                            tipParagraph.removeEventListener('transitionend', handleFlipInEnd);
+                        });
+                    });
+                }
+        
+                // Set interval to update the tip every 10 seconds
+                const tipInterval = setInterval(updateTip, 10000); // 10000 milliseconds = 10 seconds
+        
+                // Show or hide the preview button based on promptEndDate
+                if (now < promptEndDate) {
+                    previewButton.style.display = "block";
+                } else {
+                    previewButton.style.display = "none";
+                }
+            } else {
+                // Past departure date
+                countdownContainer.style.display = "none";
+                itineraryContainer.style.display = "block";
+                previewButton.style.display = "none";
+            }
+        
+            // Navigation Dots Active State (if applicable)
+            const navDots = document.querySelectorAll("#nav-dots a");
+            const sections = document.querySelectorAll(".flip-card");
+        
+            function activateNavDot() {
+                let index = sections.length;
+        
+                while (--index >= 0 && window.scrollY + 50 < sections[index].offsetTop) {}
+        
+                navDots.forEach((dot) => dot.classList.remove("active"));
+                if (navDots[index]) {
+                    let dot = navDots[index];
+                    dot.classList.add("active");
+                }
+            }
+        
+            window.addEventListener("scroll", activateNavDot);
+        
+            // Function to update viewport height
+            function updateViewportHeight() {
+                let vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+            }
+        
+            // Initial call
+            updateViewportHeight();
+        
+            // Update on resize
+            window.addEventListener('resize', updateViewportHeight);
+        
+            // Initialize variable to save scroll position
+            let savedScrollPosition = 0;
+        
+            // Flip Card on Flip Indicator Click
+            const flipIndicators = document.querySelectorAll('.flip-indicator');
+        
+            flipIndicators.forEach(indicator => {
+                indicator.addEventListener('click', function (e) {
+                    e.stopPropagation(); // Prevent event bubbling
+                    const card = this.closest('.flip-card');
+                    const isFlipped = card.classList.toggle('flipped');
+                    if (isFlipped) {
+                        // Save the current scroll position
+                        savedScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+                        document.body.classList.add('card-focused');
+                        // Lock body scrolling
+                        lockBodyScroll();
+                    } else {
+                        document.body.classList.remove('card-focused');
+                        // Unlock body scrolling
+                        unlockBodyScroll();
+                        // Restore the saved scroll position after a slight delay
+                        setTimeout(function () {
+                            window.scrollTo(0, savedScrollPosition);
+                        }, 10); // Adjust the delay if necessary
+                    }
+                });
+        
+                // Accessibility: Allow flipping cards using keyboard (Enter and Space keys)
+                indicator.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        this.click();
+                    }
+                });
+            });
+        
+            // Function to lock body scroll
+            function lockBodyScroll() {
+                savedScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+                document.body.style.position = 'fixed';
+                document.body.style.top = `-${savedScrollPosition}px`;
+                document.body.style.left = '0';
+                document.body.style.right = '0';
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            }
+
+            // Function to unlock body scroll
+            function unlockBodyScroll() {
+                document.body.style.position = '';
+                document.body.style.top = '';
+                document.body.style.left = '';
+                document.body.style.right = '';
+                document.body.style.overflow = ''; // Re-enable background scrolling
+                window.scrollTo(0, savedScrollPosition);
+            }
+
+        
+            // Preview Button Functionality
+            previewButton.addEventListener("click", function () {
+                openModal();
+            });
+        
+            // Function to open the modal
+            function openModal() {
+                if (previewModal) {
+                    previewModal.style.display = "flex";
+                    document.body.style.overflow = "hidden"; // Prevent background scrolling when modal is open
+                    // Move focus to the modal for accessibility
+                    previewModal.querySelector('.modal-content').focus();
+                } else {
+                    console.error("previewModal not found");
+                }
+            }
+        
+            // Close Modal Functionality
+            if (closeModal) {
+                closeModal.addEventListener("click", closeModalFunction);
+            } else {
+                console.error("closeModal not found");
+            }
+        
+            if (cancelBtn) {
+                cancelBtn.addEventListener("click", closeModalFunction);
+            } else {
+                console.error("cancelBtn not found");
+            }
+        
+            // Confirm Preview Itinerary
+            if (confirmBtn) {
+                confirmBtn.addEventListener("click", function () {
+                    // Show Itinerary without hiding Countdown
+                    itineraryContainer.style.display = "block";
+                    previewModal.style.display = "none";
+                    document.body.style.overflow = "auto"; // Re-enable background scrolling
+                    // Hide the preview button after previewing
+                    previewButton.style.display = "none";
+                });
+            } else {
+                console.error("confirmBtn not found");
+            }
+        
+            // Function to close the modal
+            function closeModalFunction() {
+                if (previewModal) {
+                    previewModal.style.display = "none";
+                    document.body.style.overflow = "auto"; // Re-enable background scrolling
+                    // Return focus to the preview button for accessibility
+                    previewButton.focus();
+                } else {
+                    console.error("previewModal not found");
+                }
+            }
+        
+            // Close modal when clicking outside the modal content
+            window.addEventListener("click", function(event) {
+                if (event.target == previewModal) {
+                    closeModalFunction();
+                }
+            });
+        
+            // Accessibility: Close modal with Escape key
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && previewModal && previewModal.style.display === "flex") {
+                    closeModalFunction();
+                }
+            });
+        
+            /**
+             * =======================
+             * THEMING FUNCTIONALITY
+             * =======================
+             */
+        
+            // Define theme colors for each country
+            const themes = {
+                spain: {
+                    primaryColor: '#AA151B', // Red
+                    secondaryColor: '#FFD700', // Yellow
+                    textColor: '#FFFFFF', // White
+                    timelineColor: '#AA151B',
+                    timelineHoverBg: '#FFE5E5',
+                    timelineBoxShadow: '0px 0px 0px 2px rgba(170, 21, 27, 1), 8px 8px 0px 0px rgba(170, 21, 27, 1)'
+                },
+                italy: {
+                    primaryColor: '#008C45', // Green
+                    secondaryColor: '#F4F5F0', // White
+                    textColor: '#CD212A', // Red
+                    timelineColor: '#008C45',
+                    timelineHoverBg: '#E5F7EB',
+                    timelineBoxShadow: '0px 0px 0px 2px rgba(0, 140, 69, 1), 8px 8px 0px 0px rgba(0, 140, 69, 1)'
+                },
+                france: {
+                    primaryColor: '#0055A4', // Blue
+                    secondaryColor: '#FFFFFF', // White
+                    textColor: '#ED2939', // Red
+                    timelineColor: '#0055A4',
+                    timelineHoverBg: '#E0E6F8',
+                    timelineBoxShadow: '0px 0px 0px 2px rgba(0, 85, 164, 1), 8px 8px 0px 0px rgba(0, 85, 164, 1)'
+                }
+            };
+        
+            // Select all flip-card-back elements
+            const flipCardBacks = document.querySelectorAll('.flip-card-back');
+        
+            // Function to apply themes based on country class
+            function applyThemes() {
+                flipCardBacks.forEach(card => {
+                    // Check for country class
+                    if (card.classList.contains('country-spain')) {
+                        setTheme(card, themes.spain);
+                    } else if (card.classList.contains('country-italy')) {
+                        setTheme(card, themes.italy);
+                    } else if (card.classList.contains('country-france')) {
+                        setTheme(card, themes.france);
+                    }
+                });
+            }
+        
+            // Helper function to set theme styles
+            function setTheme(element, theme) {
+                // Apply primary background color
+                element.style.backgroundColor = theme.primaryColor;
+        
+                // Apply text color
+                element.style.color = theme.textColor;
+        
+                // Style timeline blocks
+                const timelineBlocks = element.querySelectorAll('.timeline-block');
+                timelineBlocks.forEach(block => {
+                    block.style.color = theme.textColor;
+                    block.style.borderBottom = `2px solid ${theme.timelineColor}`; // Optional: underline timeline blocks
+                });
+        
+                // Style timeline items
+                const timelineItems = element.querySelectorAll('.timeline-item');
+                timelineItems.forEach(item => {
+                    // Time
+                    const time = item.querySelector('.timeline-time');
+                    if (time) {
+                        time.style.color = theme.secondaryColor;
+                        time.style.fontWeight = 'bold';
+                    }
+                    // Content
+                    const content = item.querySelector('.timeline-content');
+                    if (content) {
+                        content.style.color = theme.textColor;
+                        content.style.backgroundColor = theme.timelineHoverBg;
+                        content.style.borderLeft = `4px solid ${theme.timelineColor}`;
+                        content.style.padding = '10px';
+                        content.style.borderRadius = '4px';
+                        content.style.transition = 'background-color 0.3s ease, color 0.3s ease, border-left 0.3s ease';
+                    }
+                });
+        
+                // Style flip indicators inside the card
+                const flipIndicators = element.querySelectorAll('.flip-indicator img');
+                flipIndicators.forEach(indicator => {
+                    // Invert the arrow color based on background for better visibility
+                    indicator.style.filter = 'invert(1)';
+                    indicator.style.transition = 'filter 0.3s ease';
+                });
+        
+                // Apply box-shadow to timeline if needed
+                const timeline = element.querySelector('.timeline');
+                if (timeline) {
+                    timeline.style.borderLeft = `4px solid ${theme.timelineColor}`;
+                }
+            }
+        
+            // Wait for the DOM to load before applying themes
+            applyThemes();
+        
+            /**
+             * ============================
+             * END OF THEMING FUNCTIONALITY
+             * ============================
+             */
+        });        
+    </script>
+
+</body>
+</html>
