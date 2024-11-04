@@ -1,25 +1,15 @@
 ---
 title: "Quarto 101"
 author: "Brian Cervantes Alvarez"
-format: 
-   revealjs:
-     footer: "Quarto 101 (November 13, 2023)"
-     code-fold: true
-     multiplex: true
-     preview-links: true
-     theme: [OregonStateTheme.scss]
-     scrollable: true
-     logo: OSULogo.png
-     chalkboard: true
-     html-math-method: katex
-     incremental: true
-     slide-number: c/t
-     transition: slide
+format: OSUStyle-revealjs
+filters:
+  - shinylive
+jupyter: python3
 ---
 
 # What is Quarto?
 
-![](quarto.png){.absolute top=200 right=400 width="300" height="100"}
+![](quarto.jpg)
 
 ## Quarto allows you to
 
@@ -34,44 +24,76 @@ format:
 "Publish reproducible, production quality articles, presentations, dashboards, websites, blogs, and books in HTML, PDF, MS Word, ePub, and more." - quarto.org
 
 
-## Power of using quarto {auto-animate="true"}
+## Teaching with Quarto {auto-animate="true"}
 
 ```r
-# Fill in the spot we created for a plot
-output$phonePlot <- renderPlot({
-  # Render a barplot
-})
+# Set Parameters for Data Generation
+set.seed(20242025)  # For reproducibility
+
+ovlap <- 0.2
+propmaj <- 0.85
+sampsize <- 300
+ndim <- 20
+perc_cat <- 40
+typemiss <- 'none'
+amountmiss <- 0
 ```
 
-## Power of using quarto {auto-animate=true}
+## Teaching with Quarto {auto-animate=true}
 
 ```r
-# Fill in the spot we created for a plot
-output$phonePlot <- renderPlot({
-  # Render a barplot
-  barplot(WorldPhones[,input$region]*1000, 
-          main=input$region,
-          ylab="Number of Telephones",
-          xlab="Year")
-})
+# Set Parameters for Data Generation
+set.seed(20242025)  # For reproducibility
+
+ovlap <- 0.2
+propmaj <- 0.85
+sampsize <- 300
+ndim <- 20
+perc_cat <- 40
+typemiss <- 'none'
+amountmiss <- 0
+
+# Generate and Store Simulated Datasets
+datasets_list <- list()  # Initialize list to store datasets
 ```
 
-## Power of using quarto {auto-animate=true}
+## Teaching with Quarto {auto-animate=true}
 
 ```r
-# Fill in the spot we created for a plot
-output$phonePlot <- renderPlot({
-  # Render a barplot
-  barplot(WorldPhones[,input$region]*1000, 
-          main=input$region,
-          ylab="Number of Telephones",
-          xlab="Year")
-})
+# Set Parameters for Data Generation
+set.seed(20242025)  # For reproducibility
 
-# And it keeps on getting better!
+ovlap <- 0.2
+propmaj <- 0.85
+sampsize <- 300
+ndim <- 20
+perc_cat <- 40
+typemiss <- 'none'
+amountmiss <- 0
+
+# Generate and Store Simulated Datasets
+datasets_list <- list()  # Initialize list to store datasets
+
+for (i in 1:5) {
+  set.seed(100 + i)  # Different seed for each dataset to ensure variability
+  
+  # Generate datasets using the simtraindatfun function
+  datasets <- simtraindatfun(
+    ovlap = ovlap,
+    propmaj = propmaj,
+    sampsize = sampsize,
+    ndim = ndim,
+    perc_cat = perc_cat,
+    typemiss = typemiss,
+    amountmiss = amountmiss
+  )
+  
+  # Store the generated datasets in the list with a unique name
+  datasets_list[[paste0("Dataset_", i)]] <- datasets
+}
 ```
 
-## Power of using quarto {auto-animate=true}
+## Use Tabsets in RevealJS/HTML {auto-animate=true}
 
 ::: {.panel-tabset}
 
@@ -103,26 +125,6 @@ def fizz_buzz(num):
     print(num)
 ```
 
-### Java
-
-```{.java}
-public class FizzBuzz
-{
-  public static void fizzBuzz(int num)
-  {
-    if (num % 15 == 0) {
-      System.out.println("FizzBuzz");
-    } else if (num % 5 == 0) {
-      System.out.println("Buzz");
-    } else if (num % 3 == 0) {
-      System.out.println("Fizz");
-    } else {
-      System.out.println(num);
-    }
-  }
-}
-```
-
 ### Julia
 
 ```{.julia}
@@ -139,20 +141,61 @@ function FizzBuzz(num)
 end
 ```
 
+### ObservableJs
+
+```{.js}
+function fizzBuzz(num) {
+  if (num % 15 === 0) {
+    return "FizzBuzz";
+  } else if (num % 5 === 0) {
+    return "Buzz";
+  } else if (num % 3 === 0) {
+    return "Fizz";
+  } else {
+    return num;
+  }
+}
+```
+
 :::
 
 
-## Shiny app? No problem!
+## Shiny apps? No problem! {auto-animate=true}
 
-<iframe src="https://bcervantesalvarez.shinyapps.io/FinalProjectData502/" style='height:100%;width:100%' data-autoplay></iframe>
+<iframe src="https://bcervantesalvarez.shinyapps.io/VacanyForMarionCounty/" style='height:600px;width:100%' data-autoplay></iframe>
 
-## Wanna create a portfolio website? Quarto's got you
 
-<iframe src="https://bcervantesalvarez.github.io/Portfolio/" style='height:100%;width:100%' data-autoplay></iframe>
+## Shiny apps? No problem! {auto-animate=true}
 
-## Videos? Here's a tutorial
+<iframe src="https://bcervantesalvarez.shinyapps.io/UKAccidentTimeSeries/" style='height:600px;width:100%' data-autoplay></iframe>
 
-{{< video https://www.youtube.com/watch?v=_f3latmOhew&ab_channel=PositPBC width="100%" height="80%" >}}
+## Serverless Shiny? Yep!
+
+```{shinylive-python}
+#| standalone: true
+#| viewerHeight: 650
+import matplotlib.pyplot as plt
+import numpy as np
+from shiny.express import ui, input, render
+
+with ui.sidebar():
+    ui.input_slider("n", "N", 0, 100, 20)
+
+
+@render.plot(alt="A histogram")
+def histogram():
+    np.random.seed(19680801)
+    x = 100 + 15 * np.random.randn(437)
+    plt.hist(x, input.n(), density=True)
+```
+
+## Wanna create a portfolio website?
+
+<iframe src="https://bcervantesalvarez.github.io/Portfolio/" style='height:600px;width:100%' data-autoplay></iframe>
+
+## Videos!
+
+{{< video https://www.youtube.com/watch?v=_f3latmOhew&ab_channel=PositPBC width="100%" height="100%" >}}
 
 ## Wanna learn more?
 
@@ -169,7 +212,7 @@ Here are some pro tips before you jump into using quarto:
 
 Wanna see everything that quarto's got to offer? Click on the quarto logo!
 
-[![](quarto.png){fig-alt="Alt text"}](https://quarto.org)
+[![](quarto.jpg){fig-alt="Alt text"}](https://quarto.org)
 
 ## References
 

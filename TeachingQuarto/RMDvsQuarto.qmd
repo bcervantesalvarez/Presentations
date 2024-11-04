@@ -1,0 +1,242 @@
+---
+title: "Comparing R Markdown and Quarto"
+author: "Brian Cervantes Alvarez"
+date: "11-01-2024"
+format: 
+  html:
+    toc: true
+    toc-depth: 2
+---
+
+# Introduction
+
+R Markdown and Quarto are both tools for creating dynamic documents that combine code, outputs, and narrative text. While R Markdown has been a staple in the R community for reproducible research, Quarto is a more recent, language-agnostic tool that extends the capabilities of R Markdown.
+
+This document provides a side-by-side comparison of R Markdown and Quarto to highlight their differences and help you decide which tool is best suited for your needs.
+
+# Document Structure
+
+## YAML Header
+
+Both R Markdown and Quarto use a YAML header to define document metadata, but there are some differences in the syntax and available options.
+
+::: {.columns}
+
+#### **R Markdown**
+
+```yaml
+---
+title: "My Document"
+author: "Author Name"
+date: "2023-10-01"
+output: html_document
+---
+```
+
+#### **Quarto** {#Quarto}
+
+```yaml
+---
+title: "My Document"
+author: "Author Name"
+date: "2023-10-01"
+format: html
+---
+```
+
+:::
+
+**Key Differences:**
+
+- **Output/Format Specification:** R Markdown uses the `output` field, while Quarto uses the `format` field.
+- **Consistency:** Quarto's format field is consistent across different output types, simplifying the syntax.
+
+## Sections and Headings
+
+Both tools use Markdown syntax for headings, but Quarto supports additional features like cross-referencing.
+
+
+
+#### **R Markdown**
+
+```markdown
+# Introduction
+
+This is an introductory section.
+```
+
+#### **Quarto**
+
+```markdown
+# Introduction {#introduction}
+
+This is an introductory section.
+```
+
+**Key Differences:**
+
+- **Explicit IDs:** Quarto allows you to assign IDs to headings for easier cross-referencing.
+
+# Code Execution
+
+## Language Support
+
+While R Markdown is primarily designed for R, it does support other languages via additional setup. Quarto is language-agnostic by default.
+
+
+#### **R Markdown**
+
+
+```{r}
+# R code example
+summary(cars)
+```
+
+
+#### **Quarto**
+
+
+```{python}
+print("Hello, World!")
+```
+
+
+**Key Differences:**
+
+- **Setup Required:** In R Markdown, running Python code might require additional packages like `reticulate`.
+- **Built-in Support:** Quarto natively supports multiple languages without extra configuration.
+
+## Code Chunk Options
+
+The syntax for code chunk options differs between the two.
+
+#### **R Markdown**
+
+
+```r, echo=FALSE, message=FALSE
+summary(cars)
+```
+
+
+#### **Quarto**
+
+
+```r
+#| echo: false
+#| message: false
+summary(cars)
+```
+
+
+**Key Differences:**
+
+- **Option Syntax:** R Markdown uses comma-separated options within the chunk header. Quarto uses YAML-like syntax with `#|` prefix inside the chunk.
+
+# Output Formats
+
+## Supported Formats
+
+Quarto supports a wider range of output formats out of the box compared to R Markdown.
+
+
+#### **R Markdown**
+
+- HTML (`html_document`)
+- PDF (`pdf_document`)
+- Word (`word_document`)
+
+#### **Quarto**
+
+- HTML (`html`)
+- PDF (`pdf`)
+- Word (`docx`)
+- Presentation formats like Reveal.js, Beamer
+- Jupyter Notebooks
+- Books and Websites
+
+
+**Key Differences:**
+
+- **Versatility:** Quarto is designed to create a variety of publication formats without needing additional packages.
+
+# Advanced Features
+
+## Cross-referencing
+
+Quarto provides enhanced cross-referencing capabilities.
+
+#### **R Markdown**
+
+```markdown
+See Figure \@ref(fig:plot1).
+```
+
+#### **Quarto**
+
+```markdown
+See @fig-plot1.
+```
+
+
+
+**Key Differences:**
+
+- **Simplified Syntax:** Quarto simplifies cross-references with `@` notation.
+- **Automatic Numbering:** Quarto handles numbering and referencing more elegantly.
+
+## Extensions and Plugins
+
+Quarto allows for extensions and filters to enhance functionality.
+
+
+#### **R Markdown**
+
+- Limited to what's provided or requires custom Lua filters.
+
+#### **Quarto**
+
+- Supports Pandoc extensions.
+- Allows custom filters and plugins.
+- Supports Julia, Python, and R extensions.
+
+# Integration with Editors
+
+## IDE Support
+
+
+#### **R Markdown**
+
+- Best supported in RStudio.
+- Limited support in other editors.
+
+#### **Quarto**
+
+- Supported in RStudio.
+- Extensions available for VSCode.
+- Support for Jupyter environments.
+
+**Key Differences:**
+
+- **Editor Flexibility:** Quarto offers better integration with a variety of development environments.
+
+# Conclusion
+
+Both R Markdown and Quarto are powerful tools for reproducible research and dynamic report generation. R Markdown is deeply integrated with R and is ideal for R-centric workflows. Quarto, being language-agnostic and feature-rich, is suitable for projects that require flexibility across different programming languages and output formats.
+
+**Consider Quarto if:**
+
+- You work with multiple programming languages.
+- You need advanced cross-referencing and output options.
+- You prefer a consistent and modern syntax.
+
+**Consider R Markdown if:**
+
+- Your work is primarily in R.
+- You are already invested in the R Markdown ecosystem.
+- You require compatibility with existing R Markdown documents.
+
+# References
+
+- [R Markdown Documentation](https://rmarkdown.rstudio.com/)
+- [Quarto Documentation](https://quarto.org/docs/)
+

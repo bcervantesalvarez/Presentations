@@ -311,7 +311,6 @@
     }
     .reveal .slide:not(.center) {
       height: 100%;
-      overflow-y: auto;
     }
     .reveal .slide.scrollable {
       overflow-y: auto;
@@ -408,8 +407,8 @@ Brian Cervantes Alvarez
 <section>
 <section id="what-is-quarto" class="title-slide slide level1 center">
 <h1>What is Quarto?</h1>
-<p><img data-src="quarto.png" class="absolute" style="top: 200px; right: 400px; width: 300px; height: 100px; "></p>
-</section>
+
+<img data-src="quarto.jpg" class="r-stretch"></section>
 <section id="quarto-allows-you-to" class="slide level2">
 <h2>Quarto allows you to</h2>
 <ul>
@@ -455,7 +454,7 @@ Brian Cervantes Alvarez
 <section id="power-of-using-quarto-3" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Power of using quarto</h2>
 <div class="panel-tabset">
-<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">R</a></li><li><a href="#tabset-1-2">Python</a></li><li><a href="#tabset-1-3">Java</a></li><li><a href="#tabset-1-4">Julia</a></li></ul>
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">R</a></li><li><a href="#tabset-1-2">Python</a></li><li><a href="#tabset-1-3">Julia</a></li><li><a href="#tabset-1-4">ObservableJs</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1">
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a>fizz_buzz <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">fbnums =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>) {</span>
@@ -480,46 +479,47 @@ Brian Cervantes Alvarez
 <span id="cb5-9"><a href=""></a>    <span class="bu">print</span>(num)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="tabset-1-3">
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href=""></a><span class="kw">public</span> <span class="kw">class</span> FizzBuzz</span>
-<span id="cb6-2"><a href=""></a><span class="op">{</span></span>
-<span id="cb6-3"><a href=""></a>  <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">fizzBuzz</span><span class="op">(</span><span class="dt">int</span> num<span class="op">)</span></span>
-<span id="cb6-4"><a href=""></a>  <span class="op">{</span></span>
-<span id="cb6-5"><a href=""></a>    <span class="cf">if</span> <span class="op">(</span>num <span class="op">%</span> <span class="dv">15</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb6-6"><a href=""></a>      <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"FizzBuzz"</span><span class="op">);</span></span>
-<span id="cb6-7"><a href=""></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>num <span class="op">%</span> <span class="dv">5</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb6-8"><a href=""></a>      <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Buzz"</span><span class="op">);</span></span>
-<span id="cb6-9"><a href=""></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>num <span class="op">%</span> <span class="dv">3</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb6-10"><a href=""></a>      <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Fizz"</span><span class="op">);</span></span>
-<span id="cb6-11"><a href=""></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb6-12"><a href=""></a>      <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>num<span class="op">);</span></span>
-<span id="cb6-13"><a href=""></a>    <span class="op">}</span></span>
-<span id="cb6-14"><a href=""></a>  <span class="op">}</span></span>
-<span id="cb6-15"><a href=""></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href=""></a><span class="kw">function</span> <span class="fu">FizzBuzz</span>(num)</span>
+<span id="cb6-2"><a href=""></a>  <span class="cf">if</span> num <span class="op">%</span> <span class="fl">15</span> <span class="op">==</span> <span class="fl">0</span></span>
+<span id="cb6-3"><a href=""></a>    <span class="fu">println</span>(<span class="st">"FizzBuzz"</span>)</span>
+<span id="cb6-4"><a href=""></a>  <span class="cf">elseif</span> num <span class="op">%</span> <span class="fl">5</span> <span class="op">==</span> <span class="fl">0</span></span>
+<span id="cb6-5"><a href=""></a>    <span class="fu">println</span>(<span class="st">"Buzz"</span>)</span>
+<span id="cb6-6"><a href=""></a>  <span class="cf">elseif</span> num <span class="op">%</span> <span class="fl">3</span> <span class="op">==</span> <span class="fl">0</span></span>
+<span id="cb6-7"><a href=""></a>    <span class="fu">println</span>(<span class="st">"Fizz"</span>)</span>
+<span id="cb6-8"><a href=""></a>  <span class="cf">else</span></span>
+<span id="cb6-9"><a href=""></a>    <span class="fu">println</span>(num)</span>
+<span id="cb6-10"><a href=""></a>  <span class="cf">end</span></span>
+<span id="cb6-11"><a href=""></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="tabset-1-4">
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href=""></a><span class="kw">function</span> <span class="fu">FizzBuzz</span>(num)</span>
-<span id="cb7-2"><a href=""></a>  <span class="cf">if</span> num <span class="op">%</span> <span class="fl">15</span> <span class="op">==</span> <span class="fl">0</span></span>
-<span id="cb7-3"><a href=""></a>    <span class="fu">println</span>(<span class="st">"FizzBuzz"</span>)</span>
-<span id="cb7-4"><a href=""></a>  <span class="cf">elseif</span> num <span class="op">%</span> <span class="fl">5</span> <span class="op">==</span> <span class="fl">0</span></span>
-<span id="cb7-5"><a href=""></a>    <span class="fu">println</span>(<span class="st">"Buzz"</span>)</span>
-<span id="cb7-6"><a href=""></a>  <span class="cf">elseif</span> num <span class="op">%</span> <span class="fl">3</span> <span class="op">==</span> <span class="fl">0</span></span>
-<span id="cb7-7"><a href=""></a>    <span class="fu">println</span>(<span class="st">"Fizz"</span>)</span>
-<span id="cb7-8"><a href=""></a>  <span class="cf">else</span></span>
-<span id="cb7-9"><a href=""></a>    <span class="fu">println</span>(num)</span>
-<span id="cb7-10"><a href=""></a>  <span class="cf">end</span></span>
-<span id="cb7-11"><a href=""></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb7-1"><a href=""></a><span class="kw">function</span> <span class="fu">fizzBuzz</span>(num) {</span>
+<span id="cb7-2"><a href=""></a>  <span class="cf">if</span> (num <span class="op">%</span> <span class="dv">15</span> <span class="op">===</span> <span class="dv">0</span>) {</span>
+<span id="cb7-3"><a href=""></a>    <span class="cf">return</span> <span class="st">"FizzBuzz"</span><span class="op">;</span></span>
+<span id="cb7-4"><a href=""></a>  } <span class="cf">else</span> <span class="cf">if</span> (num <span class="op">%</span> <span class="dv">5</span> <span class="op">===</span> <span class="dv">0</span>) {</span>
+<span id="cb7-5"><a href=""></a>    <span class="cf">return</span> <span class="st">"Buzz"</span><span class="op">;</span></span>
+<span id="cb7-6"><a href=""></a>  } <span class="cf">else</span> <span class="cf">if</span> (num <span class="op">%</span> <span class="dv">3</span> <span class="op">===</span> <span class="dv">0</span>) {</span>
+<span id="cb7-7"><a href=""></a>    <span class="cf">return</span> <span class="st">"Fizz"</span><span class="op">;</span></span>
+<span id="cb7-8"><a href=""></a>  } <span class="cf">else</span> {</span>
+<span id="cb7-9"><a href=""></a>    <span class="cf">return</span> num<span class="op">;</span></span>
+<span id="cb7-10"><a href=""></a>  }</span>
+<span id="cb7-11"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="shiny-app-no-problem" class="slide level2">
-<h2>Shiny app? No problem!</h2>
-<iframe src="https://bcervantesalvarez.shinyapps.io/FinalProjectData502/" style="height:100%;width:100%" data-autoplay="">
+<section id="shiny-apps-no-problem" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Shiny apps? No problem!</h2>
+<iframe src="https://bcervantesalvarez.shinyapps.io/VacanyForMarionCounty/" style="height:80%;width:100%" data-autoplay="">
 </iframe>
 </section>
-<section id="wanna-create-a-portfolio-website-quartos-got-you" class="slide level2">
-<h2>Wanna create a portfolio website? Quarto’s got you</h2>
-<iframe src="https://bcervantesalvarez.github.io/Portfolio/" style="height:100%;width:100%" data-autoplay="">
+<section id="shiny-apps-no-problem-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Shiny apps? No problem!</h2>
+<iframe src="https://bcervantesalvarez.shinyapps.io/UKAccidentTimeSeries/" style="height:80%;width:100%" data-autoplay="">
+</iframe>
+</section>
+<section id="wanna-create-a-portfolio-website" class="slide level2">
+<h2>Wanna create a portfolio website?</h2>
+<iframe src="https://bcervantesalvarez.github.io/Portfolio/" style="height:80%;width:100%" data-autoplay="">
 </iframe>
 </section>
 <section id="videos-heres-a-tutorial" class="slide level2">

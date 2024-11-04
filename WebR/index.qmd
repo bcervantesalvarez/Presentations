@@ -3,6 +3,7 @@ title: "Hands-on Teaching with webR"
 author: "Brian Cervantes Alvarez"
 date: today
 date-format: long
+embed-resources: true
 format:
   OSUStyle-revealjs:
     footer: "[https://bcervantesalvarez.github.io/Presentations/WebR](https://bcervantesalvarez.github.io/Presentations/WebR)"

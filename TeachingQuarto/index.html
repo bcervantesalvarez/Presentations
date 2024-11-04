@@ -7,7 +7,12 @@
 <link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="index_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="index_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<meta name="shinylive:serviceworker_dir" content=".">
+<script src="index_files/libs/quarto-contrib/shinylive-0.9.0/shinylive/load-shinylive-sw.js" type="module"></script>
+<script src="index_files/libs/quarto-contrib/shinylive-0.9.0/shinylive/run-python-blocks.js" type="module"></script>
+<link href="index_files/libs/quarto-contrib/shinylive-0.9.0/shinylive/shinylive.css" rel="stylesheet">
+<link href="index_files/libs/quarto-contrib/shinylive-quarto-css/shinylive-quarto.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.55">
 
   <meta name="author" content="Brian Cervantes Alvarez">
@@ -99,8 +104,6 @@
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="index_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="index_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
@@ -311,7 +314,6 @@
     }
     .reveal .slide:not(.center) {
       height: 100%;
-      overflow-y: auto;
     }
     .reveal .slide.scrollable {
       overflow-y: auto;
@@ -408,54 +410,86 @@ Brian Cervantes Alvarez
 <section>
 <section id="what-is-quarto" class="title-slide slide level1 center">
 <h1>What is Quarto?</h1>
-<p><img data-src="quarto.png" class="absolute" style="top: 200px; right: 400px; width: 300px; height: 100px; "></p>
-</section>
+
+<img data-src="quarto.jpg" class="r-stretch"></section>
 <section id="quarto-allows-you-to" class="slide level2">
 <h2>Quarto allows you to</h2>
 <ul>
-<li class="fragment"><p>Present your findings in R, Python, Julia, &amp; Observable</p></li>
-<li class="fragment"><p>Use Revealjs (this presentation for example)</p></li>
-<li class="fragment"><p>Have images, videos, and iframe backgrounds imbedded in your documents</p></li>
+<li><p>Present your findings in R, Python, Julia, &amp; Observable</p></li>
+<li><p>Use Revealjs (this presentation for example)</p></li>
+<li><p>Have images, videos, and iframe backgrounds imbedded in your documents</p></li>
 </ul>
 <div class="fragment">
 <p>“Publish reproducible, production quality articles, presentations, dashboards, websites, blogs, and books in HTML, PDF, MS Word, ePub, and more.” - quarto.org</p>
 </div>
 </section>
-<section id="power-of-using-quarto" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Power of using quarto</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb1-1" class="hljs-ln-code"><a href=""></a><span class="co"># Fill in the spot we created for a plot</span></span>
-<span id="cb1-2" class="hljs-ln-code"><a href=""></a>output<span class="sc">$</span>phonePlot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
-<span id="cb1-3" class="hljs-ln-code"><a href=""></a>  <span class="co"># Render a barplot</span></span>
-<span id="cb1-4" class="hljs-ln-code"><a href=""></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="teaching-with-quarto" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Teaching with Quarto</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb1-1" class="hljs-ln-code"><a href=""></a><span class="co"># Set Parameters for Data Generation</span></span>
+<span id="cb1-2" class="hljs-ln-code"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">20242025</span>)  <span class="co"># For reproducibility</span></span>
+<span id="cb1-3" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb1-4" class="hljs-ln-code"><a href=""></a>ovlap <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
+<span id="cb1-5" class="hljs-ln-code"><a href=""></a>propmaj <span class="ot">&lt;-</span> <span class="fl">0.85</span></span>
+<span id="cb1-6" class="hljs-ln-code"><a href=""></a>sampsize <span class="ot">&lt;-</span> <span class="dv">300</span></span>
+<span id="cb1-7" class="hljs-ln-code"><a href=""></a>ndim <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb1-8" class="hljs-ln-code"><a href=""></a>perc_cat <span class="ot">&lt;-</span> <span class="dv">40</span></span>
+<span id="cb1-9" class="hljs-ln-code"><a href=""></a>typemiss <span class="ot">&lt;-</span> <span class="st">'none'</span></span>
+<span id="cb1-10" class="hljs-ln-code"><a href=""></a>amountmiss <span class="ot">&lt;-</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="power-of-using-quarto-1" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Power of using quarto</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb2-1" class="hljs-ln-code"><a href=""></a><span class="co"># Fill in the spot we created for a plot</span></span>
-<span id="cb2-2" class="hljs-ln-code"><a href=""></a>output<span class="sc">$</span>phonePlot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
-<span id="cb2-3" class="hljs-ln-code"><a href=""></a>  <span class="co"># Render a barplot</span></span>
-<span id="cb2-4" class="hljs-ln-code"><a href=""></a>  <span class="fu">barplot</span>(WorldPhones[,input<span class="sc">$</span>region]<span class="sc">*</span><span class="dv">1000</span>, </span>
-<span id="cb2-5" class="hljs-ln-code"><a href=""></a>          <span class="at">main=</span>input<span class="sc">$</span>region,</span>
-<span id="cb2-6" class="hljs-ln-code"><a href=""></a>          <span class="at">ylab=</span><span class="st">"Number of Telephones"</span>,</span>
-<span id="cb2-7" class="hljs-ln-code"><a href=""></a>          <span class="at">xlab=</span><span class="st">"Year"</span>)</span>
-<span id="cb2-8" class="hljs-ln-code"><a href=""></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="teaching-with-quarto-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Teaching with Quarto</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb2-1" class="hljs-ln-code"><a href=""></a><span class="co"># Set Parameters for Data Generation</span></span>
+<span id="cb2-2" class="hljs-ln-code"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">20242025</span>)  <span class="co"># For reproducibility</span></span>
+<span id="cb2-3" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb2-4" class="hljs-ln-code"><a href=""></a>ovlap <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
+<span id="cb2-5" class="hljs-ln-code"><a href=""></a>propmaj <span class="ot">&lt;-</span> <span class="fl">0.85</span></span>
+<span id="cb2-6" class="hljs-ln-code"><a href=""></a>sampsize <span class="ot">&lt;-</span> <span class="dv">300</span></span>
+<span id="cb2-7" class="hljs-ln-code"><a href=""></a>ndim <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb2-8" class="hljs-ln-code"><a href=""></a>perc_cat <span class="ot">&lt;-</span> <span class="dv">40</span></span>
+<span id="cb2-9" class="hljs-ln-code"><a href=""></a>typemiss <span class="ot">&lt;-</span> <span class="st">'none'</span></span>
+<span id="cb2-10" class="hljs-ln-code"><a href=""></a>amountmiss <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb2-11" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb2-12" class="hljs-ln-code"><a href=""></a><span class="co"># Generate and Store Simulated Datasets</span></span>
+<span id="cb2-13" class="hljs-ln-code"><a href=""></a>datasets_list <span class="ot">&lt;-</span> <span class="fu">list</span>()  <span class="co"># Initialize list to store datasets</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="power-of-using-quarto-2" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Power of using quarto</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb3-1" class="hljs-ln-code"><a href=""></a><span class="co"># Fill in the spot we created for a plot</span></span>
-<span id="cb3-2" class="hljs-ln-code"><a href=""></a>output<span class="sc">$</span>phonePlot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
-<span id="cb3-3" class="hljs-ln-code"><a href=""></a>  <span class="co"># Render a barplot</span></span>
-<span id="cb3-4" class="hljs-ln-code"><a href=""></a>  <span class="fu">barplot</span>(WorldPhones[,input<span class="sc">$</span>region]<span class="sc">*</span><span class="dv">1000</span>, </span>
-<span id="cb3-5" class="hljs-ln-code"><a href=""></a>          <span class="at">main=</span>input<span class="sc">$</span>region,</span>
-<span id="cb3-6" class="hljs-ln-code"><a href=""></a>          <span class="at">ylab=</span><span class="st">"Number of Telephones"</span>,</span>
-<span id="cb3-7" class="hljs-ln-code"><a href=""></a>          <span class="at">xlab=</span><span class="st">"Year"</span>)</span>
-<span id="cb3-8" class="hljs-ln-code"><a href=""></a>})</span>
-<span id="cb3-9" class="hljs-ln-code"><a href=""></a></span>
-<span id="cb3-10" class="hljs-ln-code"><a href=""></a><span class="co"># And it keeps on getting better!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="teaching-with-quarto-2" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Teaching with Quarto</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb3-1" class="hljs-ln-code"><a href=""></a><span class="co"># Set Parameters for Data Generation</span></span>
+<span id="cb3-2" class="hljs-ln-code"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">20242025</span>)  <span class="co"># For reproducibility</span></span>
+<span id="cb3-3" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb3-4" class="hljs-ln-code"><a href=""></a>ovlap <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
+<span id="cb3-5" class="hljs-ln-code"><a href=""></a>propmaj <span class="ot">&lt;-</span> <span class="fl">0.85</span></span>
+<span id="cb3-6" class="hljs-ln-code"><a href=""></a>sampsize <span class="ot">&lt;-</span> <span class="dv">300</span></span>
+<span id="cb3-7" class="hljs-ln-code"><a href=""></a>ndim <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb3-8" class="hljs-ln-code"><a href=""></a>perc_cat <span class="ot">&lt;-</span> <span class="dv">40</span></span>
+<span id="cb3-9" class="hljs-ln-code"><a href=""></a>typemiss <span class="ot">&lt;-</span> <span class="st">'none'</span></span>
+<span id="cb3-10" class="hljs-ln-code"><a href=""></a>amountmiss <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb3-11" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb3-12" class="hljs-ln-code"><a href=""></a><span class="co"># Generate and Store Simulated Datasets</span></span>
+<span id="cb3-13" class="hljs-ln-code"><a href=""></a>datasets_list <span class="ot">&lt;-</span> <span class="fu">list</span>()  <span class="co"># Initialize list to store datasets</span></span>
+<span id="cb3-14" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb3-15" class="hljs-ln-code"><a href=""></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) {</span>
+<span id="cb3-16" class="hljs-ln-code"><a href=""></a>  <span class="fu">set.seed</span>(<span class="dv">100</span> <span class="sc">+</span> i)  <span class="co"># Different seed for each dataset to ensure variability</span></span>
+<span id="cb3-17" class="hljs-ln-code"><a href=""></a>  </span>
+<span id="cb3-18" class="hljs-ln-code"><a href=""></a>  <span class="co"># Generate datasets using the simtraindatfun function</span></span>
+<span id="cb3-19" class="hljs-ln-code"><a href=""></a>  datasets <span class="ot">&lt;-</span> <span class="fu">simtraindatfun</span>(</span>
+<span id="cb3-20" class="hljs-ln-code"><a href=""></a>    <span class="at">ovlap =</span> ovlap,</span>
+<span id="cb3-21" class="hljs-ln-code"><a href=""></a>    <span class="at">propmaj =</span> propmaj,</span>
+<span id="cb3-22" class="hljs-ln-code"><a href=""></a>    <span class="at">sampsize =</span> sampsize,</span>
+<span id="cb3-23" class="hljs-ln-code"><a href=""></a>    <span class="at">ndim =</span> ndim,</span>
+<span id="cb3-24" class="hljs-ln-code"><a href=""></a>    <span class="at">perc_cat =</span> perc_cat,</span>
+<span id="cb3-25" class="hljs-ln-code"><a href=""></a>    <span class="at">typemiss =</span> typemiss,</span>
+<span id="cb3-26" class="hljs-ln-code"><a href=""></a>    <span class="at">amountmiss =</span> amountmiss</span>
+<span id="cb3-27" class="hljs-ln-code"><a href=""></a>  )</span>
+<span id="cb3-28" class="hljs-ln-code"><a href=""></a>  </span>
+<span id="cb3-29" class="hljs-ln-code"><a href=""></a>  <span class="co"># Store the generated datasets in the list with a unique name</span></span>
+<span id="cb3-30" class="hljs-ln-code"><a href=""></a>  datasets_list[[<span class="fu">paste0</span>(<span class="st">"Dataset_"</span>, i)]] <span class="ot">&lt;-</span> datasets</span>
+<span id="cb3-31" class="hljs-ln-code"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="power-of-using-quarto-3" class="slide level2" data-auto-animate="true">
-<h2 data-id="quarto-animate-title">Power of using quarto</h2>
+<section id="use-tabsets-in-revealjshtml" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Use Tabsets in RevealJS/HTML</h2>
 <div class="panel-tabset">
-<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">R</a></li><li><a href="#tabset-1-2">Python</a></li><li><a href="#tabset-1-3">Java</a></li><li><a href="#tabset-1-4">Julia</a></li></ul>
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">R</a></li><li><a href="#tabset-1-2">Python</a></li><li><a href="#tabset-1-3">Julia</a></li><li><a href="#tabset-1-4">ObservableJs</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1">
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a>fizz_buzz <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">fbnums =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>) {</span>
@@ -480,66 +514,88 @@ Brian Cervantes Alvarez
 <span id="cb5-9"><a href=""></a>    <span class="bu">print</span>(num)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="tabset-1-3">
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href=""></a><span class="kw">public</span> <span class="kw">class</span> FizzBuzz</span>
-<span id="cb6-2"><a href=""></a><span class="op">{</span></span>
-<span id="cb6-3"><a href=""></a>  <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">fizzBuzz</span><span class="op">(</span><span class="dt">int</span> num<span class="op">)</span></span>
-<span id="cb6-4"><a href=""></a>  <span class="op">{</span></span>
-<span id="cb6-5"><a href=""></a>    <span class="cf">if</span> <span class="op">(</span>num <span class="op">%</span> <span class="dv">15</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb6-6"><a href=""></a>      <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"FizzBuzz"</span><span class="op">);</span></span>
-<span id="cb6-7"><a href=""></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>num <span class="op">%</span> <span class="dv">5</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb6-8"><a href=""></a>      <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Buzz"</span><span class="op">);</span></span>
-<span id="cb6-9"><a href=""></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>num <span class="op">%</span> <span class="dv">3</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb6-10"><a href=""></a>      <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Fizz"</span><span class="op">);</span></span>
-<span id="cb6-11"><a href=""></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb6-12"><a href=""></a>      <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>num<span class="op">);</span></span>
-<span id="cb6-13"><a href=""></a>    <span class="op">}</span></span>
-<span id="cb6-14"><a href=""></a>  <span class="op">}</span></span>
-<span id="cb6-15"><a href=""></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href=""></a><span class="kw">function</span> <span class="fu">FizzBuzz</span>(num)</span>
+<span id="cb6-2"><a href=""></a>  <span class="cf">if</span> num <span class="op">%</span> <span class="fl">15</span> <span class="op">==</span> <span class="fl">0</span></span>
+<span id="cb6-3"><a href=""></a>    <span class="fu">println</span>(<span class="st">"FizzBuzz"</span>)</span>
+<span id="cb6-4"><a href=""></a>  <span class="cf">elseif</span> num <span class="op">%</span> <span class="fl">5</span> <span class="op">==</span> <span class="fl">0</span></span>
+<span id="cb6-5"><a href=""></a>    <span class="fu">println</span>(<span class="st">"Buzz"</span>)</span>
+<span id="cb6-6"><a href=""></a>  <span class="cf">elseif</span> num <span class="op">%</span> <span class="fl">3</span> <span class="op">==</span> <span class="fl">0</span></span>
+<span id="cb6-7"><a href=""></a>    <span class="fu">println</span>(<span class="st">"Fizz"</span>)</span>
+<span id="cb6-8"><a href=""></a>  <span class="cf">else</span></span>
+<span id="cb6-9"><a href=""></a>    <span class="fu">println</span>(num)</span>
+<span id="cb6-10"><a href=""></a>  <span class="cf">end</span></span>
+<span id="cb6-11"><a href=""></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="tabset-1-4">
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href=""></a><span class="kw">function</span> <span class="fu">FizzBuzz</span>(num)</span>
-<span id="cb7-2"><a href=""></a>  <span class="cf">if</span> num <span class="op">%</span> <span class="fl">15</span> <span class="op">==</span> <span class="fl">0</span></span>
-<span id="cb7-3"><a href=""></a>    <span class="fu">println</span>(<span class="st">"FizzBuzz"</span>)</span>
-<span id="cb7-4"><a href=""></a>  <span class="cf">elseif</span> num <span class="op">%</span> <span class="fl">5</span> <span class="op">==</span> <span class="fl">0</span></span>
-<span id="cb7-5"><a href=""></a>    <span class="fu">println</span>(<span class="st">"Buzz"</span>)</span>
-<span id="cb7-6"><a href=""></a>  <span class="cf">elseif</span> num <span class="op">%</span> <span class="fl">3</span> <span class="op">==</span> <span class="fl">0</span></span>
-<span id="cb7-7"><a href=""></a>    <span class="fu">println</span>(<span class="st">"Fizz"</span>)</span>
-<span id="cb7-8"><a href=""></a>  <span class="cf">else</span></span>
-<span id="cb7-9"><a href=""></a>    <span class="fu">println</span>(num)</span>
-<span id="cb7-10"><a href=""></a>  <span class="cf">end</span></span>
-<span id="cb7-11"><a href=""></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript"><span id="cb7-1"><a href=""></a><span class="kw">function</span> <span class="fu">fizzBuzz</span>(num) {</span>
+<span id="cb7-2"><a href=""></a>  <span class="cf">if</span> (num <span class="op">%</span> <span class="dv">15</span> <span class="op">===</span> <span class="dv">0</span>) {</span>
+<span id="cb7-3"><a href=""></a>    <span class="cf">return</span> <span class="st">"FizzBuzz"</span><span class="op">;</span></span>
+<span id="cb7-4"><a href=""></a>  } <span class="cf">else</span> <span class="cf">if</span> (num <span class="op">%</span> <span class="dv">5</span> <span class="op">===</span> <span class="dv">0</span>) {</span>
+<span id="cb7-5"><a href=""></a>    <span class="cf">return</span> <span class="st">"Buzz"</span><span class="op">;</span></span>
+<span id="cb7-6"><a href=""></a>  } <span class="cf">else</span> <span class="cf">if</span> (num <span class="op">%</span> <span class="dv">3</span> <span class="op">===</span> <span class="dv">0</span>) {</span>
+<span id="cb7-7"><a href=""></a>    <span class="cf">return</span> <span class="st">"Fizz"</span><span class="op">;</span></span>
+<span id="cb7-8"><a href=""></a>  } <span class="cf">else</span> {</span>
+<span id="cb7-9"><a href=""></a>    <span class="cf">return</span> num<span class="op">;</span></span>
+<span id="cb7-10"><a href=""></a>  }</span>
+<span id="cb7-11"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="shiny-app-no-problem" class="slide level2">
-<h2>Shiny app? No problem!</h2>
-<iframe src="https://bcervantesalvarez.shinyapps.io/FinalProjectData502/" style="height:100%;width:100%" data-autoplay="">
+<section id="shiny-apps-no-problem" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Shiny apps? No problem!</h2>
+<iframe src="https://bcervantesalvarez.shinyapps.io/VacanyForMarionCounty/" style="height:600px;width:100%" data-autoplay="">
 </iframe>
 </section>
-<section id="wanna-create-a-portfolio-website-quartos-got-you" class="slide level2">
-<h2>Wanna create a portfolio website? Quarto’s got you</h2>
-<iframe src="https://bcervantesalvarez.github.io/Portfolio/" style="height:100%;width:100%" data-autoplay="">
+<section id="shiny-apps-no-problem-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Shiny apps? No problem!</h2>
+<iframe src="https://bcervantesalvarez.shinyapps.io/UKAccidentTimeSeries/" style="height:600px;width:100%" data-autoplay="">
 </iframe>
 </section>
-<section id="videos-heres-a-tutorial" class="slide level2">
-<h2>Videos? Here’s a tutorial</h2>
-<iframe data-external="1" src="https://www.youtube.com/embed/_f3latmOhew" width="100%" height="80%" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+<section id="serverless-shiny-yep" class="slide level2">
+<h2>Serverless Shiny? Yep!</h2>
+<div class="sourceCode" id="cb8" data-engine="python"><pre class="sourceCode numberSource shinylive-python number-lines code-with-copy"><code class="sourceCode"><span id="cb8-1"><a href=""></a>#| '!! shinylive warning !!': |</span>
+<span id="cb8-2"><a href=""></a>#|   shinylive does not work in self-contained HTML documents.</span>
+<span id="cb8-3"><a href=""></a>#|   Please set `embed-resources: false` in your metadata.</span>
+<span id="cb8-4"><a href=""></a>#| standalone: true</span>
+<span id="cb8-5"><a href=""></a>#| viewerHeight: 650</span>
+<span id="cb8-6"><a href=""></a>import matplotlib.pyplot as plt</span>
+<span id="cb8-7"><a href=""></a>import numpy as np</span>
+<span id="cb8-8"><a href=""></a>from shiny.express import ui, input, render</span>
+<span id="cb8-9"><a href=""></a></span>
+<span id="cb8-10"><a href=""></a>with ui.sidebar():</span>
+<span id="cb8-11"><a href=""></a>    ui.input_slider("n", "N", 0, 100, 20)</span>
+<span id="cb8-12"><a href=""></a></span>
+<span id="cb8-13"><a href=""></a></span>
+<span id="cb8-14"><a href=""></a>@render.plot(alt="A histogram")</span>
+<span id="cb8-15"><a href=""></a>def histogram():</span>
+<span id="cb8-16"><a href=""></a>    np.random.seed(19680801)</span>
+<span id="cb8-17"><a href=""></a>    x = 100 + 15 * np.random.randn(437)</span>
+<span id="cb8-18"><a href=""></a>    plt.hist(x, input.n(), density=True)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="wanna-create-a-portfolio-website" class="slide level2">
+<h2>Wanna create a portfolio website?</h2>
+<iframe src="https://bcervantesalvarez.github.io/Portfolio/" style="height:600px;width:100%" data-autoplay="">
+</iframe>
+</section>
+<section id="videos" class="slide level2">
+<h2>Videos!</h2>
+<iframe data-external="1" src="https://www.youtube.com/embed/_f3latmOhew" width="100%" height="100%" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
 </section>
 <section id="wanna-learn-more" class="slide level2">
 <h2>Wanna learn more?</h2>
 <div class="fragment">
 <p>Here are some pro tips before you jump into using quarto:</p>
 <ul>
-<li class="fragment">Understand how github works (push/pull/commits)</li>
-<li class="fragment">Learn and master how to use Rmarkdown</li>
-<li class="fragment">Understand how to create shiny/interactive applications</li>
-<li class="fragment">Then, jump into learning Quarto!</li>
+<li>Understand how github works (push/pull/commits)</li>
+<li>Learn and master how to use Rmarkdown</li>
+<li>Understand how to create shiny/interactive applications</li>
+<li>Then, jump into learning Quarto!</li>
 </ul>
 </div>
 <div class="fragment">
 <p>Wanna see everything that quarto’s got to offer? Click on the quarto logo!</p>
-<p><a href="https://quarto.org"><img data-src="quarto.png" alt="Alt text"></a></p>
+<p><a href="https://quarto.org"><img data-src="quarto.jpg" alt="Alt text"></a></p>
 </div>
 </section>
 <section id="references" class="slide level2">
@@ -551,7 +607,7 @@ Brian Cervantes Alvarez
 <div class="quarto-auto-generated-content">
 <p><img src="OSULogo.png" class="slide-logo"></p>
 <div class="footer footer-default">
-<p>Quarto 101 (November 13, 2023)</p>
+
 </div>
 </div>
 </section></section>
@@ -565,15 +621,13 @@ Brian Cervantes Alvarez
   <script src="index_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
   <script src="index_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="index_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="index_files/libs/revealjs/plugin/multiplex/socket.io.js"></script>
-  <script src="index_files/libs/revealjs/plugin/multiplex/multiplex.js"></script>
   <script src="index_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
   <script src="index_files/libs/revealjs/plugin/notes/notes.js"></script>
   <script src="index_files/libs/revealjs/plugin/search/search.js"></script>
   <script src="index_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="index_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -587,9 +641,7 @@ Brian Cervantes Alvarez
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'chalkboard': {"buttons":true},
-'multiplex': {"secret":null,"id":"a08a62e74b27d9a3","url":"https://reveal-multiplex.glitch.me/"},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -610,7 +662,7 @@ Brian Cervantes Alvarez
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: 'c/t',
+        slideNumber: false,
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
@@ -712,10 +764,10 @@ Brian Cervantes Alvarez
         hideCursorTime: 5000,
 
         // Opens links in an iframe preview overlay
-        previewLinks: true,
+        previewLinks: false,
 
         // Transition style (none/fade/slide/convex/concave/zoom)
-        transition: 'slide',
+        transition: 'none',
 
         // Transition speed (default/fast/slow)
         transitionSpeed: 'default',
@@ -742,10 +794,28 @@ Brian Cervantes Alvarez
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
 
-          
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
           RevealSearch,
           RevealZoom
         ]
