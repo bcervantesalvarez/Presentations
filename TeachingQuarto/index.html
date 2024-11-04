@@ -428,62 +428,60 @@ Brian Cervantes Alvarez
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb1-1" class="hljs-ln-code"><a href=""></a><span class="co"># Set Parameters for Data Generation</span></span>
 <span id="cb1-2" class="hljs-ln-code"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">20242025</span>)  <span class="co"># For reproducibility</span></span>
 <span id="cb1-3" class="hljs-ln-code"><a href=""></a></span>
-<span id="cb1-4" class="hljs-ln-code"><a href=""></a>ovlap <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
-<span id="cb1-5" class="hljs-ln-code"><a href=""></a>propmaj <span class="ot">&lt;-</span> <span class="fl">0.85</span></span>
-<span id="cb1-6" class="hljs-ln-code"><a href=""></a>sampsize <span class="ot">&lt;-</span> <span class="dv">300</span></span>
-<span id="cb1-7" class="hljs-ln-code"><a href=""></a>ndim <span class="ot">&lt;-</span> <span class="dv">20</span></span>
-<span id="cb1-8" class="hljs-ln-code"><a href=""></a>perc_cat <span class="ot">&lt;-</span> <span class="dv">40</span></span>
-<span id="cb1-9" class="hljs-ln-code"><a href=""></a>typemiss <span class="ot">&lt;-</span> <span class="st">'none'</span></span>
-<span id="cb1-10" class="hljs-ln-code"><a href=""></a>amountmiss <span class="ot">&lt;-</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4" class="hljs-ln-code"><a href=""></a>classOverlap <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
+<span id="cb1-5" class="hljs-ln-code"><a href=""></a>proportionMajority <span class="ot">&lt;-</span> <span class="fl">0.85</span></span>
+<span id="cb1-6" class="hljs-ln-code"><a href=""></a>sampleSize <span class="ot">&lt;-</span> <span class="dv">300</span></span>
+<span id="cb1-7" class="hljs-ln-code"><a href=""></a>numericVariables <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb1-8" class="hljs-ln-code"><a href=""></a>categoricalVariablePercentage <span class="ot">&lt;-</span> <span class="dv">40</span></span>
+<span id="cb1-9" class="hljs-ln-code"><a href=""></a>missingType <span class="ot">&lt;-</span> <span class="st">'none'</span></span>
+<span id="cb1-10" class="hljs-ln-code"><a href=""></a>totalPercentageMissing <span class="ot">&lt;-</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="teaching-with-quarto-1" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Teaching with Quarto</h2>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb2-1" class="hljs-ln-code"><a href=""></a><span class="co"># Set Parameters for Data Generation</span></span>
-<span id="cb2-2" class="hljs-ln-code"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">20242025</span>)  <span class="co"># For reproducibility</span></span>
-<span id="cb2-3" class="hljs-ln-code"><a href=""></a></span>
-<span id="cb2-4" class="hljs-ln-code"><a href=""></a>ovlap <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
-<span id="cb2-5" class="hljs-ln-code"><a href=""></a>propmaj <span class="ot">&lt;-</span> <span class="fl">0.85</span></span>
-<span id="cb2-6" class="hljs-ln-code"><a href=""></a>sampsize <span class="ot">&lt;-</span> <span class="dv">300</span></span>
-<span id="cb2-7" class="hljs-ln-code"><a href=""></a>ndim <span class="ot">&lt;-</span> <span class="dv">20</span></span>
-<span id="cb2-8" class="hljs-ln-code"><a href=""></a>perc_cat <span class="ot">&lt;-</span> <span class="dv">40</span></span>
-<span id="cb2-9" class="hljs-ln-code"><a href=""></a>typemiss <span class="ot">&lt;-</span> <span class="st">'none'</span></span>
-<span id="cb2-10" class="hljs-ln-code"><a href=""></a>amountmiss <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb2-11" class="hljs-ln-code"><a href=""></a></span>
-<span id="cb2-12" class="hljs-ln-code"><a href=""></a><span class="co"># Generate and Store Simulated Datasets</span></span>
-<span id="cb2-13" class="hljs-ln-code"><a href=""></a>datasets_list <span class="ot">&lt;-</span> <span class="fu">list</span>()  <span class="co"># Initialize list to store datasets</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2" class="hljs-ln-code"><a href=""></a>classOverlap <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
+<span id="cb2-3" class="hljs-ln-code"><a href=""></a>proportionMajority <span class="ot">&lt;-</span> <span class="fl">0.85</span></span>
+<span id="cb2-4" class="hljs-ln-code"><a href=""></a>sampleSize <span class="ot">&lt;-</span> <span class="dv">300</span></span>
+<span id="cb2-5" class="hljs-ln-code"><a href=""></a>numericVariables <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb2-6" class="hljs-ln-code"><a href=""></a>categoricalVariablePercentage <span class="ot">&lt;-</span> <span class="dv">40</span></span>
+<span id="cb2-7" class="hljs-ln-code"><a href=""></a>missingType <span class="ot">&lt;-</span> <span class="st">'none'</span></span>
+<span id="cb2-8" class="hljs-ln-code"><a href=""></a>totalPercentageMissing <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb2-9" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb2-10" class="hljs-ln-code"><a href=""></a><span class="co"># Generate and Store Simulated Datasets</span></span>
+<span id="cb2-11" class="hljs-ln-code"><a href=""></a>datasetList <span class="ot">&lt;-</span> <span class="fu">list</span>()  <span class="co"># Initialize list to store datasets</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="teaching-with-quarto-2" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Teaching with Quarto</h2>
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb3-1" class="hljs-ln-code"><a href=""></a><span class="co"># Set Parameters for Data Generation</span></span>
 <span id="cb3-2" class="hljs-ln-code"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">20242025</span>)  <span class="co"># For reproducibility</span></span>
 <span id="cb3-3" class="hljs-ln-code"><a href=""></a></span>
-<span id="cb3-4" class="hljs-ln-code"><a href=""></a>ovlap <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
-<span id="cb3-5" class="hljs-ln-code"><a href=""></a>propmaj <span class="ot">&lt;-</span> <span class="fl">0.85</span></span>
-<span id="cb3-6" class="hljs-ln-code"><a href=""></a>sampsize <span class="ot">&lt;-</span> <span class="dv">300</span></span>
-<span id="cb3-7" class="hljs-ln-code"><a href=""></a>ndim <span class="ot">&lt;-</span> <span class="dv">20</span></span>
-<span id="cb3-8" class="hljs-ln-code"><a href=""></a>perc_cat <span class="ot">&lt;-</span> <span class="dv">40</span></span>
-<span id="cb3-9" class="hljs-ln-code"><a href=""></a>typemiss <span class="ot">&lt;-</span> <span class="st">'none'</span></span>
-<span id="cb3-10" class="hljs-ln-code"><a href=""></a>amountmiss <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb3-4" class="hljs-ln-code"><a href=""></a>classOverlap <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
+<span id="cb3-5" class="hljs-ln-code"><a href=""></a>proportionMajority <span class="ot">&lt;-</span> <span class="fl">0.85</span></span>
+<span id="cb3-6" class="hljs-ln-code"><a href=""></a>sampleSize <span class="ot">&lt;-</span> <span class="dv">300</span></span>
+<span id="cb3-7" class="hljs-ln-code"><a href=""></a>numericVariables <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb3-8" class="hljs-ln-code"><a href=""></a>categoricalVariablePercentage <span class="ot">&lt;-</span> <span class="dv">40</span></span>
+<span id="cb3-9" class="hljs-ln-code"><a href=""></a>missingType <span class="ot">&lt;-</span> <span class="st">'none'</span></span>
+<span id="cb3-10" class="hljs-ln-code"><a href=""></a>totalPercentageMissing <span class="ot">&lt;-</span> <span class="dv">0</span></span>
 <span id="cb3-11" class="hljs-ln-code"><a href=""></a></span>
 <span id="cb3-12" class="hljs-ln-code"><a href=""></a><span class="co"># Generate and Store Simulated Datasets</span></span>
-<span id="cb3-13" class="hljs-ln-code"><a href=""></a>datasets_list <span class="ot">&lt;-</span> <span class="fu">list</span>()  <span class="co"># Initialize list to store datasets</span></span>
+<span id="cb3-13" class="hljs-ln-code"><a href=""></a>datasetList <span class="ot">&lt;-</span> <span class="fu">list</span>()  <span class="co"># Initialize list to store datasets</span></span>
 <span id="cb3-14" class="hljs-ln-code"><a href=""></a></span>
 <span id="cb3-15" class="hljs-ln-code"><a href=""></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) {</span>
 <span id="cb3-16" class="hljs-ln-code"><a href=""></a>  <span class="fu">set.seed</span>(<span class="dv">100</span> <span class="sc">+</span> i)  <span class="co"># Different seed for each dataset to ensure variability</span></span>
 <span id="cb3-17" class="hljs-ln-code"><a href=""></a>  </span>
 <span id="cb3-18" class="hljs-ln-code"><a href=""></a>  <span class="co"># Generate datasets using the simtraindatfun function</span></span>
 <span id="cb3-19" class="hljs-ln-code"><a href=""></a>  datasets <span class="ot">&lt;-</span> <span class="fu">simtraindatfun</span>(</span>
-<span id="cb3-20" class="hljs-ln-code"><a href=""></a>    <span class="at">ovlap =</span> ovlap,</span>
-<span id="cb3-21" class="hljs-ln-code"><a href=""></a>    <span class="at">propmaj =</span> propmaj,</span>
-<span id="cb3-22" class="hljs-ln-code"><a href=""></a>    <span class="at">sampsize =</span> sampsize,</span>
-<span id="cb3-23" class="hljs-ln-code"><a href=""></a>    <span class="at">ndim =</span> ndim,</span>
-<span id="cb3-24" class="hljs-ln-code"><a href=""></a>    <span class="at">perc_cat =</span> perc_cat,</span>
-<span id="cb3-25" class="hljs-ln-code"><a href=""></a>    <span class="at">typemiss =</span> typemiss,</span>
-<span id="cb3-26" class="hljs-ln-code"><a href=""></a>    <span class="at">amountmiss =</span> amountmiss</span>
+<span id="cb3-20" class="hljs-ln-code"><a href=""></a>    <span class="at">classOverlap =</span> classOverlap,</span>
+<span id="cb3-21" class="hljs-ln-code"><a href=""></a>    <span class="at">proportionMajority =</span> proportionMajority,</span>
+<span id="cb3-22" class="hljs-ln-code"><a href=""></a>    <span class="at">sampleSize =</span> sampleSize,</span>
+<span id="cb3-23" class="hljs-ln-code"><a href=""></a>    <span class="at">numericVariables =</span> numericVariables,</span>
+<span id="cb3-24" class="hljs-ln-code"><a href=""></a>    <span class="at">categoricalVariablePercentage =</span> categoricalVariablePercentage,</span>
+<span id="cb3-25" class="hljs-ln-code"><a href=""></a>    <span class="at">missingType =</span> missingType,</span>
+<span id="cb3-26" class="hljs-ln-code"><a href=""></a>    <span class="at">totalPercentageMissing =</span> totalPercentageMissing</span>
 <span id="cb3-27" class="hljs-ln-code"><a href=""></a>  )</span>
 <span id="cb3-28" class="hljs-ln-code"><a href=""></a>  </span>
 <span id="cb3-29" class="hljs-ln-code"><a href=""></a>  <span class="co"># Store the generated datasets in the list with a unique name</span></span>
-<span id="cb3-30" class="hljs-ln-code"><a href=""></a>  datasets_list[[<span class="fu">paste0</span>(<span class="st">"Dataset_"</span>, i)]] <span class="ot">&lt;-</span> datasets</span>
+<span id="cb3-30" class="hljs-ln-code"><a href=""></a>  datasetList[[<span class="fu">paste0</span>(<span class="st">"Dataset_"</span>, i)]] <span class="ot">&lt;-</span> datasets</span>
 <span id="cb3-31" class="hljs-ln-code"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="use-tabsets-in-revealjshtml" class="slide level2" data-auto-animate="true">

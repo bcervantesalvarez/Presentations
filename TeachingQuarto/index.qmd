@@ -30,13 +30,29 @@ jupyter: python3
 # Set Parameters for Data Generation
 set.seed(20242025)  # For reproducibility
 
-ovlap <- 0.2
-propmaj <- 0.85
-sampsize <- 300
-ndim <- 20
-perc_cat <- 40
-typemiss <- 'none'
-amountmiss <- 0
+classOverlap <- 0.2
+proportionMajority <- 0.85
+sampleSize <- 300
+numericVariables <- 20
+categoricalVariablePercentage <- 40
+missingType <- 'none'
+totalPercentageMissing <- 0
+```
+
+## Teaching with Quarto {auto-animate=true}
+
+```r
+# Set Parameters for Data Generation
+classOverlap <- 0.2
+proportionMajority <- 0.85
+sampleSize <- 300
+numericVariables <- 20
+categoricalVariablePercentage <- 40
+missingType <- 'none'
+totalPercentageMissing <- 0
+
+# Generate and Store Simulated Datasets
+datasetList <- list()  # Initialize list to store datasets
 ```
 
 ## Teaching with Quarto {auto-animate=true}
@@ -45,51 +61,33 @@ amountmiss <- 0
 # Set Parameters for Data Generation
 set.seed(20242025)  # For reproducibility
 
-ovlap <- 0.2
-propmaj <- 0.85
-sampsize <- 300
-ndim <- 20
-perc_cat <- 40
-typemiss <- 'none'
-amountmiss <- 0
+classOverlap <- 0.2
+proportionMajority <- 0.85
+sampleSize <- 300
+numericVariables <- 20
+categoricalVariablePercentage <- 40
+missingType <- 'none'
+totalPercentageMissing <- 0
 
 # Generate and Store Simulated Datasets
-datasets_list <- list()  # Initialize list to store datasets
-```
-
-## Teaching with Quarto {auto-animate=true}
-
-```r
-# Set Parameters for Data Generation
-set.seed(20242025)  # For reproducibility
-
-ovlap <- 0.2
-propmaj <- 0.85
-sampsize <- 300
-ndim <- 20
-perc_cat <- 40
-typemiss <- 'none'
-amountmiss <- 0
-
-# Generate and Store Simulated Datasets
-datasets_list <- list()  # Initialize list to store datasets
+datasetList <- list()  # Initialize list to store datasets
 
 for (i in 1:5) {
   set.seed(100 + i)  # Different seed for each dataset to ensure variability
   
   # Generate datasets using the simtraindatfun function
   datasets <- simtraindatfun(
-    ovlap = ovlap,
-    propmaj = propmaj,
-    sampsize = sampsize,
-    ndim = ndim,
-    perc_cat = perc_cat,
-    typemiss = typemiss,
-    amountmiss = amountmiss
+    classOverlap = classOverlap,
+    proportionMajority = proportionMajority,
+    sampleSize = sampleSize,
+    numericVariables = numericVariables,
+    categoricalVariablePercentage = categoricalVariablePercentage,
+    missingType = missingType,
+    totalPercentageMissing = totalPercentageMissing
   )
   
   # Store the generated datasets in the list with a unique name
-  datasets_list[[paste0("Dataset_", i)]] <- datasets
+  datasetList[[paste0("Dataset_", i)]] <- datasets
 }
 ```
 
