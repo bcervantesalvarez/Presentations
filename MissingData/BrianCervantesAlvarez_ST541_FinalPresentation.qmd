@@ -1,0 +1,242 @@
+---
+title: "Exploring Missing Data & M.I.C.E."
+subtitle: "Oregon State University"
+footer: "ST 541: Probability, Simulation & Computation"
+author: "Brian Cervantes Alvarez"
+date: 12/03/2024
+date-format: full
+format: 
+  OSUStyle-revealjs:
+    slide-number: true
+    transition: convex
+    html-math-method: katex
+    embed-resources: true
+    smooth-scroll: true
+    scrollable: true
+    logo: OSUlogo.png
+    controls: true
+message: false
+warning: false
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+
+# Missing Data
+
+## How Missing Data Occurs & Why It Matters
+
+**Common Causes of Missing Data**  
+
+- **Human Error**: Mistakes during entry or recording.  
+- **System Failures**: Equipment malfunctions.  
+- **Non-response**: Participants can't or won't respond.  
+- **Deliberate Omission**: Excluding unreliable data.  
+
+**Why It Matters**  
+
+- **Bias**: Missing data skews parameter estimates and inferences.  
+- **Reduced Accuracy**: Less reliable predictions and results.  
+- **Power Loss**: Harder to detect meaningful effects.
+
+
+## Types of Missing Data & MICE Assumptions
+
+**Types of Missing Data**  
+
+- **MCAR**: Missingness is random, no bias.  
+- **MAR**: Related to observed data; handled with MICE.  
+- **MNAR**: Linked to unobserved data; requires advanced models.  
+
+MICE assumes data is MAR, making it crucial to identify the missingness type to apply the right method.
+
+# M.I.C.E
+
+## What is M.I.C.E.?
+
+**MICE = Multiple Imputation by Chained Equations**
+
+- A statistical method to handle missing data by creating multiple plausible datasets.
+- Generates several estimates to reflect uncertainty, rather than a single imputation.
+
+For each variable with missing data $X_j$:
+
+$$
+X_j^{(\text{missing})} = f_j(X_{-j}) + \varepsilon_j
+$$
+
+- $X_{-j}$: All other variables
+- $f_j$: Predictive model (e.g., regression function)
+- $\varepsilon_j$: Random error term capturing residuals
+
+*(van Buuren, 2018)*
+
+## Another way to put it
+
+Handling missing data with MICE is like trying to complete a puzzle with missing pieces. Instead of guessing one fixed piece to fill a gap, you evaluate several options that could reasonably fit, based on the surrounding picture. Each plausible "piece" represents a potential imputation, reflecting the uncertainty of the missing data.
+
+## How Does MICE Work?
+
+1. **Initial Imputation**
+   - Fill missing values with initial guesses (mean, median, or mode).
+
+2. **Iterative Process**
+   - For each variable with missing data $X_j$:
+     - **Step 1**: Treat $X_j$ as the target variable.
+     - **Step 2**: Use other variables $X_{-j}$ to build a predictive model $f_j$ (e.g., linear regression).
+     - **Step 3**: Predict and replace the missing values in $X_j$ using $f_j(X_{-j})$.
+
+3. **Repeat Cycles**
+   - Iterate over all variables multiple times until the imputations converge (usually around 10 cycles).
+
+MICE models each variable conditional on others, preserving multivariate relationships and producing statistically valid imputations.
+
+## Study Overview
+
+**Goal**: Assess the impact of missing data patterns on regression analysis and demonstrate how MICE recovers accurate results.
+
+**Dataset**: [Product Sales and Returns](https://www.kaggle.com/datasets/yaminh/product-sales-and-returns-dataset)  
+**Problem**: Missing values simulated in **Refunds** column.
+
+**Steps**:  
+1. **Data Prep**: Selected **Refunds**, **Purchased Item Count**, **Total Revenue**, **Category**.  
+2. **Simulating Missingness**: Applied patterns (**MCAR**, **MAR**, **MNAR**) at 10–70% levels.  
+3. **MICE Imputation**: Used **mice** package with predictors to fill missing **Refunds**.  
+4. **Regression Analysis**: Evaluated the effect of missing patterns and imputation on results.
+
+## Plot 1
+
+![](plot1_purchased_item_count.png)
+
+## Plot 2
+
+![](plot2_difference_purchased_item_count.png)
+
+
+## Plot 3
+
+![](plot4_difference_all_terms.png)
+
+
+## Conclusion
+
+  - MICE effectively handles missing data by leveraging multivariate relationships.
+  - Maintains data integrity and provides unbiased parameter estimates.
+
+Hence, understanding missing data types is crucial for selecting appropriate imputation methods.
+
+
+## References
+
+- van Buuren, S. (2018). *Flexible Imputation of Missing Data* (2nd ed.). Chapman and Hall/CRC. [https://doi.org/10.1201/9780429492259](https://doi.org/10.1201/9780429492259)
+
+
+# Questions?
+
+# Appendix
+
+
+## Evaluation Criteria for Multiple Imputation
+
+- **Raw Bias (RB)**:
+  - Difference between the expected estimate and the true value.
+  - $\text{RB} = E(\bar{Q}) - Q$
+  
+- **Percent Bias (PB)**:
+  - Relative bias expressed as a percentage.
+  - $\text{PB} = 100 \times \left| \frac{E(\bar{Q}) - Q}{Q} \right|$
+  
+- **Coverage Rate (CR)**:
+  - Proportion of confidence intervals that contain the true value.
+  - **Goal**: Should be close to the nominal level (e.g., 95%).
+
+- **Average Width (AW)**:
+  - Average width of confidence intervals.
+  - Indicates statistical efficiency; narrower intervals are more efficient but must maintain adequate coverage.
+
+- **Root Mean Squared Error (RMSE)**:
+  - Combines bias and variance.
+  - $\text{RMSE} = \sqrt{E\left( \bar{Q} - Q \right)^2}$
+
+*(van Buuren, 2018)*
+
+**Low Bias and High Coverage**: Indicates randomization-valid methods.
+
+**Efficiency**: Shorter confidence intervals (AW) are better if coverage (CR) is adequate.
+
+
+## Univariate vs. Multivariate Imputation
+
+- **Univariate Imputation**:
+  - Replaces missing values using only the variable itself (mean, median).
+  - **Limitation**: Ignores relationships between variables; may distort distributions and underestimate variability.
+  
+- **Multivariate Imputation (like MICE)**:
+  - Uses other variables to estimate missing values.
+  - **Advantage**: Preserves covariance structure and maintains data integrity.
+
+
+## Advantages of MICE
+
+- **Flexibility**:
+  - Compatible with various data types (numerical, categorical).
+  - Allows for different imputation models per variable.
+
+- **Statistical Validity**:
+  - Accounts for uncertainty by creating multiple imputed datasets.
+  - Provides unbiased estimates under the MAR assumption.
+
+- **Preserves Data Structure**:
+  - Maintains natural variability and multivariate relationships.
+  - Reflects the true covariance among variables.
+
+- **Reduces Bias**:
+  - More accurate than univariate methods, especially when data is not MCAR.
+
+## Limitations of MICE
+
+- **Computationally Intensive**:
+  - Requires more processing time and resources, especially with large datasets.
+
+- **Complexity**:
+  - Implementation and tuning can be challenging; requires statistical expertise.
+
+- **Assumptions**:
+  - Relies on the data being Missing at Random (MAR).
+  - Violations of MAR can lead to biased imputations.
+
+- **Model Dependency**:
+  - Quality depends on the correctness of specified models for each variable.
+  - Mis-specified models can introduce errors.
+  
+  
+## When Not to Use Multiple Imputation
+
+- **Multiple Imputation** is powerful but not always needed.
+
+- **Complete-Case Analysis** (also known as **Listwise Deletion**):
+
+  - **What is it?**
+    - Using only the data entries (rows) that have **no missing values** in the variables you're analyzing.
+    - You **exclude** any rows that contain missing data and perform your analysis on the remaining complete cases.
+
+When is Complete-Case Analysis Appropriate?
+
+- If missingness occurs only in $Y$ and the data are **Missing Completely at Random (MCAR)**.
+- Analyzing only the complete cases can be as effective as multiple imputation but is simpler.
+
+**Be Careful**:
+
+  - Using only complete cases can lead to **biased results** when data is **MAR** or **MNAR** and these conditions aren't met.
+  - Choosing this method should be a thoughtful decision, and you should **clearly explain** why you're using it, considering how the missing data might affect your analysis.
+
+
+*(van Buuren, 2018)*
+
+
+
+
+
+
+
