@@ -1,0 +1,279 @@
+---
+title: "Loan Approval Logistic Regression Analysis"
+authors: 
+  - "Brian Cervantes Alvarez"
+  - "Wylea Walker"
+date: 12/03/2024
+date-format: full
+format: 
+  OSUStyle-revealjs:
+    slide-number: true
+    transition: convex
+    html-math-method: katex
+    smooth-scroll: true
+    scrollable: true
+    logo: OSUlogo.png
+    controls: true
+message: false
+warning: false
+echo: false
+embed-resources: true
+---
+
+
+```{r}
+#| output: false
+# Load required libraries for data manipulation, visualization, and modeling
+library(readr)
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(car)
+library(showtext)
+library(corrplot)
+library(ggcorrplot)
+
+
+# Load the corrected dataset from CSV file
+loanDs2 <- read.csv("loanApproval2.csv")
+
+# Display the column names to verify the dataset structure
+names(loanDs2)
+
+# Convert selected variables to factors for appropriate analysis
+loanDs2 <- loanDs2 %>%
+  mutate(
+    person_home_ownership = as.factor(person_home_ownership),
+    loan_intent = as.factor(loan_intent),
+    loan_grade = as.factor(loan_grade),
+    cb_person_default_on_file = as.factor(cb_person_default_on_file),
+    loan_status = as.factor(loan_status)
+  )
+
+logitModel <- glm(loan_status ~ . - person_age - loan_grade,
+                 data = loanDs2,
+                 family = binomial(link = "logit"))
+
+# Calculate Variance Inflation Factor (VIF) to assess multicollinearity
+vif_values <- vif(logitModel)
+
+
+# Select numeric columns for correlation analysis, excluding 'person_age'
+numeric_columns <- loanDs2 %>% 
+  select_if(is.numeric) %>%
+  select(-c(person_age))
+
+```
+
+
+## Introduction & Background {auto-animate=true}
+
+
+Loan approval decisions are pivotal in the financial sector, affecting both lenders' risk management and borrowers' access to funds. Our project dived into identifying the key demographic and financial factors that influence loan approval outcomes.
+
+- **Dataset:** 32,581 simulated loan applications
+- **Methods:** Logistic regression & ANOVA
+- **Key Variables:** Income, Employment Length, Home Ownership, Loan Intent, Credit History
+
+
+## Research Question {auto-animate=true}
+
+Which demographic and financial factors are most strongly linked to an increased likelihood of loan approval?
+
+
+
+
+# Logistic Regression
+
+
+## Methods
+
+**Data Description**
+
+  - **Demographics:** Age, home ownership.
+  - **Financial:** Income, employment length, loan amount, loan intent, interest rate, loan-to-income ratio.
+  - **Credit History:** Default status, credit history length, credit score.
+  - **Outcome:** Loan approval status.
+
+**Data Preparation**
+
+  - Converted categorical variables to factors.
+  - Ran a correlation matrix
+  - Excluded `person_age` and `loan_grade` to avoid multicollinearity.
+
+**Statistical Modeling:** Logistic regression to model loan approval probability.
+  
+  
+## Multicollinearity
+
+```{r}
+#| echo: false
+numeric_columns <- loanDs2 %>% 
+  select_if(is.numeric) %>%
+  select(-c(person_age))
+
+correlation_matrix <- cor(numeric_columns, use = "complete.obs")
+
+ggcorrplot(correlation_matrix, 
+           hc.order = TRUE, 
+           type = "lower",
+           lab = TRUE, 
+           lab_size = 3,
+           tl.cex = 8) +
+  ggtitle("Correlation Matrix of Numeric Variables")
+```
+
+
+## Model Specification {.smaller}
+
+We employed logistic regression to model the probability of loan approval based on predictor variables. The logistic regression model is defined as:
+
+$$
+\log\left(\frac{P(Y = 1)}{1 - P(Y = 1)}\right) = \beta_0 + \sum_{i=1}^{p} \beta_i X_i,
+$$
+
+where $Y$ is the loan approval status, $\beta_0$ is the intercept, $\beta_i$ are the coefficients, and $X_i$ are the predictor variables.
+
+The fitted logistic regression model is:
+
+
+
+$$
+\begin{align*}
+\log\left(\frac{P(\text{loan\_status} = 1)}{1 - P(\text{loan\_status} = 1)}\right) = & \beta_0 + \beta_1 \cdot \text{person\_income} + \beta_2 \cdot \text{person\_home\_ownership} \\
+& + \beta_3 \cdot \text{person\_emp\_length} \\
+& + \beta_4 \cdot \text{loan\_intent} + \beta_5 \cdot \text{loan\_amnt} + \beta_6 \cdot \text{loan\_int\_rate} \\
+& + \beta_7 \cdot \text{loan\_percent\_income} + \beta_8 \cdot \text{cb\_person\_default\_on\_file} \\
+& + \beta_9 \cdot \text{cb\_person\_cred\_hist\_length} + \beta_{10} \cdot \text{credit\_score}.
+\end{align*}
+$$
+
+
+
+## Model Fit 
+
+| Variable                     | GVIF      | Df | GVIF^(1/(2*Df)) |
+|------------------------------|-----------|----|-----------------|
+| person_income               | 1.227036  |  1 | 1.107717        |
+| person_home_ownership       | 1.151364  |  3 | 1.023769        |
+| person_emp_length           | 1.076528  |  1 | 1.037559        |
+| loan_intent                 | 1.058406  |  5 | 1.005693        |
+| loan_amnt                   | 2.112565  |  1 | 1.453466        |
+| loan_int_rate               | 1.351832  |  1 | 1.162683        |
+| loan_percent_income         | 2.115208  |  1 | 1.454375        |
+| cb_person_default_on_file   | 1.256489  |  1 | 1.120932        |
+| cb_person_cred_hist_length  | 1.027444  |  1 | 1.013629        |
+
+**VIF Values:** All below 5 → No multicollinearity issues.
+
+
+
+## Results
+
+**Significant Predictors:**
+
+  - **Income:** Higher income ↑ approval odds.
+  - **Home Ownership:** Renting ↑, Owning ↓ approval odds.
+  - **Employment Length:** Longer employment ↓ approval odds.
+  - **Loan Amount:** Higher amount ↓ approval odds.
+  - **Loan Intent:** Most intents ↓ approval odds except Home Improvement.
+  - **Interest Rate & Loan-to-Income:** Higher values ↑ approval odds.
+  - **Credit Score:** Higher scores ↓ approval odds (unexpected).
+  - **Historical Default:** Marginal effect.
+  - **Credit History Length:** No significant effect.
+
+
+## Residual Analysis
+
+```{r}
+#| echo: false
+plot(logitModel$fitted.values, residuals(logitModel, type = "deviance"),
+     xlab = "Fitted Values",
+     ylab = "Deviance Residuals",
+     main = "Residuals vs Fitted Values")
+abline(h = 0, col = "red")
+```
+
+The residuals display a distinct curve rather than being randomly scattered around zero.  
+
+**What does this mean?**  This suggests an opportunity to improve the model by addressing potential non-linearity or mis-specification, which could lead to better predictive performance.
+
+
+
+# ANOVA
+
+## Does Loan Interest Rates differ from Loan Intent?
+
+- **Null Hypothesis $(H_0)$**: The mean Loan Interest Rates are the same across all Loan Intent categories.  
+- **Alternative Hypothesis $(H_A)$**: At least one Loan Intent category has a different mean Loan Interest Rate.  
+
+
+```{r}
+# Perform ANOVA to test if Loan Interest Rates differ by Loan Intent
+anova_int_rate <- aov(loan_int_rate ~ loan_intent, data = loanDs2)
+
+# Display the ANOVA summary results
+summary(anova_int_rate)
+```
+
+
+## Violin|Box Plots
+
+```{r}
+#| echo: false
+ggplot(loanDs2, aes(x = loan_intent, y = loan_int_rate, fill = loan_intent)) +
+  geom_violin(trim = FALSE, alpha = 0.6) +
+  geom_boxplot(width = 0.1, outlier.shape = NA) +
+  labs(title = "Loan Interest Rates by Loan Intent",
+       x = "Loan Intent",
+       y = "Interest Rate (%)") + 
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+## Does Loan Percent Income Differ by Home Ownership?  
+
+- **Null Hypothesis $(H_0)$**: The mean Loan Percent Income is the same across all Home Ownership statuses.  
+- **Alternative Hypothesis $(H_A)$**: At least one Home Ownership status has a different mean Loan Percent Income.  
+
+```{r}
+# Perform ANOVA to test if Loan Percent Income differs by Home Ownership
+anova_percent_income <- aov(loan_percent_income ~ person_home_ownership, data = loanDs2)
+
+# Display the ANOVA summary results
+summary(anova_percent_income)
+```
+
+
+## Violin|Box Plots
+
+```{r}
+#| echo: false
+ggplot(loanDs2, aes(x = person_home_ownership, y = loan_percent_income, fill = person_home_ownership)) +
+  geom_violin(trim = FALSE, alpha = 0.6) +
+  geom_boxplot(width = 0.3, outlier.shape = NA) +
+  labs(title = "Loan Percent Income by Home Ownership",
+       x = "Home Ownership Status",
+       y = "Loan Percent Income (%)") + 
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+
+## Conclusion
+
+**Key Findings:** Higher income and renting increase loan approval odds; higher credit scores surprisingly decrease odds.
+
+**Practical Implications**
+
+  - **For Lenders:** Refine criteria focusing on income and loan amounts.
+  - **For Applicants:** Highlight income and request moderate loan amounts.
+  
+**Limitations:** Unexpected credit score relationship suggests data/model issues; dataset simulated with unknown generation process.
+
+
+
+## References
+
+- Laotse. (n.d.). *Credit Risk Dataset*. Kaggle. Retrieved from [https://www.kaggle.com/datasets/laotse/credit-risk-dataset](https://www.kaggle.com/datasets/laotse/credit-risk-dataset)
+```
