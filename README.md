@@ -9,6 +9,10 @@ https://bcervantesalvarez.github.io/Presentations/TeachingQuarto
 
 https://bcervantesalvarez.github.io/Presentations/WebR/
 
+https://bcervantesalvarez.github.io/Presentations/MissingData/
+
+https://bcervantesalvarez.github.io/Presentations/LoanApproval/
+
 
 ## HOW TO ACCESS LIVE REVEAL.JS PRESENTATIONS [TEMPLATE]
 
