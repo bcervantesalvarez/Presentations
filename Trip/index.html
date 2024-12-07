@@ -1,0 +1,2895 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <title>Europe Misadventures 2024</title>
+    <style>
+      /* ===================================================
+        Global Styles
+        =================================================== */
+      body,
+      html {
+        font-family: "Work Sans", sans-serif;
+        /* Updated to Work Sans */
+        font-weight: 400;
+        line-height: 1.5;
+        font-size: 14px;
+        margin: 0;
+        padding: 0;
+        color: #333;
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        overscroll-behavior-y: none;
+        /* Prevent scroll chaining */
+      }
+
+      #weather-updates {
+        font-family: "Libre Franklin", sans-serif;
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+        margin-top: 20px;
+      }
+      .city-weather {
+        margin-bottom: 10px;
+      }
+
+      /* ===================================================
+        Navbar Styles
+        =================================================== */
+
+      /* General Navbar Styles */
+
+      nav {
+        display: flex;
+        font-size: 0.9em;
+        gap: 10px;
+        overflow-x: auto; /* Enable horizontal scrolling */
+        white-space: nowrap;
+        padding: 5px 5px;
+        scrollbar-width: none; /* Hide scrollbar for Firefox */
+        position: sticky; /* Make navbar stick */
+        top: 0; /* Stick to top of the viewport */
+        z-index: 1000; /* Ensure it stays above other elements */
+        background: #f9f9f9; /* Neutral background for contrast */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow for separation */
+      }
+
+      nav::-webkit-scrollbar {
+        display: none; /* Hide scrollbar for Chrome and Safari */
+      }
+
+      /* Nav Link Styles */
+      /* General Styles for Navigation Links */
+      .nav-link {
+        display: inline-block;
+        text-align: center;
+        font-family: "Work Sans", sans-serif;
+        font-weight: 600;
+        color: #ffffff;
+        border-radius: 10px;
+        margin: 8px;
+        padding: 8px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background-color: #ddd; /* Default background */
+        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px,
+          rgba(0, 0, 0, 0.24) 0px 1px 2px;
+        min-width: 100px;
+        text-decoration: auto;
+      }
+
+      /* Styling for Day */
+      .nav-link .nav-day {
+        font-size: 1.2em;
+        font-weight: bold;
+        text-decoration: underline; /* Keep underline for day name only */
+        margin-bottom: 8px;
+      }
+
+      /* Styling for Date */
+      .nav-link .nav-date {
+        font-size: 1.1em;
+        font-weight: 600;
+        margin-bottom: 5px;
+        text-decoration: none; /* Remove underline for dates */
+      }
+
+      /* Styling for Country */
+      .nav-link .nav-country {
+        font-size: 0.9em;
+        font-style: italic; /* Slight emphasis */
+        text-decoration: none; /* Remove underline for country names */
+        background: #000000;
+        border-radius: 30px;
+        padding-left: 5px;
+        padding-right: 5px;
+        margin-left: 5px;
+        margin-right: 5px;
+      }
+
+      /* Hover Effect */
+      .nav-link:hover {
+        transform: translateY(-3px); /* Lift on hover */
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3); /* Add shadow for interactivity */
+      }
+
+      /* Active State */
+      .nav-link.active {
+        transform: scale(1.1); /* Slight zoom effect */
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5); /* Add depth */
+        border: solid 2px #000000;
+      }
+
+      /* Country-Specific Colors */
+      .nav-link[data-country="United States"] {
+        background: #004080; /* Blue for USA */
+      }
+      .nav-link[data-country="Spain"] {
+        background: #c8102e; /* Red for Spain */
+      }
+      .nav-link[data-country="Italy"] {
+        background: #008c45; /* Green for Italy */
+      }
+      .nav-link[data-country="France"] {
+        background: #0055a4; /* Blue for France */
+      }
+
+      /* Ensure Proper Spacing */
+      .nav-link .nav-day,
+      .nav-link .nav-date,
+      .nav-link .nav-country {
+        display: block;
+      }
+
+      /* ===================================================
+        Font Classes for Reuse
+        =================================================== */
+      .work-sans-light {
+        font-family: "Work Sans", sans-serif;
+        font-weight: 300;
+        /* Light weight */
+        font-style: normal;
+      }
+
+      .work-sans-bold {
+        font-family: "Work Sans", sans-serif;
+        font-weight: 700;
+        /* Bold weight */
+        font-style: normal;
+      }
+
+      .libre-franklin-light {
+        font-family: "Libre Franklin", serif;
+        font-weight: 300;
+        /* Light weight */
+        font-style: normal;
+      }
+
+      .libre-franklin-bold {
+        font-family: "Libre Franklin", serif;
+        font-weight: 700;
+        /* Bold weight */
+        font-style: normal;
+      }
+
+      /* ===================================================
+        Site Title
+        =================================================== */
+      .siteTitle {
+        display: block;
+        font-family: "Libre Franklin", serif;
+        /* Updated to Libre Franklin */
+        font-weight: 700;
+        font-size: 40px;
+        margin: 0 0;
+        text-align: center;
+        background: inherit;
+      }
+
+      @media (min-width: 768px) {
+        .siteTitle {
+          font-size: 90px;
+        }
+      }
+
+      /* ===================================================
+        Flip Card Container and Flip Card Styles
+        =================================================== */
+      .flip-card-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 50px;
+        box-sizing: border-box;
+        min-height: 100vh;
+        width: auto;
+        height: auto;
+        margin-top: 50px;
+        margin-bottom: 50px;
+      }
+
+      .flip-card {
+        position: relative;
+        width: 90%;
+        max-width: 700px;
+        height: 600px;
+        perspective: 1000px;
+        cursor: pointer;
+        display: inline-block;
+      }
+
+      .flip-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.5s;
+        transform-style: preserve-3d;
+      }
+
+      /* Flip Effect using Checkbox */
+      .flip-card input[type="checkbox"] {
+        display: none;
+      }
+
+      .flip-card input[type="checkbox"]:checked + .flip-card-inner {
+        transform: rotateY(180deg);
+      }
+
+      /* Flip Card Front and Back */
+      .flip-card-front,
+      .flip-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        box-sizing: border-box;
+        border-radius: 20px;
+        box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+          rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+          rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+      }
+
+      .flip-card-front {
+        overflow: hidden;
+      }
+
+      .flip-card-front .card-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .flip-card-front .inner {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 25%;
+        background: rgb(255, 255, 255);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 5px;
+        box-sizing: border-box;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        z-index: 3;
+      }
+
+      .flip-card-front .title {
+        font-family: "Libre Franklin", serif;
+        /* Updated to Libre Franklin */
+        font-size: 1.2em;
+        color: #181818;
+        text-align: center;
+        font-weight: 800;
+        margin: 0 0 8px 0;
+      }
+
+      .flip-card-front .subtitle {
+        font-family: "Work Sans", sans-serif;
+        /* Updated to Work Sans */
+        color: #555;
+        text-align: center;
+        font-weight: 500;
+        font-size: 1.2em;
+      }
+
+      /* Back Side */
+      .flip-card-back {
+        background-color: #fff;
+        color: black;
+        transform: rotateY(180deg);
+        font-family: "Work Sans", sans-serif;
+        /* Updated to Work Sans */
+        overflow-y: auto;
+        /* Enable vertical scrolling */
+        z-index: 4;
+        pointer-events: none;
+        /* Disable interactions by default */
+      }
+
+      /* Enable pointer events on back side when flipped */
+      .flip-card
+        input[type="checkbox"]:checked
+        + .flip-card-inner
+        .flip-card-back {
+        pointer-events: auto;
+      }
+
+      /* Disable pointer events on front side when flipped (optional) */
+      .flip-card
+        input[type="checkbox"]:checked
+        + .flip-card-inner
+        .flip-card-front {
+        pointer-events: none;
+      }
+
+      .flip-card-back h2 {
+        background-color: #ffffff;
+        color: #000000;
+        text-align: center;
+        font-size: 1.8em;
+        margin-top: 20px;
+        padding: 5px;
+      }
+
+      .flip-card-back h3 {
+        color: #ffffff;
+        background-color: rgb(0, 0, 0);
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        margin-top: 30px;
+        margin-bottom: 20px;
+        padding: 10px;
+        font-size: 1.6em;
+      }
+
+      /* ===================================================
+        Timeline Styles
+        =================================================== */
+      .timeline {
+        position: relative;
+        padding-left: 20px;
+      }
+
+      .timeline-item {
+        position: relative;
+        margin-bottom: 40px;
+        display: flex;
+        align-items: flex-start;
+        opacity: 1;
+        flex-direction: column;
+        font-size: 1.2em;
+        font-weight: 600;
+      }
+
+      .timeline-content {
+        background-color: #f9f9f9 !important;
+        color: #151515 !important;
+        font-weight: 400;
+        padding: 10px 15px;
+        margin-right: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 0px 2px rgb(0, 0, 0), 8px 8px 0px 0px rgb(0, 0, 0);
+      }
+
+      .timeline-time {
+        padding: 5px;
+      }
+
+      .flight-info {
+        font-weight: 400;
+        margin: 30px 20px 0px 20px;
+        color: black;
+        background: #ffdfdf;
+        /* Light red background */
+        padding: 10px 15px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 0px 2px rgb(0, 0, 0), 8px 8px 0px 0px rgb(0, 0, 0);
+        font-size: 1.2em;
+      }
+
+      .hotel-info {
+        font-weight: 400;
+        margin: 30px 20px 0px 20px;
+        color: black;
+        background: #e4ffe5;
+        /* Light green background */
+        padding: 10px 15px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 0px 2px rgb(0, 0, 0), 8px 8px 0px 0px rgb(0, 0, 0);
+        font-size: 1.2em;
+      }
+
+      /* Train Information Styles */
+      .train-info {
+        font-weight: 400;
+        margin: 30px 20px 0px 20px;
+        color: black;
+        background: #ffdfdf;
+        /* Light red background */
+        padding: 10px 15px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 0px 2px rgb(0, 0, 0), 8px 8px 0px 0px rgb(0, 0, 0);
+      }
+
+      /* Common Styles for Sunrise and Sunset Dividers */
+      .timeline-block.timeline-sunrise,
+      .timeline-block.timeline-sunset {
+        display: flex;
+        align-items: center;
+        padding: 5px 0;
+        position: relative;
+        margin-top: 40px;
+        /* Space above the divider */
+        margin-bottom: 30px;
+        /* Space below the divider */
+        font-size: 1.2em;
+        font-weight: 700;
+      }
+
+      /* Sunrise Specific Styles */
+      .timeline-block.timeline-sunrise {
+        color: #ffa500;
+        /* Orange text */
+        border-bottom: 3px solid #ffa500;
+        /* Orange border */
+        border-left: 3px solid #ffa500;
+        /* Orange border */
+        border-top: 3px solid #ffa500;
+        /* Orange border */
+        background-color: #fffae3;
+        /* Light Yellow background */
+      }
+
+      .timeline-block.timeline-sunrise .timeline-block-icon {
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+        margin-left: 10px;
+      }
+
+      /* Sunset Specific Styles */
+      .timeline-block.timeline-sunset {
+        color: #ff4500;
+        /* Orange-Red text */
+        border-bottom: 3px solid #ff4500;
+        /* Orange-Red border */
+        border-left: 3px solid #ff4500;
+        /* Orange-Red border */
+        border-top: 3px solid #ff4500;
+        /* Orange-Red border */
+        background-color: #f0e6ff;
+        /* Light Purple background */
+      }
+
+      .timeline-block.timeline-sunset .timeline-block-icon {
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+        margin-left: 10px;
+      }
+
+      /* ===================================================
+        Responsive Design
+        =================================================== */
+      @media (max-width: 768px) {
+        .flip-card-container {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .flip-card-front .title {
+          font-size: 2.4em;
+        }
+
+        .flip-card-front .subtitle {
+          font-family: "Work Sans", sans-serif;
+          color: #555;
+          text-align: center;
+          font-weight: 500;
+          font-size: 1.6em;
+        }
+
+        .siteTitle {
+          font-size: 1.9em;
+          font-weight: 800;
+        }
+
+        /* Responsive Styles for Sunrise and Sunset Dividers */
+        .timeline-block.timeline-sunrise,
+        .timeline-block.timeline-sunset {
+          font-size: 1.3em;
+        }
+
+        .timeline-block.timeline-sunrise .timeline-block-icon,
+        .timeline-block.timeline-sunset .timeline-block-icon {
+          width: 40px;
+          height: 40px;
+          margin-right: 10px;
+        }
+
+        .flip-card-container {
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+      /* ===================================================
+        Currency Converter API Block
+        =================================================== */
+
+      #currency-converter {
+        font-family: "Work Sans", sans-serif;
+        background-color: #f9fafb;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        padding: 20px;
+        max-width: 400px;
+        margin: 50px auto;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      #currency-converter h3 {
+        color: #2b6cb0;
+        margin-bottom: 8px;
+      }
+
+      #currency-converter p {
+        font-size: 0.9em;
+        color: #4a5568;
+        margin-bottom: 20px;
+      }
+
+      .input-group {
+        margin-bottom: 16px;
+      }
+
+      #currency-converter label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #2d3748;
+      }
+
+      #usd-amount {
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        box-sizing: border-box;
+      }
+
+      #convert-btn {
+        display: inline-block;
+        background-color: #2b6cb0;
+        color: white;
+        padding: 10px 20px;
+        font-size: 1rem;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.2s ease-in-out;
+      }
+
+      #convert-btn:hover {
+        background-color: #2c5282;
+      }
+
+      .result {
+        margin-top: 20px;
+        font-size: 1.1em;
+        color: #2d3748;
+        font-weight: bold;
+      }
+
+      .result small {
+        font-size: 0.8em;
+        color: #718096;
+      }
+
+      /* ===================================================
+        Currency Converter API Block
+        =================================================== */
+
+      #google_translate_element {
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        z-index: 1000;
+      }
+      body {
+        top: 0px !important;
+      }
+      body > .skiptranslate > iframe.skiptranslate {
+        display: none !important;
+        visibility: hidden !important;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header style="background: inherit">
+      <span class="siteTitle">Europe Trip 2024</span>
+    </header>
+    <div id="google_translate_element"></div>
+    <div id="currency-converter">
+      <h3>💱 USD to Euro Converter</h3>
+      <p>Real-time conversion rates at your fingertips!</p>
+      <div class="input-group">
+        <label for="usd-amount">Amount in USD:</label>
+        <input
+          type="number"
+          id="usd-amount"
+          placeholder="Enter amount in USD"
+        />
+      </div>
+      <button id="convert-btn">Convert</button>
+      <div id="conversion-result" class="result"></div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav>
+      <a
+        class="nav-link"
+        href="#dec11"
+        data-country="United States"
+        data-date="2024-12-11"
+      ></a>
+      <a
+        class="nav-link"
+        href="#dec12"
+        data-country="Spain"
+        data-date="2024-12-12"
+      ></a>
+      <a
+        class="nav-link"
+        href="#dec13"
+        data-country="Spain"
+        data-date="2024-12-13"
+      ></a>
+      <a
+        class="nav-link"
+        href="#dec14"
+        data-country="Spain"
+        data-date="2024-12-14"
+      ></a>
+      <a
+        class="nav-link"
+        href="#dec15"
+        data-country="Italy"
+        data-date="2024-12-15"
+      ></a>
+      <a
+        class="nav-link"
+        href="#dec16"
+        data-country="Italy"
+        data-date="2024-12-16"
+      ></a>
+      <a
+        class="nav-link"
+        href="#dec17"
+        data-country="Italy"
+        data-date="2024-12-17"
+      ></a>
+      <a
+        class="nav-link"
+        href="#dec18"
+        data-country="Italy"
+        data-date="2024-12-18"
+      ></a>
+      <a
+        class="nav-link"
+        href="#dec19"
+        data-country="Italy"
+        data-date="2024-12-19"
+      ></a>
+      <a
+        class="nav-link"
+        href="#dec20"
+        data-country="Italy"
+        data-date="2024-12-20"
+      ></a>
+      <a
+        class="nav-link"
+        href="#dec21"
+        data-country="France"
+        data-date="2024-12-21"
+      ></a>
+      <a
+        class="nav-link"
+        href="#dec22"
+        data-country="France"
+        data-date="2024-12-22"
+      ></a>
+      <a
+        class="nav-link"
+        href="#dec23"
+        data-country="United States"
+        data-date="2024-12-23"
+      ></a>
+    </nav>
+
+    <!-- Itinerary Display -->
+    <main
+      id="itinerary"
+      style="display: block; padding: 5px; background: inherit"
+    >
+      <!-- Parent Container for Flip Cards -->
+      <div class="flip-card-container">
+        <!-- Flip Card for Day 0 -->
+        <label class="flip-card" id="dec11">
+          <input type="checkbox" />
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img
+                src="images/day-0.jpg"
+                alt="Departing to Europe"
+                class="card-image"
+              />
+              <div class="inner">
+                <h2 class="title">Adventure Awaits 🌍</h2>
+                <time class="subtitle">Wed, Dec 11th</time>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <h2>Buen Viaje, Travelers ✈️</h2>
+              <!-- Flight Information (Collapsible Section) -->
+              <details class="flight-info">
+                <summary>Flight Information</summary>
+                <ul>
+                  <li>
+                    <strong>Flight 1</strong>: Portland International Airport
+                    (PDX) ✈ John F. Kennedy International Airport (JFK)
+                    <ul>
+                      <li><strong>Airline</strong>: Delta Airlines (DL1234)</li>
+                      <li><strong>Departure</strong>: 7:05 AM PST (PDX)</li>
+                      <li><strong>Arrival</strong>: 3:28 PM EST (JFK)</li>
+                      <li>
+                        <strong>Flight Duration</strong>: 5 hours 23 minutes
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <strong>Flight 2</strong>: John F. Kennedy International
+                    Airport (JFK) ✈ Adolfo Suárez Madrid-Barajas Airport (MAD)
+                    <ul>
+                      <li><strong>Airline</strong>: Delta Airlines (DL0126)</li>
+                      <li><strong>Departure</strong>: 6:44 PM EST (JFK)</li>
+                      <li>
+                        <strong>Arrival</strong>: 8:00 AM CET (MAD), Dec 12th
+                      </li>
+                      <li>
+                        <strong>Flight Duration</strong>: 7 hours 16 minutes
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </details>
+              <!-- Itinerary Content with Timeline -->
+              <div class="timeline">
+                <!-- Early Morning Block -->
+                <h3 class="timeline-block">Early Morning</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">2:30 AM - 3:00 AM</div>
+                  <div class="timeline-content">
+                    <p><strong>Wake Up and Final Preparations</strong></p>
+                    <p>
+                      Ensure all luggage is packed and travel documents are
+                      ready.
+                    </p>
+                    <p>
+                      <strong>Tip</strong>: Double-check your passport and
+                      flight details.
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">3:00 AM - 3:45 AM</div>
+                  <div class="timeline-content">
+                    <p>
+                      <strong
+                        >Travel to Portland International Airport (PDX)</strong
+                      >
+                    </p>
+                    <p>
+                      <strong>Travel Time</strong>: Approximately 45 minutes by
+                      car.
+                    </p>
+                  </div>
+                </div>
+                <!-- Morning Block -->
+                <h3 class="timeline-block">Morning</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">4:00 AM - 6:00 AM</div>
+                  <div class="timeline-content">
+                    <p><strong>Airport Check-in and Security</strong></p>
+                    <p>
+                      Check in luggage and proceed through security screening.
+                    </p>
+                    <p>
+                      <strong>Tip</strong>: Arrive early to account for
+                      potential delays.
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">6:00 AM - 7:00 AM</div>
+                  <div class="timeline-content">
+                    <p><strong>Relax at Delta Sky Club Lounge</strong></p>
+                    <p>Enjoy complimentary breakfast and amenities.</p>
+                    <p><strong>Location</strong>: Near Gate D5.</p>
+                    <p>
+                      <strong>Fun Fact</strong>: Access provided courtesy of
+                      Brian's AMERICAN EXPRESS PLATINUM CARD.
+                    </p>
+                  </div>
+                </div>
+                <!-- Flight Departure -->
+                <div class="timeline-item">
+                  <div class="timeline-time">7:05 AM</div>
+                  <div class="timeline-content">
+                    <p>
+                      <strong>Flight Departs from Portland to New York</strong>
+                    </p>
+                    <p><strong>Flight Number</strong>: DL1234</p>
+                  </div>
+                </div>
+                <!-- Sunrise Divider -->
+                <h3 class="timeline-block timeline-sunrise">
+                  <img
+                    src="images/sunrise-icon.png"
+                    alt="Sunrise"
+                    class="timeline-block-icon"
+                  />
+                  Sunrise @7:41 AM PST
+                </h3>
+                <!-- Afternoon Block -->
+                <h3 class="timeline-block">Afternoon</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">3:28 PM EST</div>
+                  <div class="timeline-content">
+                    <p><strong>Arrive at JFK Airport, New York</strong></p>
+                    <p>
+                      Proceed to the next gate for the international flight.
+                    </p>
+                    <p>
+                      <strong>Layover Duration</strong>: Approximately 1 hour 32
+                      minutes.
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">3:30 PM - 4:45 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Relax at Delta Sky Club Lounge</strong></p>
+                    <p>Enjoy refreshments and relax before the next flight.</p>
+                    <p><strong>Location</strong>: Terminal 4, near Gate B31.</p>
+                  </div>
+                </div>
+                <!-- Sunset Divider -->
+                <h3 class="timeline-block timeline-sunset">
+                  <img
+                    src="images/sunset-icon.png"
+                    alt="Sunset"
+                    class="timeline-block-icon"
+                  />
+                  Sunset @4:27 PM EST
+                </h3>
+                <!-- Evening Block -->
+                <h3 class="timeline-block">Evening</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">5:00 PM EST</div>
+                  <div class="timeline-content">
+                    <p>
+                      <strong>Flight Departs from New York to Madrid</strong>
+                    </p>
+                    <p><strong>Flight Number</strong>: DL4321</p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">Overnight</div>
+                  <div class="timeline-content">
+                    <p><strong>In-Flight Overnight Journey</strong></p>
+                    <p>Rest and prepare for arrival in Madrid.</p>
+                    <p>
+                      <strong>Tip</strong>: Adjust your watch to Madrid time
+                      (CET) to minimize jet lag.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </label>
+        <!-- Flip Card for Day 1 -->
+        <label class="flip-card" id="dec12">
+          <input type="checkbox" />
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img
+                src="images/day-1.jpg"
+                alt="Madrid Journey Begins"
+                class="card-image"
+              />
+              <div class="inner">
+                <h2 class="title">🇪🇸 ¡Hola Madrid! 🇪🇸</h2>
+                <time class="subtitle">Thu, Dec 12th</time>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <h2>First Steps in España 🇪🇸</h2>
+              <!-- Madrid Hotel Section -->
+              <details class="hotel-info">
+                <summary>Hotel Information</summary>
+                <ul>
+                  <li><strong>Hotel Name:</strong> Apartamentos San Andres</li>
+                  <li>
+                    <strong>Address:</strong> 4 Calle de los Mancebos, Madrid
+                    City Center, 28005 Madrid, Spain
+                  </li>
+                  <li>
+                    <strong>Check-in:</strong> Thursday, Dec 12, 2024, 3:00 PM -
+                    10:00 PM
+                  </li>
+                  <li>
+                    <strong>Check-out:</strong> Sunday, Dec 15, 2024, 12:00 AM -
+                    11:00 AM
+                  </li>
+                  <li>
+                    <strong>Special Request:</strong> Approximate time of
+                    arrival between 8:00 AM and 9:00 AM
+                  </li>
+                  <li>
+                    <strong>Check-in Instructions:</strong> Someone will meet
+                    you there.
+                  </li>
+                </ul>
+              </details>
+
+              <!-- Itinerary Content with Timeline -->
+              <div class="timeline">
+                <!-- Sunrise Divider -->
+                <h3 class="timeline-block timeline-sunrise">
+                  <img
+                    src="images/sunrise-icon.png"
+                    alt="Sunrise"
+                    class="timeline-block-icon"
+                  />
+                  Sunrise @8:28 AM
+                </h3>
+                <!-- Morning Block -->
+                <h3 class="timeline-block">Morning</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">10:30 AM - 11:30 AM</div>
+                  <div class="timeline-content">
+                    <p>
+                      <strong>Breakfast at Carmencita Brunch Lavapiés</strong>
+                    </p>
+                    <p>
+                      A popular brunch spot offering a variety of options in a
+                      cozy atmosphere.
+                    </p>
+                    <p>
+                      <strong>Travel Time</strong>: Hotel to restaurant — ~15
+                      minutes walk.
+                    </p>
+                  </div>
+                </div>
+                <!-- Afternoon Block -->
+                <h3 class="timeline-block">Afternoon</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">12:00 PM - 2:00 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Visit the Royal Palace of Madrid</strong></p>
+                    <p>
+                      Explore the opulent rooms and gardens of the official
+                      residence of the Spanish royal family.
+                    </p>
+                    <p>
+                      <strong>Location</strong>: Calle de Bailén, 28071 Madrid.
+                    </p>
+                    <p>
+                      <strong>Tip</strong>: Book tickets in advance to avoid
+                      long lines.
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">2:30 PM - 3:30 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Lunch at Sobrino de Botín</strong></p>
+                    <p>
+                      Dine at one of the oldest restaurants in the world, known
+                      for its traditional roast suckling pig.
+                    </p>
+                    <p><strong>Location</strong>: C/ Cuchilleros, 17.</p>
+                  </div>
+                </div>
+                <!-- Sunset Divider -->
+                <h3 class="timeline-block timeline-sunset">
+                  <img
+                    src="images/sunset-icon.png"
+                    alt="Sunset"
+                    class="timeline-block-icon"
+                  />
+                  Sunset @5:48 PM
+                </h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">4:00 PM - 6:00 PM</div>
+                  <div class="timeline-content">
+                    <p>
+                      <strong>Explore Plaza Mayor and Puerta del Sol</strong>
+                    </p>
+                    <p>
+                      Walk through these iconic squares, enjoy people-watching,
+                      and perhaps get a snack or coffee.
+                    </p>
+                    <p><strong>Location</strong>: Central Madrid.</p>
+                  </div>
+                </div>
+                <!-- Evening Block -->
+                <h3 class="timeline-block">Evening</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">6:30 PM - 7:30 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Dinner at Restaurant Álvarez Gato</strong></p>
+                    <p>
+                      Enjoy traditional Spanish cuisine in a historic setting
+                      connected to literary history.
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">8:00 PM - 10:00 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Stroll through Gran Vía</strong></p>
+                    <p>
+                      Explore Madrid's most famous street, known for its vibrant
+                      atmosphere and iconic architecture.
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">10:30 PM</div>
+                  <div class="timeline-content">
+                    <p>Return to Hotel and rest for the night.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </label>
+        <!-- Flip Card for Day 2 -->
+        <label class="flip-card" id="dec13">
+          <input type="checkbox" />
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img
+                src="images/day-2.jpg"
+                alt="Exploring Madrid's Museums"
+                class="card-image"
+              />
+              <div class="inner">
+                <h2 class="title">Art & History Rejoice!</h2>
+                <time class="subtitle">Fri, Dec 13th</time>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <h2>Madrid's Golden Brushstrokes 🎨</h2>
+              <!-- Itinerary Content with Timeline -->
+              <div class="timeline">
+                <!-- Sunrise Divider -->
+                <h3 class="timeline-block timeline-sunrise">
+                  <img
+                    src="images/sunrise-icon.png"
+                    alt="Sunrise"
+                    class="timeline-block-icon"
+                  />
+                  Sunrise @8:29 AM
+                </h3>
+                <!-- Morning Block -->
+                <h3 class="timeline-block">Morning</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">8:00 AM - 9:00 AM</div>
+                  <div class="timeline-content">
+                    <p><strong>Breakfast at El Patio Vertical</strong></p>
+                    <p>
+                      A unique and modern dining concept offering innovative
+                      cuisine in a stunning environment.
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">9:30 AM - 11:00 AM</div>
+                  <div class="timeline-content">
+                    <p><strong>Visit the Prado Museum</strong></p>
+                    <p>
+                      See masterpieces by Goya, Velázquez, and other renowned
+                      artists.
+                    </p>
+                    <p>
+                      <strong>Location</strong>: Calle de Felipe IV, 28014
+                      Madrid.
+                    </p>
+                  </div>
+                </div>
+                <!-- Afternoon Block -->
+                <h3 class="timeline-block">Afternoon</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">11:15 AM - 12:15 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Explore the Surrounding Area</strong></p>
+                    <p>
+                      Stroll through nearby streets, visit shops, or relax at a
+                      café.
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">12:30 PM - 1:30 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Lunch at El Club Allard</strong></p>
+                    <p>
+                      Enjoy innovative Spanish cuisine in a stylish setting.
+                    </p>
+                    <p><strong>Location</strong>: C/ Vallehermoso, 79.</p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">2:00 PM - 4:00 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Visit the Reina Sofía Museum</strong></p>
+                    <p>
+                      Explore modern and contemporary art, including works by
+                      Picasso and Dalí.
+                    </p>
+                    <p>
+                      <strong>Note</strong>: Part of Madrid's "Golden Triangle
+                      of Art."
+                    </p>
+                  </div>
+                </div>
+                <!-- Sunset Divider -->
+                <h3 class="timeline-block timeline-sunset">
+                  <img
+                    src="images/sunset-icon.png"
+                    alt="Sunset"
+                    class="timeline-block-icon"
+                  />
+                  Sunset @5:48 PM
+                </h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">4:30 PM - 6:00 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Walk through Parque del Retiro</strong></p>
+                    <p>
+                      Relax in this beautiful park and visit the Crystal Palace.
+                    </p>
+                    <p><strong>Location</strong>: Central Madrid.</p>
+                  </div>
+                </div>
+                <!-- Evening Preparation -->
+                <div class="timeline-item">
+                  <div class="timeline-time">6:15 PM - 6:45 PM</div>
+                  <div class="timeline-content">
+                    <p>
+                      Return to Hotel and prepare outfits for dinner and
+                      nightlife.
+                    </p>
+                  </div>
+                </div>
+                <!-- Evening Block -->
+                <h3 class="timeline-block">Evening</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">7:00 PM - 8:00 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Dinner at Taberna El Sur</strong></p>
+                    <p>
+                      A popular spot known for delicious tapas and traditional
+                      Spanish dishes.
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">8:15 PM - 10:00 PM</div>
+                  <div class="timeline-content">
+                    <p>
+                      <strong>Flamenco Show at Teatro Flamenco Madrid</strong>
+                    </p>
+                    <p>
+                      Experience authentic flamenco performances in an intimate
+                      setting.
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">10:15 PM - 12:00 AM</div>
+                  <div class="timeline-content">
+                    <p><strong>Night Club at Planet Club</strong></p>
+                    <p>
+                      Dance the night away at one of Madrid's popular
+                      nightclubs.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </label>
+        <!-- Flip Card for Day 3 -->
+        <label class="flip-card" id="dec14">
+          <input type="checkbox" />
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img
+                src="images/day-3.jpg"
+                alt="Barcelona Day Trip"
+                class="card-image"
+              />
+              <div class="inner">
+                <h2 class="title">Barcelona Bound! 🚂</h2>
+                <time class="subtitle">Sat, Dec 14th</time>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <h2>Gaudí’s Playground 🏰</h2>
+              <!-- Train Information (Collapsible Section) -->
+              <details class="train-info">
+                <summary>Train Information</summary>
+                <ul>
+                  <li>
+                    <strong>Outbound Journey</strong>:
+                    <ul>
+                      <li><strong>Departure Time</strong>: 6:15 AM</li>
+                      <li>
+                        <strong>Departure Location</strong>: Pta. Atocha -
+                        Almudena Grandes Station, Madrid
+                      </li>
+                      <li>
+                        <strong>Train Service</strong>: Renfe AVLO Express Train
+                        #06301
+                      </li>
+                      <li>
+                        <strong>Journey Duration</strong>: 2 hours 30 minutes
+                      </li>
+                      <li><strong>Arrival Time</strong>: 8:45 AM</li>
+                      <li>
+                        <strong>Arrival Location</strong>: Sants Station,
+                        Barcelona
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <strong>Return Journey</strong>:
+                    <ul>
+                      <li><strong>Departure Time</strong>: 9:00 PM</li>
+                      <li>
+                        <strong>Departure Location</strong>: Sants Station,
+                        Barcelona
+                      </li>
+                      <li>
+                        <strong>Train Service</strong>: Renfe AVE Bullet Train
+                        #03212
+                      </li>
+                      <li>
+                        <strong>Journey Duration</strong>: 2 hours 45 minutes
+                      </li>
+                      <li><strong>Arrival Time</strong>: 11:45 PM</li>
+                      <li>
+                        <strong>Arrival Location</strong>: Pta. Atocha -
+                        Almudena Grandes Station, Madrid
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </details>
+              <!-- Updated Itinerary Content with Timeline -->
+              <div class="timeline">
+                <!-- Early Morning Block -->
+                <h3 class="timeline-block">Early Morning</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">5:00 AM - 5:45 AM</div>
+                  <div class="timeline-content">
+                    <p>Get ready for train travel.</p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">5:45 AM - 6:10 AM</div>
+                  <div class="timeline-content">
+                    <p>Walk to Pta. Atocha - Almudena Grandes Station.</p>
+                  </div>
+                </div>
+                <!-- Sunrise Divider -->
+                <h3 class="timeline-block timeline-sunrise">
+                  <img
+                    src="images/sunrise-icon.png"
+                    alt="Sunrise"
+                    class="timeline-block-icon"
+                  />
+                  Sunrise @8:09 AM
+                </h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">6:15 AM - 8:45 AM</div>
+                  <div class="timeline-content">
+                    <p>
+                      <strong>Travel to Barcelona by High-Speed Rail</strong>
+                    </p>
+                    <p>
+                      <strong>Train Service</strong>: Renfe AVLO Express Train
+                      #06301
+                    </p>
+                  </div>
+                </div>
+                <!-- Morning Block -->
+                <h3 class="timeline-block">Morning</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">9:00 AM - 9:45 AM</div>
+                  <div class="timeline-content">
+                    <p><strong>Breakfast at El Nacional</strong></p>
+                    <p>
+                      A stylish food hall offering traditional Spanish breakfast
+                      options.
+                    </p>
+                    <p>
+                      <strong>Travel Time</strong>: Short taxi ride or 15-minute
+                      walk from Sants Station.
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">10:00 AM - 10:15 AM</div>
+                  <div class="timeline-content">
+                    <p>Walk by <strong>La Pedrera - Casa Milà</strong>.</p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">10:30 AM - 12:00 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Visit La Sagrada Familia</strong></p>
+                    <p>
+                      <strong>Tip</strong>: Book tickets in advance to avoid
+                      long lines.
+                    </p>
+                  </div>
+                </div>
+                <!-- Afternoon Block -->
+                <h3 class="timeline-block">Afternoon</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">12:15 PM - 1:30 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Explore Passeig de Gràcia</strong></p>
+                    <p>
+                      Famous avenue known for high-end shops and iconic
+                      buildings like Casa Batlló.
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">1:45 PM - 3:00 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Lunch at Cervecería Catalana</strong></p>
+                    <p>
+                      Enjoy a variety of delicious tapas in a lively atmosphere.
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">3:15 PM - 4:45 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Visit Park Güell</strong></p>
+                    <p>
+                      Gaudí’s park offering stunning views and incredible
+                      mosaics.
+                    </p>
+                  </div>
+                </div>
+                <!-- Sunset Divider -->
+                <h3 class="timeline-block timeline-sunset">
+                  <img
+                    src="images/sunset-icon.png"
+                    alt="Sunset"
+                    class="timeline-block-icon"
+                  />
+                  Sunset @5:44 PM
+                </h3>
+                <!-- Evening Block -->
+                <h3 class="timeline-block">Evening</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">5:00 PM - 6:30 PM</div>
+                  <div class="timeline-content">
+                    <p>
+                      <strong>Explore the Gothic Quarter (Barri Gòtic)</strong>
+                    </p>
+                    <p>
+                      Wander through historic streets, discovering hidden plazas
+                      and cafes.
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">6:45 PM - 7:45 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Early Dinner at Els 4 Gats</strong></p>
+                    <p>
+                      A historic cafe that was a meeting place for artists like
+                      Picasso.
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">8:15 PM - 8:45 PM</div>
+                  <div class="timeline-content">
+                    <p>Return to Barcelona Sants Station.</p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">9:00 PM - 11:45 PM</div>
+                  <div class="timeline-content">
+                    <p>
+                      <strong>Travel back to Madrid by High-Speed Rail</strong>
+                    </p>
+                    <p>
+                      <strong>Train Service</strong>: Renfe AVE Bullet Train
+                      #03212
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </label>
+        <!-- Flip Card for Day 4 -->
+        <label class="flip-card" id="dec15">
+          <input type="checkbox" />
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img
+                src="images/day-4.jpg"
+                alt="Travel to Venice"
+                class="card-image"
+              />
+              <div class="inner">
+                <h2 class="title">🇮🇹 Ciao, Venice! 🇮🇹</h2>
+                <time class="subtitle">Sun, Dec 15th</time>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <h2>Drifting Through Venice 🌊</h2>
+              <!-- Flight Information (Collapsible Section) -->
+              <details class="flight-info">
+                <summary>Flight Information</summary>
+                <ul>
+                  <li>
+                    <strong>Flight 2</strong>: Adolfo Suárez Madrid-Barajas
+                    Airport (MAD) ✈ Venice Marco Polo Airport (VCE)
+                    <ul>
+                      <li>
+                        <strong>Airline</strong>: Iberia Airlines (IB3240)
+                      </li>
+                      <li><strong>Departure</strong>: 6:55 AM CET (MAD)</li>
+                      <li><strong>Arrival</strong>: 9:25 AM CET (VCE)</li>
+                      <li>
+                        <strong>Flight Duration</strong>: 2 hours 30 minutes
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </details>
+              <!-- Venice Hotel Section -->
+              <details class="hotel-info">
+                <summary>Hotel Information</summary>
+                <ul>
+                  <li>
+                    <strong>Hotel Name:</strong> Hotel Carlton On The Grand
+                    Canal
+                  </li>
+                  <li>
+                    <strong>Address:</strong> Santa Croce 578, Santa Croce,
+                    30135 Venice, Italy
+                  </li>
+                  <li>
+                    <strong>Check-in:</strong> Sunday, Dec 15, 2024, from 2:00
+                    PM
+                  </li>
+                  <li>
+                    <strong>Check-out:</strong> Wednesday, Dec 18, 2024, until
+                    11:00 AM
+                  </li>
+                  <li>
+                    <strong>Special Request:</strong> Approximate time of
+                    arrival between 9:00 AM and 10:00 AM
+                  </li>
+                </ul>
+              </details>
+
+              <!-- Itinerary Content with Timeline -->
+              <div class="timeline">
+                <!-- Early Morning Block -->
+                <h3 class="timeline-block">Early Morning</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">4:30 AM - 5:00 AM</div>
+                  <div class="timeline-content">
+                    <p>Check out of Hotel and depart for the airport.</p>
+                    <p><strong>Travel Time</strong>: ~25 minutes by taxi.</p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">5:00 AM - 6:15 AM</div>
+                  <div class="timeline-content">
+                    <p>
+                      Arrive at Madrid Airport (MAD), check-in, and pass through
+                      security.
+                    </p>
+                  </div>
+                </div>
+                <!-- Flight Departure -->
+                <div class="timeline-item">
+                  <div class="timeline-time">6:55 AM</div>
+                  <div class="timeline-content">
+                    <p>
+                      <strong>Flight departs from Madrid to Venice.</strong>
+                    </p>
+                  </div>
+                </div>
+                <!-- Sunrise Divider -->
+                <h3 class="timeline-block timeline-sunrise">
+                  <img
+                    src="images/sunrise-icon.png"
+                    alt="Sunrise"
+                    class="timeline-block-icon"
+                  />
+                  Sunrise @7:43 AM
+                </h3>
+                <!-- Morning Block -->
+                <h3 class="timeline-block">Morning</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">9:25 AM</div>
+                  <div class="timeline-content">
+                    <p>Arrive at Venice Marco Polo Airport (VCE).</p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">9:45 AM - 10:30 AM</div>
+                  <div class="timeline-content">
+                    <p>Travel to accommodation via water taxi.</p>
+                    <p><strong>Travel Time</strong>: ~45 minutes.</p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">11:00 AM - 12:00 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Check-in at Accommodation</strong></p>
+                  </div>
+                </div>
+                <!-- Afternoon Block -->
+                <h3 class="timeline-block">Afternoon</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">12:15 PM - 1:15 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Lunch at Ristorante Al Graspo de Ua</strong></p>
+                    <p>
+                      <strong>Travel Time</strong>: ~10 minutes walk from hotel.
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">1:30 PM - 2:30 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Rialto Bridge and Market</strong></p>
+                    <p>Explore the historic bridge and nearby markets.</p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">2:45 PM - 3:45 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>St. Mark's Basilica</strong></p>
+                    <p>
+                      <strong>Travel Time</strong>: 15-minute walk from Rialto
+                      Bridge.
+                    </p>
+                    <p>
+                      <strong>Tip</strong>: Visit the terrace for a great view
+                      of St. Mark's Square.
+                    </p>
+                  </div>
+                </div>
+                <!-- Sunset Divider -->
+                <h3 class="timeline-block timeline-sunset">
+                  <img
+                    src="images/sunset-icon.png"
+                    alt="Sunset"
+                    class="timeline-block-icon"
+                  />
+                  Sunset @4:28 PM
+                </h3>
+                <!-- Evening Block -->
+                <h3 class="timeline-block">Evening</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">4:00 PM - 5:30 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Doge's Palace</strong></p>
+                    <p>Explore the palace and its historic rooms.</p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">5:45 PM - 6:15 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Bridge of Sighs</strong></p>
+                    <p>Walk across the iconic bridge.</p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">6:30 PM onwards</div>
+                  <div class="timeline-content">
+                    <p><strong>Dinner at Osteria alle Testiere</strong></p>
+                    <p>
+                      <strong>Travel Time</strong>: 10-minute walk from Bridge
+                      of Sighs.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </label>
+        <!-- Flip Card for Day 5 -->
+        <label class="flip-card" id="dec16">
+          <input type="checkbox" />
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img
+                src="images/day-5.jpg"
+                alt="Murano and Burano Islands"
+                class="card-image"
+              />
+              <div class="inner">
+                <h2 class="title">Color Splash & Glass Art</h2>
+                <time class="subtitle">Mon, Dec 16th</time>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <h2>Island Escapes 🌈</h2>
+              <!-- Itinerary Content with Timeline -->
+              <div class="timeline">
+                <!-- Sunrise Divider -->
+                <h3 class="timeline-block timeline-sunrise">
+                  <img
+                    src="images/sunrise-icon.png"
+                    alt="Sunrise"
+                    class="timeline-block-icon"
+                  />
+                  Sunrise @7:44 AM
+                </h3>
+                <!-- Morning Block -->
+                <h3 class="timeline-block">Morning</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">8:30 AM - 9:00 AM</div>
+                  <div class="timeline-content">
+                    <p>Breakfast at nearby café.</p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">9:15 AM - 9:45 AM</div>
+                  <div class="timeline-content">
+                    <p><strong>Travel to Murano Island</strong></p>
+                    <p>
+                      <strong>Travel Time</strong>: ~30 minutes by vaporetto
+                      (Line 4.1 or 4.2).
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">10:00 AM - 11:30 AM</div>
+                  <div class="timeline-content">
+                    <p><strong>Murano Glass Factory Tour</strong></p>
+                    <p>Witness glass-blowing demonstrations.</p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">11:45 AM - 12:15 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Travel to Burano Island</strong></p>
+                    <p>
+                      <strong>Travel Time</strong>: ~30 minutes by vaporetto
+                      (Line 12).
+                    </p>
+                  </div>
+                </div>
+                <!-- Afternoon Block -->
+                <h3 class="timeline-block">Afternoon</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">12:30 PM - 1:30 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Lunch at Trattoria da Primo e Paolo</strong></p>
+                    <p>Enjoy seafood specialties.</p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">1:45 PM - 3:30 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Explore Burano's Colorful Houses</strong></p>
+                    <p>Walk around and take photos of the vibrant streets.</p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">3:45 PM - 4:15 PM</div>
+                  <div class="timeline-content">
+                    <p>
+                      <strong>Visit Lace Museum (Museo del Merletto)</strong>
+                    </p>
+                    <p>Learn about Burano's lace-making history.</p>
+                  </div>
+                </div>
+                <!-- Sunset Divider -->
+                <h3 class="timeline-block timeline-sunset">
+                  <img
+                    src="images/sunset-icon.png"
+                    alt="Sunset"
+                    class="timeline-block-icon"
+                  />
+                  Sunset @4:28 PM
+                </h3>
+                <!-- Evening Block -->
+                <h3 class="timeline-block">Evening</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">4:30 PM - 5:30 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Return to Venice</strong></p>
+                    <p>
+                      <strong>Travel Time</strong>: ~45 minutes by vaporetto.
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">6:00 PM onwards</div>
+                  <div class="timeline-content">
+                    <p><strong>Dinner at Ristorante Quadri</strong></p>
+                    <p>Fine dining with a view of St. Mark's Square.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </label>
+        <!-- Flip Card for Day 6 -->
+        <label class="flip-card" id="dec17">
+          <input type="checkbox" />
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img
+                src="images/day-6.jpg"
+                alt="Venice Exploration"
+                class="card-image"
+              />
+              <div class="inner">
+                <h2 class="title">Gondolas & Galleries</h2>
+                <time class="subtitle">Tue, Dec 17th</time>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <h2>A Venetian Dream 🛶</h2>
+              <!-- Itinerary Content with Timeline -->
+              <div class="timeline">
+                <!-- Sunrise Divider -->
+                <h3 class="timeline-block timeline-sunrise">
+                  <img
+                    src="images/sunrise-icon.png"
+                    alt="Sunrise"
+                    class="timeline-block-icon"
+                  />
+                  Sunrise @7:45 AM
+                </h3>
+                <!-- Morning Block -->
+                <h3 class="timeline-block">Morning</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">9:00 AM - 10:30 AM</div>
+                  <div class="timeline-content">
+                    <p><strong>Palazzo Grimani Museum</strong></p>
+                    <p>
+                      <strong>Travel Time</strong>: ~15 minutes walk from hotel.
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">10:45 AM - 11:30 AM</div>
+                  <div class="timeline-content">
+                    <p><strong>Libreria Acqua Alta</strong></p>
+                    <p>
+                      A unique bookstore with books stacked in bathtubs and
+                      gondolas.
+                    </p>
+                  </div>
+                </div>
+                <!-- Afternoon Block -->
+                <h3 class="timeline-block">Afternoon</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">12:00 PM - 1:00 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Lunch at Osteria Alla Staffa</strong></p>
+                    <p>
+                      <strong>Travel Time</strong>: ~10 minutes walk from
+                      bookstore.
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">1:30 PM - 3:00 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Peggy Guggenheim Collection</strong></p>
+                    <p>
+                      <strong>Travel Time</strong>: ~25 minutes by vaporetto or
+                      30 minutes walk.
+                    </p>
+                    <p>Modern art museum located on the Grand Canal.</p>
+                  </div>
+                </div>
+                <!-- Sunset Divider -->
+                <h3 class="timeline-block timeline-sunset">
+                  <img
+                    src="images/sunset-icon.png"
+                    alt="Sunset"
+                    class="timeline-block-icon"
+                  />
+                  Sunset @4:28 PM
+                </h3>
+                <!-- Evening Block -->
+                <h3 class="timeline-block">Evening</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">3:30 PM - 5:00 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Gondola Ride through the Canals</strong></p>
+                    <p>Experience Venice from the water.</p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">5:30 PM onwards</div>
+                  <div class="timeline-content">
+                    <p><strong>Dinner at Ristorante Da Ivo</strong></p>
+                    <p>
+                      <strong>Travel Time</strong>: ~10 minutes walk from
+                      gondola station.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </label>
+        <!-- Flip Card for Day 7 -->
+        <label class="flip-card" id="dec18">
+          <input type="checkbox" />
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img
+                src="images/day-7.jpg"
+                alt="Venice to Rome"
+                class="card-image"
+              />
+              <div class="inner">
+                <h2 class="title">Road to the Eternal City</h2>
+                <time class="subtitle">Wed, Dec 18th</time>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <h2>Rome Welcomes You 🏛️</h2>
+              <!-- Flight Information (Collapsible Section) -->
+              <details class="flight-info">
+                <summary>Flight Information</summary>
+                <ul>
+                  <li>
+                    <strong>Flight 3</strong>: Venice Marco Polo Airport (VCE) ✈
+                    Leonardo da Vinci–Fiumicino Airport (FCO), Rome
+                    <ul>
+                      <li><strong>Airline</strong>: ITA Airways (AZ1460)</li>
+                      <li><strong>Departure</strong>: 6:15 AM CET (VCE)</li>
+                      <li><strong>Arrival</strong>: 7:25 AM CET (FCO)</li>
+                      <li>
+                        <strong>Flight Duration</strong>: 1 hour 10 minutes
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </details>
+              <!-- Rome Hotel Section -->
+              <details class="hotel-info">
+                <summary>Hotel Information</summary>
+                <ul>
+                  <li>
+                    <strong>Hotel Name:</strong> Residenze Serventi Longhi
+                  </li>
+                  <li>
+                    <strong>Address:</strong> 2 Largo Brindisi, San Giovanni,
+                    00182 Rome, Italy
+                  </li>
+                  <li>
+                    <strong>Check-in:</strong> Wednesday, Dec 18, 2024, 2:30 PM
+                    - 11:00 PM
+                  </li>
+                  <li>
+                    <strong>Check-out:</strong> Saturday, Dec 21, 2024, 5:00 AM
+                    - 10:00 AM
+                  </li>
+                </ul>
+              </details>
+              <!-- Itinerary Content with Timeline -->
+              <div class="timeline">
+                <!-- Sunrise Divider -->
+                <h3 class="timeline-block timeline-sunrise">
+                  <img
+                    src="images/sunrise-icon.png"
+                    alt="Sunrise"
+                    class="timeline-block-icon"
+                  />
+                  Sunrise @7:32 AM
+                </h3>
+                <!-- Early Morning Block -->
+                <h3 class="timeline-block">Early Morning</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">4:00 AM - 4:30 AM</div>
+                  <div class="timeline-content">
+                    <p>
+                      Check out of accommodation and head to Venice Marco Polo
+                      Airport.
+                    </p>
+                    <p>
+                      <strong>Travel Time</strong>: ~30 minutes by water taxi.
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">4:30 AM - 5:45 AM</div>
+                  <div class="timeline-content">
+                    <p>
+                      Arrive at airport, check-in, and pass through security.
+                    </p>
+                  </div>
+                </div>
+                <!-- Flight Departure -->
+                <div class="timeline-item">
+                  <div class="timeline-time">6:15 AM</div>
+                  <div class="timeline-content">
+                    <p><strong>Flight departs from Venice to Rome.</strong></p>
+                  </div>
+                </div>
+                <!-- Morning Block -->
+                <h3 class="timeline-block">Morning</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">7:25 AM</div>
+                  <div class="timeline-content">
+                    <p>Arrive at Rome Fiumicino Airport (FCO).</p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">7:45 AM - 8:15 AM</div>
+                  <div class="timeline-content">
+                    <p>Travel to accommodation via Leonardo Express train.</p>
+                    <p>
+                      <strong>Travel Time</strong>: ~30 minutes to Roma Termini
+                      Station.
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">8:30 AM - 9:30 AM</div>
+                  <div class="timeline-content">
+                    <p><strong>Check-in at Accommodation</strong></p>
+                  </div>
+                </div>
+                <!-- Late Morning Block -->
+                <div class="timeline-item">
+                  <div class="timeline-time">10:00 AM - 12:00 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Colosseum and Roman Forum</strong></p>
+                    <p>
+                      <strong>Travel Time</strong>: ~15 minutes by metro from
+                      hotel.
+                    </p>
+                    <p>
+                      <strong>Tip</strong>: Pre-book tickets to skip the line.
+                    </p>
+                  </div>
+                </div>
+                <!-- Afternoon Block -->
+                <h3 class="timeline-block">Afternoon</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">12:15 PM - 1:15 PM</div>
+                  <div class="timeline-content">
+                    <p>
+                      <strong>Lunch at La Taverna dei Fori Imperiali</strong>
+                    </p>
+                    <p>
+                      <strong>Travel Time</strong>: 5-minute walk from
+                      Colosseum.
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">1:30 PM - 3:00 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Palatine Hill</strong></p>
+                    <p>
+                      Explore ancient ruins and enjoy panoramic views of Rome.
+                    </p>
+                  </div>
+                </div>
+                <!-- Sunset Divider -->
+                <h3 class="timeline-block timeline-sunset">
+                  <img
+                    src="images/sunset-icon.png"
+                    alt="Sunset"
+                    class="timeline-block-icon"
+                  />
+                  Sunset @4:40 PM
+                </h3>
+                <!-- Evening Block -->
+                <h3 class="timeline-block">Evening</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">3:30 PM - 4:30 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Trevi Fountain</strong></p>
+                    <p>
+                      <strong>Travel Time</strong>: ~15 minutes by metro or
+                      taxi.
+                    </p>
+                    <p>Don't forget to toss a coin for good luck!</p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">5:00 PM - 6:00 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Spanish Steps</strong></p>
+                    <p>Climb the steps and enjoy the atmosphere.</p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">6:30 PM onwards</div>
+                  <div class="timeline-content">
+                    <p><strong>Dinner at Ristorante Alla Rampa</strong></p>
+                    <p>Located near the Spanish Steps.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </label>
+        <!-- Flip Card for Day 8 -->
+        <label class="flip-card" id="dec19">
+          <input type="checkbox" />
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img
+                src="images/day-8.jpg"
+                alt="Vatican Museums"
+                class="card-image"
+              />
+              <div class="inner">
+                <h2 class="title">The Heart of Christianity</h2>
+                <time class="subtitle">Thu, Dec 19th</time>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <h2>Treasures of the Vatican ✝️</h2>
+              <!-- Itinerary Content with Timeline -->
+              <div class="timeline">
+                <!-- Sunrise Divider -->
+                <h3 class="timeline-block timeline-sunrise">
+                  <img
+                    src="images/sunrise-icon.png"
+                    alt="Sunrise"
+                    class="timeline-block-icon"
+                  />
+                  Sunrise @7:33 AM
+                </h3>
+                <!-- Morning Block -->
+                <h3 class="timeline-block">Morning</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">8:00 AM - 9:00 AM</div>
+                  <div class="timeline-content">
+                    <p><strong>Breakfast at Roscioli Caffè</strong></p>
+                    <p>
+                      <strong>Travel Time</strong>: ~15 minutes walk from hotel.
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">9:30 AM - 12:00 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Vatican Museums &amp; Sistine Chapel</strong></p>
+                    <p><strong>Travel Time</strong>: ~30 minutes by metro.</p>
+                    <p>
+                      <strong>Tip</strong>: Pre-book tickets to skip the line.
+                    </p>
+                  </div>
+                </div>
+                <!-- Afternoon Block -->
+                <h3 class="timeline-block">Afternoon</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">12:15 PM - 1:30 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>St. Peter's Basilica</strong></p>
+                    <p>Climb to the dome for panoramic views.</p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">1:45 PM - 2:45 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Lunch at Ristorante La Vittoria</strong></p>
+                    <p>Located near Vatican City.</p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">3:00 PM - 4:00 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Castel Sant'Angelo</strong></p>
+                    <p>
+                      <strong>Travel Time</strong>: 10-minute walk from St.
+                      Peter's Square.
+                    </p>
+                  </div>
+                </div>
+                <!-- Sunset Divider -->
+                <h3 class="timeline-block timeline-sunset">
+                  <img
+                    src="images/sunset-icon.png"
+                    alt="Sunset"
+                    class="timeline-block-icon"
+                  />
+                  Sunset @4:41 PM
+                </h3>
+                <!-- Evening Block -->
+                <h3 class="timeline-block">Evening</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">4:30 PM - 5:30 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Piazza Navona</strong></p>
+                    <p>
+                      <strong>Travel Time</strong>: 20-minute walk or 10-minute
+                      taxi.
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">6:00 PM onwards</div>
+                  <div class="timeline-content">
+                    <p><strong>Dinner at Ristorante Santa Lucia</strong></p>
+                    <p>Enjoy Italian cuisine in a historic setting.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </label>
+        <!-- Flip Card for Day 9 -->
+        <label class="flip-card" id="dec20">
+          <input type="checkbox" />
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="images/day-9.jpg" alt="Pantheon" class="card-image" />
+              <div class="inner">
+                <h2 class="title">Historic Marvels</h2>
+                <time class="subtitle">Fri, Dec 20th</time>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <h2>Ancient Vibes & Modern Energy 🌅</h2>
+              <!-- Itinerary Content with Timeline -->
+              <div class="timeline">
+                <!-- Sunrise Divider -->
+                <h3 class="timeline-block timeline-sunrise">
+                  <img
+                    src="images/sunrise-icon.png"
+                    alt="Sunrise"
+                    class="timeline-block-icon"
+                  />
+                  Sunrise @7:33 AM
+                </h3>
+                <!-- Morning Block -->
+                <h3 class="timeline-block">Morning</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">8:30 AM - 9:30 AM</div>
+                  <div class="timeline-content">
+                    <p><strong>Breakfast at Sant'Eustachio Il Caffè</strong></p>
+                    <p>Famous for its espresso.</p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">9:45 AM - 10:30 AM</div>
+                  <div class="timeline-content">
+                    <p><strong>Pantheon</strong></p>
+                    <p>
+                      <strong>Travel Time</strong>: ~10 minutes walk from café.
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">10:45 AM - 11:30 AM</div>
+                  <div class="timeline-content">
+                    <p><strong>Campo de' Fiori</strong></p>
+                    <p>Explore the open-air market.</p>
+                  </div>
+                </div>
+                <!-- Afternoon Block -->
+                <h3 class="timeline-block">Afternoon</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">12:00 PM - 1:30 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Lunch in Trastevere</strong></p>
+                    <p>
+                      <strong>Travel Time</strong>: ~15 minutes walk across the
+                      Tiber River.
+                    </p>
+                    <p>Enjoy local Roman dishes.</p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">1:45 PM - 3:00 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Explore Trastevere Neighborhood</strong></p>
+                    <p>
+                      Charming streets, artisan shops, and historic churches.
+                    </p>
+                  </div>
+                </div>
+                <!-- Sunset Divider -->
+                <h3 class="timeline-block timeline-sunset">
+                  <img
+                    src="images/sunset-icon.png"
+                    alt="Sunset"
+                    class="timeline-block-icon"
+                  />
+                  Sunset @4:41 PM
+                </h3>
+                <!-- Evening Block -->
+                <h3 class="timeline-block">Evening</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">3:30 PM - 4:30 PM</div>
+                  <div class="timeline-content">
+                    <p>
+                      <strong>Villa Borghese &amp; Borghese Gallery</strong>
+                    </p>
+                    <p>
+                      <strong>Travel Time</strong>: ~30 minutes by bus or taxi.
+                    </p>
+                    <p>
+                      <strong>Tip</strong>: Reservation required for Borghese
+                      Gallery.
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">5:15 PM - 6:00 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Pincio Terrace</strong></p>
+                    <p>Enjoy sunset views over Rome.</p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">6:30 PM onwards</div>
+                  <div class="timeline-content">
+                    <p><strong>Dinner at Antica Pesa</strong></p>
+                    <p>
+                      A historic restaurant offering traditional Roman cuisine.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </label>
+        <!-- Flip Card for Day 10 -->
+        <label class="flip-card" id="dec21">
+          <input type="checkbox" />
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img
+                src="images/day-10.jpg"
+                alt="Rome ✈ Paris"
+                class="card-image"
+              />
+              <div class="inner">
+                <h2 class="title">🇫🇷 Bonjour Paris! 🇫🇷</h2>
+                <time class="subtitle">Sat, Dec 21st</time>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <h2>Chasing Eiffel Dreams 🇫🇷</h2>
+              <!-- Flight Information (Collapsible Section) -->
+              <details class="flight-info">
+                <summary>Flight Information</summary>
+                <ul>
+                  <li>
+                    <strong>Flight 4</strong>: Leonardo da Vinci–Fiumicino
+                    Airport (FCO) ✈ Paris Charles de Gaulle Airport (CDG)
+                    <ul>
+                      <li><strong>Airline</strong>: Air France (AF1305)</li>
+                      <li><strong>Departure</strong>: 6:00 AM CET (FCO)</li>
+                      <li><strong>Arrival</strong>: 8:15 AM CET (CDG)</li>
+                      <li>
+                        <strong>Flight Duration</strong>: 2 hours 15 minutes
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </details>
+              <!-- Itinerary Content with Timeline -->
+              <div class="timeline">
+                <!-- Sunrise Divider -->
+                <h3 class="timeline-block timeline-sunrise">
+                  <img
+                    src="images/sunrise-icon.png"
+                    alt="Sunrise"
+                    class="timeline-block-icon"
+                  />
+                  Sunrise @8:41 AM
+                </h3>
+                <!-- Morning Block -->
+                <h3 class="timeline-block">Morning</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">8:30 AM - 10:00 AM</div>
+                  <div class="timeline-content">
+                    <p><strong>Eiffel Tower</strong></p>
+                    <p>
+                      <strong>Travel Time</strong>: ~20 minutes by metro from
+                      hotel.
+                    </p>
+                    <p>
+                      <strong>Tip</strong>: Book early morning tickets to avoid
+                      crowds.
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">10:15 AM - 11:00 AM</div>
+                  <div class="timeline-content">
+                    <p><strong>Champ de Mars</strong></p>
+                    <p>Relax and take photos.</p>
+                  </div>
+                </div>
+                <!-- Afternoon Block -->
+                <h3 class="timeline-block">Afternoon</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">11:30 AM - 12:30 PM</div>
+                  <div class="timeline-content">
+                    <p>
+                      <strong
+                        >Louvre Museum (Exterior) and Tuileries Garden</strong
+                      >
+                    </p>
+                    <p><strong>Travel Time</strong>: 15-minute metro ride.</p>
+                    <p>
+                      <strong>Note</strong>: Given limited time, consider
+                      viewing the Louvre's exterior and enjoying the gardens.
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">12:45 PM - 1:45 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Lunch near the Louvre</strong></p>
+                  </div>
+                </div>
+                <!-- Sunset Divider -->
+                <h3 class="timeline-block timeline-sunset">
+                  <img
+                    src="images/sunset-icon.png"
+                    alt="Sunset"
+                    class="timeline-block-icon"
+                  />
+                  Sunset @4:56 PM
+                </h3>
+                <!-- Evening Block -->
+                <h3 class="timeline-block">Evening</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">2:00 PM - 3:00 PM</div>
+                  <div class="timeline-content">
+                    <p>
+                      <strong>Notre-Dame Cathedral (Exterior Viewing)</strong>
+                    </p>
+                    <p>
+                      <strong>Travel Time</strong>: ~15 minutes by metro ride.
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">3:15 PM - 4:15 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Sainte-Chapelle</strong></p>
+                    <p>
+                      <strong>Tip</strong>: Admire the stunning stained-glass
+                      windows.
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">4:30 PM - 5:30 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Walk along the Seine River</strong></p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">5:45 PM - 6:00 PM</div>
+                  <div class="timeline-content">
+                    <p><strong>Montmartre and Sacré-Cœur Basilica</strong></p>
+                    <p><strong>Travel Time</strong>: 30-minute metro ride.</p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">6:30 PM onwards</div>
+                  <div class="timeline-content">
+                    <p><strong>Dinner in Montmartre</strong></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </label>
+
+        <!-- Flip Card for Day 11 -->
+        <label class="flip-card" id="dec22">
+          <input type="checkbox" />
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img
+                src="images/day-11.jpg"
+                alt="Disneyland Fun"
+                class="card-image"
+              />
+              <div class="inner">
+                <h2 class="title">Magic Awaits!</h2>
+                <time class="subtitle">Sun, Dec 22nd</time>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <h2>A Day of Disney Delight 🎠</h2>
+              <!-- Itinerary Content with Timeline -->
+              <div class="timeline">
+                <!-- Sunrise Divider -->
+                <h3 class="timeline-block timeline-sunrise">
+                  <img
+                    src="images/sunrise-icon.png"
+                    alt="Sunrise"
+                    class="timeline-block-icon"
+                  />
+                  Sunrise @8:41 AM
+                </h3>
+                <!-- Morning Block -->
+                <h3 class="timeline-block">Morning</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">8:30 AM - 9:30 AM</div>
+                  <div class="timeline-content">
+                    <p><strong>Breakfast near the hotel</strong></p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">9:45 AM - 10:30 AM</div>
+                  <div class="timeline-content">
+                    <p><strong>Travel to Disneyland Paris</strong></p>
+                    <p>
+                      <strong>Travel Time</strong>: ~45 minutes by RER A train.
+                    </p>
+                  </div>
+                </div>
+                <!-- Afternoon Block -->
+                <h3 class="timeline-block">Afternoon</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">11:00 AM - Closing</div>
+                  <div class="timeline-content">
+                    <p><strong>Disneyland Paris</strong></p>
+                    <p>Enjoy rides, shows, and parades.</p>
+                    <p>
+                      <strong>Dinner</strong>: Options available within the
+                      park.
+                    </p>
+                  </div>
+                </div>
+                <!-- Sunset Divider -->
+                <h3 class="timeline-block timeline-sunset">
+                  <img
+                    src="images/sunset-icon.png"
+                    alt="Sunset"
+                    class="timeline-block-icon"
+                  />
+                  Sunset @4:56 PM
+                </h3>
+                <!-- Evening Block -->
+                <h3 class="timeline-block">Evening</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">Return to Paris</div>
+                  <div class="timeline-content">
+                    <p>Ensure you catch the last RER train back to the city.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </label>
+
+        <!-- Flip Card for Day 12 -->
+        <label class="flip-card" id="dec23">
+          <input type="checkbox" />
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img
+                src="images/day-12.jpg"
+                alt="Return to Portland"
+                class="card-image"
+              />
+              <div class="inner">
+                <h2 class="title">Departing to the United States</h2>
+                <time class="subtitle">Mon, Dec 23rd</time>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <h2>Leaving Europe (Mon, Dec 23rd)</h2>
+              <!-- Flight Information (Collapsible Section) -->
+              <details class="flight-info">
+                <summary>Flight Information</summary>
+                <ul>
+                  <li>
+                    <strong>Flight 5</strong>: Paris Charles de Gaulle Airport
+                    (CDG) ✈ Portland International Airport (PDX)
+                    <ul>
+                      <li>
+                        <strong>First Segment</strong>: Paris (CDG) ✈ Los
+                        Angeles (LAX)
+                        <ul>
+                          <li>
+                            <strong>Airline</strong>: Air Tahiti Nui (TN7)
+                          </li>
+                          <li>
+                            <strong>Departure</strong>: 11:35 AM CET (CDG)
+                          </li>
+                          <li><strong>Arrival</strong>: 2:05 PM PST (LAX)</li>
+                          <li>
+                            <strong>Flight Duration</strong>: Approximately 11
+                            hours 30 minutes
+                          </li>
+                        </ul>
+                      </li>
+                      <li>
+                        <strong>Second Segment</strong>: Los Angeles (LAX) ✈
+                        Portland (PDX)
+                        <ul>
+                          <li>
+                            <strong>Airline</strong>: Alaska Airlines (AS1012)
+                          </li>
+                          <li><strong>Departure</strong>: 5:29 PM PST (LAX)</li>
+                          <li><strong>Arrival</strong>: 8:00 PM PST (PDX)</li>
+                          <li>
+                            <strong>Flight Duration</strong>: Approximately 2
+                            hours 31 minutes
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </details>
+              <!-- Itinerary Content with Timeline -->
+              <div class="timeline">
+                <!-- Sunrise Divider -->
+                <h3 class="timeline-block timeline-sunrise">
+                  <img
+                    src="images/sunrise-icon.png"
+                    alt="Sunrise"
+                    class="timeline-block-icon"
+                  />
+                  Sunrise @8:42 AM
+                </h3>
+                <!-- Early Morning Block -->
+                <h3 class="timeline-block">Early Morning</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">7:00 AM - 8:00 AM</div>
+                  <div class="timeline-content">
+                    <p><strong>Check-out and Travel to Airport</strong></p>
+                    <p>
+                      <strong>Travel Time</strong>: Approximately 1 hour to
+                      Charles de Gaulle Airport via RER B train or taxi.
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">8:00 AM - 10:30 AM</div>
+                  <div class="timeline-content">
+                    <p>
+                      Arrive at airport, check-in, and pass through security.
+                    </p>
+                    <p>Have breakfast at the airport if time allows.</p>
+                  </div>
+                </div>
+                <!-- Flight Departure -->
+                <div class="timeline-item">
+                  <div class="timeline-time">11:35 AM</div>
+                  <div class="timeline-content">
+                    <p>
+                      <strong>Flight departs from Paris to Los Angeles.</strong>
+                    </p>
+                  </div>
+                </div>
+                <!-- Afternoon Block -->
+                <h3 class="timeline-block">Afternoon (Local Time)</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">2:05 PM PST</div>
+                  <div class="timeline-content">
+                    <p>Arrive at Los Angeles International Airport (LAX).</p>
+                    <p>Clear U.S. Customs and Border Protection.</p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">2:30 PM - 5:00 PM</div>
+                  <div class="timeline-content">
+                    <p>Layover at LAX. Grab a meal or relax at the lounge.</p>
+                  </div>
+                </div>
+                <!-- Sunset Divider -->
+                <h3 class="timeline-block timeline-sunset">
+                  <img
+                    src="images/sunset-icon.png"
+                    alt="Sunset"
+                    class="timeline-block-icon"
+                  />
+                  Sunset @4:49 PM
+                </h3>
+                <!-- Evening Block -->
+                <h3 class="timeline-block">Evening</h3>
+                <div class="timeline-item">
+                  <div class="timeline-time">5:29 PM</div>
+                  <div class="timeline-content">
+                    <p>
+                      <strong
+                        >Flight departs from Los Angeles to Portland.</strong
+                      >
+                    </p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">8:00 PM PST</div>
+                  <div class="timeline-content">
+                    <p>Arrive at Portland International Airport (PDX).</p>
+                    <p>Collect luggage and proceed home.</p>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">8:30 PM onwards</div>
+                  <div class="timeline-content">
+                    <p><strong>Home Sweet Home</strong></p>
+                    <p>End of the Europe Misadventures 2024 trip.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </label>
+      </div>
+    </main>
+    <!-- JavaScript to center flip cards on tap -->
+    <script>
+      // Wait until the DOM content is fully loaded
+      document.addEventListener("DOMContentLoaded", function () {
+        // Select all flip cards
+        const flipCards = document.querySelectorAll(".flip-card");
+
+        // Apply scroll-margin-top to account for the navbar height
+        flipCards.forEach((card) => {
+          card.style.scrollMarginTop = "50px"; // Push down by 50px to avoid overlap
+        });
+
+        flipCards.forEach(function (card) {
+          // Get the checkbox input inside each flip card
+          const checkbox = card.querySelector('input[type="checkbox"]');
+
+          // Add an event listener to the checkbox
+          checkbox.addEventListener("change", function () {
+            if (this.checked) {
+              // When the card is flipped, scroll it into view
+              card.scrollIntoView({ behavior: "smooth", block: "center" });
+            }
+          });
+        });
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const navLinks = document.querySelectorAll("nav .nav-link");
+        const flipCards = document.querySelectorAll(".flip-card");
+        const navBar = document.querySelector("nav");
+
+        // Function to scroll and center the active navigation link
+        const scrollToNavLink = (activeLink) => {
+          if (!activeLink) return;
+
+          const navBarWidth = navBar.offsetWidth;
+          const linkOffset = activeLink.offsetLeft;
+          const linkWidth = activeLink.offsetWidth;
+
+          const scrollPosition = linkOffset - navBarWidth / 2 + linkWidth / 2;
+
+          navBar.scrollTo({
+            left: scrollPosition,
+            behavior: "smooth",
+          });
+        };
+
+        // Function to highlight the active navigation link
+        const updateActiveNavLink = (id) => {
+          navLinks.forEach((link) => link.classList.remove("active"));
+          const activeLink = document.querySelector(
+            `nav .nav-link[href="#${id}"]`
+          );
+          if (activeLink) {
+            activeLink.classList.add("active");
+            scrollToNavLink(activeLink); // Center the active link in the navbar
+          }
+        };
+
+        // Intersection Observer for automatic navbar updates while scrolling
+        const observer = new IntersectionObserver(
+          (entries) => {
+            if (document.body.classList.contains("scrolling")) return; // Skip updates during smooth scrolling
+
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const id = entry.target.id; // Get the ID of the visible flip-card
+                updateActiveNavLink(id); // Highlight and center the corresponding navbar link
+              }
+            });
+          },
+          { threshold: 0.6 } // Trigger when 60% of the flip-card is visible
+        );
+
+        // Observe all flip-cards
+        flipCards.forEach((card) => observer.observe(card));
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const navLinks = document.querySelectorAll("nav .nav-link");
+        const flipCards = document.querySelectorAll(".flip-card");
+
+        // Apply scroll-margin-top to account for the navbar height
+        flipCards.forEach((card) => {
+          card.style.scrollMarginTop = "50px"; // Push down by 50px to avoid overlap
+        });
+
+        // Function to scroll and center a flip card
+        const scrollToCard = (targetCard) => {
+          if (targetCard) {
+            targetCard.scrollIntoView({
+              behavior: "smooth",
+              block: "center", // Ensure the card centers in the viewport
+            });
+          }
+        };
+
+        // Handle clicks on navbar links
+        navLinks.forEach((link) => {
+          link.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            const targetId = link.getAttribute("href").substring(1); // Get the ID without '#'
+            const targetCard = document.getElementById(targetId);
+
+            if (targetCard) {
+              // Temporarily pause navbar updates during smooth scrolling
+              document.body.classList.add("scrolling");
+              setTimeout(
+                () => document.body.classList.remove("scrolling"),
+                1200
+              );
+
+              // Scroll to the associated flip-card container
+              scrollToCard(targetCard);
+
+              // Highlight the clicked navbar link
+              navLinks.forEach((link) => link.classList.remove("active"));
+              link.classList.add("active");
+            }
+          });
+        });
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        navLinks.forEach((link) => {
+          const date = link.getAttribute("data-date"); // Get the date
+          const country = link.getAttribute("data-country"); // Get the country
+
+          if (date) {
+            // Create the Date object, adjusting for potential time zone issues
+            const dateObj = new Date(date + "T00:00:00"); // Ensure midnight time for accuracy
+
+            // Format the day of the week
+            const options = { weekday: "long" }; // e.g., Monday, Tuesday
+            const dayOfWeek = dateObj.toLocaleDateString("en-US", options);
+
+            // Format the date as 'Dec 11th'
+            const day = dateObj.getDate();
+            const month = dateObj.toLocaleDateString("en-US", {
+              month: "short",
+            });
+            const suffix = ["th", "st", "nd", "rd"][
+              day % 10 > 3 || ~~((day % 100) / 10) === 1 ? 0 : day % 10
+            ];
+            const formattedDate = `${month} ${day}${suffix}`;
+
+            // Update the link content with structured layout
+            link.innerHTML = `
+                        <div class="nav-day">${dayOfWeek}</div>
+                        <div class="nav-date">${formattedDate}</div>
+                        <div class="nav-country">${country}</div>
+                    `;
+          }
+        });
+      });
+    </script>
+    <script>
+      const apiKey = "9ce68f9dd5a33d72646314d6"; // Replace with your API key
+      const apiUrl = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`;
+
+      const usdAmountInput = document.getElementById("usd-amount");
+      const convertButton = document.getElementById("convert-btn");
+      const conversionResult = document.getElementById("conversion-result");
+
+      async function convertUsdToEur() {
+        const amount = usdAmountInput.value;
+
+        if (!amount || isNaN(amount)) {
+          conversionResult.textContent =
+            "⚠️ Please enter a valid amount in USD.";
+          return;
+        }
+
+        try {
+          const response = await fetch(apiUrl);
+          const data = await response.json();
+          const eurRate = data.conversion_rates.EUR;
+
+          const convertedAmount = (amount * eurRate).toFixed(2);
+          conversionResult.innerHTML = `
+            ✅ <strong>${amount} USD = ${convertedAmount} EUR</strong>
+            <br /><small>Exchange rate: 1 USD = ${eurRate.toFixed(
+              4
+            )} EUR</small>
+        `;
+        } catch (error) {
+          conversionResult.textContent =
+            "❌ Failed to convert. Please try again later.";
+        }
+      }
+
+      convertButton.addEventListener("click", convertUsdToEur);
+    </script>
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+          {
+            pageLanguage: "en",
+            includedLanguages: "es", // Restrict to Latin American Spanish
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+          },
+          "google_translate_element"
+        );
+      }
+    </script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>      
+  </body>
+</html>
