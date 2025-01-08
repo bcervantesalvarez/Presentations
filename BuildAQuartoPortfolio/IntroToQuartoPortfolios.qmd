@@ -1,0 +1,88 @@
+---
+title: "Building a Professional Portfolio with Quarto and GitHub Pages"
+author: "Brian Cervantes Alvarez"
+date: 01-07-2025
+date-format: full
+format: 
+  OSUStyle-revealjs:
+    slide-number: true
+    transition: convex
+    html-math-method: katex
+    smooth-scroll: true
+    scrollable: true
+    logo: OSUlogo.png
+    controls: true
+message: false
+warning: false
+---
+
+## Why Build a Portfolio? {auto-animate=true}
+
+**Key Benefits**
+
+- **Showcase Your Work**: Present projects, skills, and accomplishments in one place.
+- **Increase Visibility**: Stand out in applications and networking opportunities.
+- **Professional Branding**: Establish an online presence to showcase your expertise.
+
+
+## Why Build a Portfolio? {auto-animate=true}
+
+**Why Portfolios Matter**
+
+1. **First Impressions**: Portfolios offer a visual and tangible way to make a lasting impression.
+   - Example: Recruiters can easily browse your work without sifting through resumes.
+2. **Adaptability**: A portfolio evolves with your career, highlighting your most relevant work.
+   - Example: Tailor sections for academic, industry, or freelance roles.
+3. **Competitive Edge**: Portfolios differentiate you from other candidates who only submit resumes.
+   - Example: Highlighting unique skills like interactive data visualizations.
+
+
+## Long-Term Career Impact
+
+1. **Consistency**: Regular updates keep your portfolio relevant and demonstrate growth.
+2. **Networking Tool**: Share your portfolio in conferences, talks, and online forums.
+3. **Skill Demonstration**: Show expertise with tools (Quarto, GitHub, etc.) and methodologies.
+
+
+## Examples of Strong Portfolios
+
+- Data Science: Interactive dashboards and modeling case studies.
+- Academic: Published papers, research highlights, and teaching materials.
+- Industry: Client work, key deliverables, and project timelines.
+
+
+# Showcase: My Portfolio
+
+
+## Define Who You Are
+
+**Portfolio Section:** [About](https://bcervantesalvarez.github.io/Portfolio/Content/About/)
+
+<iframe src="https://bcervantesalvarez.github.io/Portfolio/Content/About/" style='height:550px;width:100%' data-autoplay></iframe>
+
+*Encourage students to define who they are in this section to create a strong personal brand.*
+
+
+## Project Highlights
+
+**Portfolio Section:** [Projects](https://bcervantesalvarez.github.io/Portfolio/Content/Projects/)
+
+<iframe src="https://bcervantesalvarez.github.io/Portfolio/Content/Projects/" style='height:550px;width:100%' data-autoplay></iframe>
+
+
+## Data Science/Statistics Projects & Blog
+
+**Portfolio Section:** [Blog](https://bcervantesalvarez.github.io/Portfolio/Content/Blog/)
+
+<iframe src="https://bcervantesalvarez.github.io/Portfolio/Content/Blog/"style='height:550px;width:100%' data-autoplay></iframe>
+
+
+## Previous Talks and Presentations
+
+**Portfolio Section:** [Talks](https://bcervantesalvarez.github.io/Portfolio/Content/Talks/)
+
+<iframe src="https://bcervantesalvarez.github.io/Portfolio/Content/Talks/" style='height:550px;width:100%' data-autoplay></iframe>
+
+
+
+# Questions?
