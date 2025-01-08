@@ -12,7 +12,7 @@ format:
     html-math-method: katex
     smooth-scroll: true
     scrollable: true
-    logo: OSUlogo.png
+    logo: OSULogo.png
     controls: true
 message: false
 warning: false
