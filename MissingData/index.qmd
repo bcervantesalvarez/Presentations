@@ -10,7 +10,6 @@ format:
     slide-number: true
     transition: convex
     html-math-method: katex
-    embed-resources: true
     smooth-scroll: true
     scrollable: true
     logo: OSUlogo.png
