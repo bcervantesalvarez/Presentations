@@ -9,11 +9,11 @@ $font-family-sans-serif: 'Roboto', Arial, sans-serif !default;
 $presentation-heading-font: 'Roboto Slab', 'Times New Roman', serif  !default;
 
 // font size (use vh for adaptive scaling based on viewport height)
-$presentation-font-size-root: 3.2vh; /* Dynamic based on viewport height */
-$presentation-h1-font-size: 9.2vh;   /* Larger heading */
-$presentation-h2-font-size: 7.2vh;
-$presentation-h3-font-size: 4.7vh;
-$presentation-h4-font-size: 4.2vh;
+$presentation-font-size-root: 3vh; /* Dynamic based on viewport height */
+$presentation-h1-font-size: 9vh;   /* Larger heading */
+$presentation-h2-font-size: 7vh;
+$presentation-h3-font-size: 4.5vh;
+$presentation-h4-font-size: 4vh;
 
 // line height
 $presentation-line-height: 4.5vh;
