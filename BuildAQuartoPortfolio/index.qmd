@@ -243,11 +243,11 @@ Overtime, you'll master `HTML`, `CSS`, and `JavaScript` to craft custom websites
 
 :::: {.columns}
 
-::: {.column width="65%"}
+::: {.column width="60%"}
 **Using RStudio:**
 
 - **Start a New Project:**
-   - Navigate to `File` → `New Project` → `Version Control` → `Git` →`Input your Repo Link` → `Create Project` .
+   - Navigate to `File` → `New Project` → `Version Control` → `Git` → `Input your Repo Link` → `Create Project` .
 
 **Add your Website files with the Terminal:**
 
@@ -257,13 +257,14 @@ Overtime, you'll master `HTML`, `CSS`, and `JavaScript` to craft custom websites
 
 :::
 
-::: {.column width="35%"}
+::: {.column width="40%"}
 **Essential Files:**
 
 - `_quarto.yml` – Configuration settings
 - `index.qmd` – Homepage content
 - `about.qmd` - About page content
 - `styles.css` – Custom styling for your site
+- Add `.noJekyll`!
 :::
 
 ::::
