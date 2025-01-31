@@ -9,11 +9,11 @@ $font-family-sans-serif: 'Roboto', Arial, sans-serif !default;
 $presentation-heading-font: 'Roboto Slab', 'Times New Roman', serif  !default;
 
 // font size (use vh for adaptive scaling based on viewport height)
-$presentation-font-size-root: 3vh; /* Dynamic based on viewport height */
-$presentation-h1-font-size: 9vh;   /* Larger heading */
-$presentation-h2-font-size: 7vh;
-$presentation-h3-font-size: 4.5vh;
-$presentation-h4-font-size: 4vh;
+$presentation-font-size-root: 3.2vh; /* Dynamic based on viewport height */
+$presentation-h1-font-size: 9.2vh;   /* Larger heading */
+$presentation-h2-font-size: 7.2vh;
+$presentation-h3-font-size: 4.7vh;
+$presentation-h4-font-size: 4.2vh;
 
 // line height
 $presentation-line-height: 4.5vh;
@@ -44,6 +44,11 @@ $footer-padding-bottom: 1vh; /* Dynamic footer padding */
   max-height: 100vh;
 }
 
+.reveal img {
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  border-radius: 8px; /* Rounds corners */
+}
+
 .reveal pre {
   visibility: visible !important;
 }
@@ -64,7 +69,7 @@ $footer-padding-bottom: 1vh; /* Dynamic footer padding */
   color: $link-color !important;
   padding-bottom: $padding-small;
   font-size: 1.7em;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 
 .reveal h3 {
@@ -106,6 +111,7 @@ section.has-dark-background a:hover {
   padding-bottom: $padding-small !important;
   max-height: $logo-max-height !important;
   z-index: 1;
+  box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
 }
 
 .reveal .slide-menu-button {
@@ -171,8 +177,7 @@ section.has-dark-background a:hover {
 }
 
 iframe {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15), 0 6px 20px rgba(0, 0, 0, 0.1); /* Softer shadow with two layers */
-  border: 3px dashed $link-color; /* Optional border to match theme */
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
   border-radius: 8px; /* Rounds corners */
   margin: $padding-small; /* Matches theme padding */
   transition: box-shadow 0.2s ease-in-out; /* Smooth transition for any hover effects */
@@ -180,7 +185,8 @@ iframe {
 
 #title-slide, div.reveal div.slides section.quarto-title-block {
     text-align: center;
-    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    border-radius: 80px;
 }
 
 #title-slide .subtitle, div.reveal div.slides section.quarto-title-block .subtitle {

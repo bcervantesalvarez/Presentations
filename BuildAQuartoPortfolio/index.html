@@ -29,6 +29,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -338,83 +403,397 @@ Brian Cervantes Alvarez
 </div>
 </div>
 
-  <p class="date">Tuesday, January 7, 2025</p>
+  <p class="date">Friday, January 31, 2025</p>
 </section>
 <section id="why-build-a-portfolio" class="slide level2" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Why Build a Portfolio?</h2>
-<p><strong>Key Benefits</strong></p>
 <ul>
-<li><strong>Showcase Your Work</strong>: Present projects, skills, and accomplishments in one place.</li>
-<li><strong>Increase Visibility</strong>: Stand out in applications and networking opportunities.</li>
-<li><strong>Professional Branding</strong>: Establish an online presence to showcase your expertise.</li>
+<li class="fragment"><strong>Key Benefits</strong>
+<ul>
+<li class="fragment"><strong>Showcase Your Work</strong>: Present projects, skills, and accomplishments in one place.</li>
+<li class="fragment"><strong>Increase Visibility</strong>: Stand out in applications and networking opportunities.</li>
+<li class="fragment"><strong>Professional Branding</strong>: Establish an online presence to showcase your expertise.</li>
+</ul></li>
 </ul>
-</section>
+
+<img data-src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHQ0N2x3dTRrZWNzOTIzeGVxN2I2cjZzNTBvMWI3a3Rmd3pzdHZkdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/2H67VmB5UEBmU/giphy.gif" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="why-build-a-portfolio-1" class="slide level2 scrollable" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Why Build a Portfolio?</h2>
-<p><strong>Why Portfolios Matter</strong></p>
 <ol type="1">
-<li><strong>First Impressions</strong>: Portfolios offer a visual and tangible way to make a lasting impression.
+<li class="fragment"><strong>First Impressions</strong>: Portfolios offer a visual and tangible way to make a lasting impression.
 <ul>
-<li>Example: Recruiters can easily browse your work without sifting through resumes.</li>
+<li class="fragment">Example: Recruiters can easily browse your work without sifting through resumes.</li>
 </ul></li>
-<li><strong>Adaptability</strong>: A portfolio evolves with your career, highlighting your most relevant work.
+<li class="fragment"><strong>Adaptability</strong>: A portfolio evolves with your career, highlighting your most relevant work.
 <ul>
-<li>Example: Tailor sections for academic, industry, or freelance roles.</li>
+<li class="fragment">Example: Tailor sections for academic, industry, or freelance roles.</li>
 </ul></li>
-<li><strong>Competitive Edge</strong>: Portfolios differentiate you from other candidates who only submit resumes.
+<li class="fragment"><strong>Competitive Edge</strong>: Portfolios differentiate you from other candidates who only submit resumes.
 <ul>
-<li>Example: Highlighting unique skills like interactive data visualizations.</li>
+<li class="fragment">Example: Highlighting unique skills like interactive data visualizations.</li>
 </ul></li>
 </ol>
+</section>
+<section id="immediate-benefits" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Immediate Benefits</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div>
+<ul>
+<li class="fragment"><strong>Within 24 Hours of Launch</strong>
+<ul>
+<li class="fragment">✅ Live portfolio website deployed via GitHub Pages</li>
+<li class="fragment">✅ Professional URL to share (yourusername.github.io)<br>
+</li>
+<li class="fragment">✅ Foundational structure for future content<br>
+</li>
+</ul></li>
+</ul>
+</div>
+<ul>
+<li class="fragment"><strong>Next 30 Days</strong>
+<ul>
+<li class="fragment">Increased visibility in search results<br>
+</li>
+<li class="fragment">Recruiter inquiries via portfolio contact form<br>
+</li>
+<li class="fragment">First project documentation completed<br>
+</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:30%;">
+<p><img data-src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExajY5cmVxN2N0OHYzOW9sZWZlamQ2dGg1dXYxc2dodHZ0MXVjc3l4eiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/111ebonMs90YLu/giphy.gif"> <img data-src="https://i.pinimg.com/originals/cb/3e/01/cb3e014d6122af3b43933bb571859ae7.png"></p>
+</div></div>
 </section>
 <section id="long-term-career-impact" class="slide level2 scrollable">
 <h2>Long-Term Career Impact</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
 <ol type="1">
-<li><strong>Consistency</strong>: Regular updates keep your portfolio relevant and demonstrate growth.</li>
-<li><strong>Networking Tool</strong>: Share your portfolio in conferences, talks, and online forums.</li>
-<li><strong>Skill Demonstration</strong>: Show expertise with tools (Quarto, GitHub, etc.) and methodologies.</li>
+<li class="fragment"><strong>Consistency</strong>: Regular updates keep your portfolio relevant and demonstrate growth.</li>
+<li class="fragment"><strong>Networking Tool</strong>: Share your portfolio in conferences, talks, and online forums.</li>
+<li class="fragment"><strong>Skill Demonstration</strong>: Show expertise with tools (Quarto, GitHub, etc.) and methodologies.</li>
+<li class="fragment"><strong>Consistency</strong>: Regular updates demonstrate growth and commitment<br>
+</li>
+<li class="fragment"><strong>Negotiation Leverage</strong>: Concrete proof of skills = salary justification</li>
 </ol>
+</div><div class="column" style="width:30%;">
+<p><img data-src="https://media1.tenor.com/m/tVwVHf9t1nwAAAAd/champagne.gif"></p>
+</div></div>
+<div class="fragment">
+<p>Overtime, you’ll master <code>HTML</code>, <code>CSS</code>, and <code>JavaScript</code> to craft custom websites 👀 😮 Not bad!</p>
+</div>
 </section>
-<section id="examples-of-strong-portfolios" class="slide level2">
-<h2>Examples of Strong Portfolios</h2>
+<section id="types-of-portfolios" class="slide level2">
+<h2>Types of Portfolios</h2>
 <ul>
-<li>Data Science: Interactive dashboards and modeling case studies.</li>
-<li>Academic: Published papers, research highlights, and teaching materials.</li>
-<li>Industry: Client work, key deliverables, and project timelines.</li>
+<li class="fragment"><strong>Statistics</strong>: Experimental design, Bayesian modeling, survey methodology, and applied data analysis.</li>
+<li class="fragment"><strong>Data Science</strong>: Interactive dashboards, modeling case studies, and machine learning experiments.<br>
+</li>
+<li class="fragment"><strong>Academic</strong>: Published papers, research highlights, teaching materials, and peer-reviewed work.<br>
+</li>
+<li class="fragment"><strong>Industry</strong>: Client work, key deliverables, project timelines, and business impact reports.<br>
+</li>
+<li class="fragment"><strong>Creative/Design</strong>: Data visualizations, UI/UX case studies, and storytelling through data.<br>
+</li>
+<li class="fragment"><strong>Open Source</strong>: Contributions to repositories, package development, and collaborative coding projects.</li>
 </ul>
 </section>
 <section>
-<section id="showcase-my-portfolio" class="title-slide slide level1 center">
-<h1>Showcase: My Portfolio</h1>
+<section id="data-science-portfolio" class="title-slide slide level1 center">
+<h1>Data Science Portfolio</h1>
 
 </section>
-<section id="define-who-you-are" class="slide level2">
-<h2>Define Who You Are</h2>
+<section id="impressive-yourself-future-recruiters-with-an-awesome-landing-page" class="slide level2">
+<h2>Impressive Yourself &amp; Future Recruiters With An Awesome Landing Page</h2>
+<p><strong>Portfolio Section:</strong> <a href="https://bcervantesalvarez.github.io/Portfolio/">Home</a></p>
+<iframe src="https://bcervantesalvarez.github.io/Portfolio/" style="height:550px;width:100%" data-autoplay="">
+</iframe>
+</section>
+<section id="define-who-you-are-a-humani-think" class="slide level2">
+<h2>Define Who You Are (A Human…I think?)</h2>
 <p><strong>Portfolio Section:</strong> <a href="https://bcervantesalvarez.github.io/Portfolio/Content/About/">About</a></p>
 <iframe src="https://bcervantesalvarez.github.io/Portfolio/Content/About/" style="height:550px;width:100%" data-autoplay="">
 </iframe>
-<p><em>Encourage students to define who they are in this section to create a strong personal brand.</em></p>
 </section>
-<section id="project-highlights" class="slide level2">
-<h2>Project Highlights</h2>
+<section id="highlight-your-best-projects-maybe-you-built-a-better-deep-seek-model-show-it" class="slide level2">
+<h2>Highlight Your Best Projects! Maybe You Built A Better Deep Seek Model (SHOW IT!)</h2>
 <p><strong>Portfolio Section:</strong> <a href="https://bcervantesalvarez.github.io/Portfolio/Content/Projects/">Projects</a></p>
 <iframe src="https://bcervantesalvarez.github.io/Portfolio/Content/Projects/" style="height:550px;width:100%" data-autoplay="">
 </iframe>
 </section>
-<section id="data-sciencestatistics-projects-blog" class="slide level2">
-<h2>Data Science/Statistics Projects &amp; Blog</h2>
+<section id="update-your-network-thru-mini-projects-or-articles" class="slide level2">
+<h2>Update Your Network Thru Mini-Projects or Articles!</h2>
 <p><strong>Portfolio Section:</strong> <a href="https://bcervantesalvarez.github.io/Portfolio/Content/Blog/">Blog</a></p>
 <iframe src="https://bcervantesalvarez.github.io/Portfolio/Content/Blog/" style="height:550px;width:100%" data-autoplay="">
 </iframe>
 </section>
-<section id="previous-talks-and-presentations" class="slide level2">
-<h2>Previous Talks and Presentations</h2>
+<section id="yapper-great-put-on-your-website" class="slide level2">
+<h2>Yapper? Great! Put on your Website!</h2>
 <p><strong>Portfolio Section:</strong> <a href="https://bcervantesalvarez.github.io/Portfolio/Content/Talks/">Talks</a></p>
 <iframe src="https://bcervantesalvarez.github.io/Portfolio/Content/Talks/" style="height:550px;width:100%" data-autoplay="">
 </iframe>
 </section></section>
+<section>
+<section id="public-health-portfolio" class="title-slide slide level1 center">
+<h1>Public Health Portfolio</h1>
+
+</section>
+<section id="not-convinced-take-a-peek-at-this" class="slide level2">
+<h2>Not Convinced? Take a Peek at This!</h2>
+<p><strong>Portfolio Section:</strong> <a href="https://girlnamedcassie.github.io/Portfolio/">Home</a></p>
+<iframe src="https://girlnamedcassie.github.io/Portfolio/" style="height:550px;width:100%" data-autoplay="">
+</iframe>
+</section></section>
 <section id="questions" class="title-slide slide level1 center">
 <h1>Questions?</h1>
+
+<img data-src="https://media1.tenor.com/m/DFfCL02_DCcAAAAC/cat-look.gif" class="r-stretch"></section>
+
+<section id="epic-transition-slide" class="title-slide slide level1 center">
+<h1>[Epic Transition Slide]</h1>
+
+<img data-src="https://media1.tenor.com/m/p7nVBn2zoNcAAAAC/beaver-carrying.gif" class="r-stretch"></section>
+
+<section id="portfolio-time" class="title-slide slide level1 center">
+<h1>Portfolio Time!</h1>
+
+</section>
+
+<section>
+<section id="part-1-github" class="title-slide slide level1 center">
+<h1>Part 1: Github</h1>
+
+</section>
+<section id="github-pages-workflow" class="slide level2 scrollable">
+<h2>GitHub Pages Workflow</h2>
+<ol type="1">
+<li class="fragment"><p><strong>Clone</strong>: Create local copy of your repository</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href=""></a><span class="fu">git</span> clone https://github.com/yourusername/yourrepo.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li class="fragment"><p><strong>Modify</strong>: Add Quarto files (.qmd) and content</p></li>
+<li class="fragment"><p><code>Commit</code>: Save changes with descriptive messages</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Added project showcase section"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li class="fragment"><p><code>Push</code>: Sync to GitHub</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href=""></a><span class="fu">git</span> push origin main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ol>
+<div class="fragment">
+<p><em>Always <code>pull</code> before pushing to avoid conflicts!</em></p>
+</div>
+</section>
+<section id="essential-git-concepts" class="slide level2">
+<h2>Essential Git Concepts</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<ul>
+<li class="fragment"><strong>Key Operations</strong>
+<ul>
+<li class="fragment"><code>Commit</code>: Snapshots changes with a timestamp and message</li>
+<li class="fragment"><code>Push</code>: Uploads commits to GitHub</li>
+<li class="fragment"><code>Pull</code>: Downloads others’ changes (critical for collaboration)</li>
+</ul></li>
+<li class="fragment"><strong>Danger Zone</strong>
+<ul>
+<li class="fragment">❌ Never use <code>git push --force</code><br>
+</li>
+<li class="fragment">❌ Never commit sensitive data (PATs, credentials)</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:30%;">
+<ul>
+<li class="fragment"><img data-src="https://media1.tenor.com/m/yxoxEKvNqMIAAAAC/bpk-crazy.gif"></li>
+<li class="fragment"><img data-src="https://media1.tenor.com/m/yxoxEKvNqMIAAAAC/bpk-crazy.gif"></li>
+</ul>
+</div></div>
+</section>
+<section id="github-pages-pro-tips" class="slide level2 scrollable">
+<h2>GitHub Pages Pro Tips</h2>
+<ol type="1">
+<li class="fragment"><strong>PAT Security</strong>
+<ul>
+<li class="fragment">Store tokens with <code>gitcreds_set()</code> in R</li>
+<li class="fragment">Never include in code or commit messages</li>
+</ul></li>
+<li class="fragment"><strong>Atomic Commits</strong>
+<ul>
+<li class="fragment">One logical change per commit</li>
+<li class="fragment">Example: “Fixed mobile layout” vs “Updated stuff”</li>
+</ul></li>
+<li class="fragment"><strong>.gitignore</strong>
+<ul>
+<li class="fragment">Always exclude: .env, .Rdata, .DS_Store</li>
+<li class="fragment">Quarto-specific: _site/, _cache/</li>
+</ul></li>
+</ol>
+</section>
+<section id="troubleshooting-checklist" class="slide level2 scrollable">
+<h2>Troubleshooting Checklist</h2>
+<ol type="1">
+<li class="fragment">Authentication issues?
+<ul>
+<li class="fragment">Refresh PAT with <code>usethis::create_github_token()</code></li>
+</ul></li>
+<li class="fragment">Merge conflicts?
+<ul>
+<li class="fragment">Use <code>git pull --rebase</code> to integrate changes cleanly</li>
+</ul></li>
+<li class="fragment">Site not updating?
+<ul>
+<li class="fragment">Check GitHub Actions logs</li>
+<li class="fragment">Verify gh-pages branch exists</li>
+</ul></li>
+</ol>
+</section></section>
+<section>
+<section id="part-2-quarto-github-pages-setup" class="title-slide slide level1 center">
+<h1>Part 2: Quarto + GitHub Pages Setup</h1>
+
+</section>
+<section id="step-1-create-your-quarto-website" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Step 1: Create Your Quarto Website</h2>
+<div class="columns">
+<div class="column" style="width:65%;">
+<p><strong>Using RStudio:</strong></p>
+<ul>
+<li class="fragment"><strong>Start a New Project:</strong>
+<ul>
+<li class="fragment">Navigate to <code>File</code> → <code>New Project</code> → <code>New Directory</code> → <code>Quarto Website</code>.</li>
+</ul></li>
+</ul>
+<p><strong>Using Terminal:</strong></p>
+<ul>
+<li class="fragment"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode bash hljs"><span id="cb4-1" class="hljs-ln-code"><a href=""></a>  <span class="ex">quarto</span> create-project mysite <span class="at">--type</span> website</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul>
+</div><div class="column" style="width:35%;">
+<p><strong>Essential Files:</strong></p>
+<ul>
+<li class="fragment"><code>_quarto.yml</code> – Configuration settings</li>
+<li class="fragment"><code>index.qmd</code> – Homepage content</li>
+<li class="fragment"><code>about.qmd</code> - About page content</li>
+<li class="fragment"><code>styles.css</code> – Custom styling for your site</li>
+</ul>
+</div></div>
+</section>
+<section id="step-2-understand-project-structure-key-files" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Step 2: Understand Project Structure &amp; Key Files</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Typical Repository Structure:</strong></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode bash hljs"><span id="cb5-1" class="hljs-ln-code"><a href=""></a><span class="ex">📁</span> yourRepoName/</span>
+<span id="cb5-2" class="hljs-ln-code"><a href=""></a><span class="ex">├──</span> 📁 _site/          <span class="co"># Auto-generated site files (exclude from repo)</span></span>
+<span id="cb5-3" class="hljs-ln-code"><a href=""></a><span class="ex">├──</span> 📄 _quarto.yml     <span class="co"># Main configuration file</span></span>
+<span id="cb5-4" class="hljs-ln-code"><a href=""></a><span class="ex">├──</span> 📄 index.qmd       <span class="co"># Homepage content</span></span>
+<span id="cb5-5" class="hljs-ln-code"><a href=""></a><span class="ex">├──</span> 📄 about.qmd       <span class="co"># About page</span></span>
+<span id="cb5-6" class="hljs-ln-code"><a href=""></a><span class="ex">└──</span> 📄 styles.css      <span class="co"># Custom CSS styles</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:50%;">
+<p><strong>Important <code>.gitignore</code> Entries:</strong></p>
+<pre><code>_site/
+_cache/
+.Rproj.user
+.DS_Store</code></pre>
+<p><em>Ensure sensitive and auto-generated files are excluded.</em></p>
+</div></div>
+</section>
+<section id="step-3-configure-_quarto.yml" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Step 3: Configure <code>_quarto.yml</code></h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><strong>Core Configuration:</strong></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource yaml number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode yaml hljs"><span id="cb7-1" class="hljs-ln-code"><a href=""></a><span class="fu">project</span><span class="kw">:</span></span>
+<span id="cb7-2" class="hljs-ln-code"><a href=""></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> website</span></span>
+<span id="cb7-3" class="hljs-ln-code"><a href=""></a><span class="at">  </span><span class="fu">output-dir</span><span class="kw">:</span><span class="at"> docs</span><span class="co">  # Required for GitHub Pages</span></span>
+<span id="cb7-4" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb7-5" class="hljs-ln-code"><a href=""></a><span class="fu">website</span><span class="kw">:</span></span>
+<span id="cb7-6" class="hljs-ln-code"><a href=""></a><span class="at">  </span><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"My Professional Portfolio"</span></span>
+<span id="cb7-7" class="hljs-ln-code"><a href=""></a><span class="at">  </span><span class="fu">navbar</span><span class="kw">:</span></span>
+<span id="cb7-8" class="hljs-ln-code"><a href=""></a><span class="at">    </span><span class="fu">left</span><span class="kw">:</span></span>
+<span id="cb7-9" class="hljs-ln-code"><a href=""></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">href</span><span class="kw">:</span><span class="at"> index.qmd</span></span>
+<span id="cb7-10" class="hljs-ln-code"><a href=""></a><span class="at">        </span><span class="fu">text</span><span class="kw">:</span><span class="at"> Home</span></span>
+<span id="cb7-11" class="hljs-ln-code"><a href=""></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">href</span><span class="kw">:</span><span class="at"> about.qmd</span></span>
+<span id="cb7-12" class="hljs-ln-code"><a href=""></a><span class="at">        </span><span class="fu">text</span><span class="kw">:</span><span class="at"> About</span></span>
+<span id="cb7-13" class="hljs-ln-code"><a href=""></a><span class="at">    </span><span class="fu">right</span><span class="kw">:</span></span>
+<span id="cb7-14" class="hljs-ln-code"><a href=""></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">icon</span><span class="kw">:</span><span class="at"> github</span></span>
+<span id="cb7-15" class="hljs-ln-code"><a href=""></a><span class="at">        </span><span class="fu">href</span><span class="kw">:</span><span class="at"> https://github.com/yourusername</span></span>
+<span id="cb7-16" class="hljs-ln-code"><a href=""></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb7-17" class="hljs-ln-code"><a href=""></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
+<span id="cb7-18" class="hljs-ln-code"><a href=""></a><span class="at">    </span><span class="fu">theme</span><span class="kw">:</span><span class="at"> cosmo</span><span class="co"> # Bootstrap Theming (automatic, simple)</span></span>
+<span id="cb7-19" class="hljs-ln-code"><a href=""></a><span class="at">    </span><span class="fu">css</span><span class="kw">:</span><span class="at"> styles.css</span><span class="co"> # Customize it to your hearts content</span></span>
+<span id="cb7-20" class="hljs-ln-code"><a href=""></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:45%;">
+<p><strong>Key Points:</strong></p>
+<ul>
+<li class="fragment"><code>output-dir</code> set to <code>docs</code> aligns with GitHub Pages requirements.</li>
+<li class="fragment">Customize the <code>navbar</code> to include relevant sections.</li>
+<li class="fragment">Choose a Bootswatch theme for aesthetic consistency.</li>
+</ul>
+</div></div>
+</section>
+<section id="step-4-configure-github-pages" class="slide level2 scrollable" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Step 4: Configure GitHub Pages</h2>
+<p><strong>Configure GitHub Pages:</strong></p>
+<ol type="1">
+<li class="fragment"><strong>Navigate to Settings:</strong>
+<ul>
+<li class="fragment">Go to <code>Settings</code> → <code>Pages</code>.</li>
+</ul></li>
+<li class="fragment"><strong>Set Source:</strong>
+<ul>
+<li class="fragment">Choose the <code>main</code> branch and <code>/docs</code> folder as the source.</li>
+</ul></li>
+<li class="fragment"><strong>Save Configuration:</strong>
+<ul>
+<li class="fragment">GitHub will provide a link to your live site once deployed.</li>
+</ul></li>
+</ol>
+</section>
+<section id="step-5-deploy-customize-your-site" class="slide level2 scrollable" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Step 5: Deploy &amp; Customize Your Site</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><strong>Initial Deployment Steps:</strong></p>
+<ol type="1">
+<li class="fragment"><p><strong>Render Locally:</strong></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href=""></a><span class="ex">quarto</span> render</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li class="fragment">Ensure the <code>docs/</code> directory is generated with your site files.</li>
+</ul></li>
+<li class="fragment"><p><strong>Commit Changes:</strong></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href=""></a><span class="fu">git</span> add .</span>
+<span id="cb9-2"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Initial site setup"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li class="fragment"><p><strong>Push to GitHub:</strong></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href=""></a><span class="fu">git</span> push origin main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ol>
+</div><div class="column" style="width:45%;">
+<p><strong>Customize Your Site:</strong></p>
+<ul>
+<li class="fragment"><strong>Update Navigation:</strong>
+<ul>
+<li class="fragment">Modify the <code>navbar</code> section in <code>_quarto.yml</code> to include new pages.</li>
+</ul></li>
+<li class="fragment"><strong>Apply Custom Styles:</strong>
+<ul>
+<li class="fragment">Edit <code>styles.css</code> to personalize the appearance.</li>
+</ul></li>
+<li class="fragment"><strong>Add Content:</strong>
+<ul>
+<li class="fragment">Create new <code>.qmd</code> files for additional sections like Blog or Contact.</li>
+</ul></li>
+</ul>
+</div></div>
+</section></section>
+<section id="references" class="title-slide slide level1 center">
+<h1>References</h1>
+<ul>
+<li class="fragment"><p><strong>Quarto Documentation:</strong><br>
+<a href="https://quarto.org/docs/projects/quarto-projects.html">Quarto Projects</a></p></li>
+<li class="fragment"><p><strong>GitHub Pages Guides:</strong><br>
+<a href="https://docs.github.com/en/pages">GitHub Pages Documentation</a></p></li>
+<li class="fragment"><p><strong>GitHub Actions for Quarto:</strong><br>
+<a href="https://quarto.org/docs/github-actions/">Quarto GitHub Actions</a></p></li>
+<li class="fragment"><p><strong>RStudio Quarto Support:</strong><br>
+<a href="https://www.rstudio.com/products/quarto/">RStudio Quarto</a></p></li>
+<li class="fragment"><p><strong>Bootswatch Themes:</strong><br>
+<a href="https://bootswatch.com/">Bootswatch Themes</a></p></li>
+</ul>
 <div class="quarto-auto-generated-content">
 <p><img src="OSULogo.png" class="slide-logo"></p>
 <div class="footer footer-default">
@@ -445,7 +824,7 @@ Brian Cervantes Alvarez
       // Full list of configuration options available at:
       // https://revealjs.com/config/
       Reveal.initialize({
-'controlsAuto': false,
+'controlsAuto': true,
 'previewLinksAuto': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
@@ -455,7 +834,7 @@ Brian Cervantes Alvarez
 'smaller': false,
  
         // Display controls in the bottom right corner
-        controls: true,
+        controls: false,
 
         // Help the user learn the controls by providing hints, for example by
         // bouncing the down arrow when they first encounter a vertical slide

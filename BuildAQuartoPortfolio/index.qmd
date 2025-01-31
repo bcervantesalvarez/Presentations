@@ -1,7 +1,7 @@
 ---
 title: "Building a Professional Portfolio with Quarto and GitHub Pages"
 author: "Brian Cervantes Alvarez"
-date: 01-07-2025
+date: 01-31-2025
 date-format: full
 format: 
   OSUStyle-revealjs:
@@ -11,23 +11,22 @@ format:
     smooth-scroll: true
     scrollable: true
     logo: OSULogo.png
-    controls: true
+    incremental: true
 message: false
 warning: false
 ---
 
 ## Why Build a Portfolio? {auto-animate=true}
 
-**Key Benefits**
 
-- **Showcase Your Work**: Present projects, skills, and accomplishments in one place.
-- **Increase Visibility**: Stand out in applications and networking opportunities.
-- **Professional Branding**: Establish an online presence to showcase your expertise.
-
+- **Key Benefits**
+  - **Showcase Your Work**: Present projects, skills, and accomplishments in one place.
+  - **Increase Visibility**: Stand out in applications and networking opportunities.
+  - **Professional Branding**: Establish an online presence to showcase your expertise.
+  
+![](https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHQ0N2x3dTRrZWNzOTIzeGVxN2I2cjZzNTBvMWI3a3Rmd3pzdHZkdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/2H67VmB5UEBmU/giphy.gif){fig-align="center"}
 
 ## Why Build a Portfolio? {auto-animate=true}
-
-**Why Portfolios Matter**
 
 1. **First Impressions**: Portfolios offer a visual and tangible way to make a lasting impression.
    - Example: Recruiters can easily browse your work without sifting through resumes.
@@ -37,52 +36,377 @@ warning: false
    - Example: Highlighting unique skills like interactive data visualizations.
 
 
+## Immediate Benefits {auto-animate=true}
+
+:::: {.columns}
+
+::: {.column width="70%"}
+
+::: {.incremental}
+- **Within 24 Hours of Launch**  
+  - ✅ Live portfolio website deployed via GitHub Pages
+  - ✅ Professional URL to share (yourusername.github.io)  
+  - ✅ Foundational structure for future content  
+:::
+
+- **Next 30 Days**  
+  - Increased visibility in search results  
+  - Recruiter inquiries via portfolio contact form  
+  - First project documentation completed  
+:::
+
+::: {.column width="30%"}
+![](https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExajY5cmVxN2N0OHYzOW9sZWZlamQ2dGg1dXYxc2dodHZ0MXVjc3l4eiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/111ebonMs90YLu/giphy.gif)
+![](https://i.pinimg.com/originals/cb/3e/01/cb3e014d6122af3b43933bb571859ae7.png)
+:::
+
+::::
+
+. . .
+
 ## Long-Term Career Impact
 
+:::: {.columns}
+
+::: {.column width="70%"}
 1. **Consistency**: Regular updates keep your portfolio relevant and demonstrate growth.
 2. **Networking Tool**: Share your portfolio in conferences, talks, and online forums.
 3. **Skill Demonstration**: Show expertise with tools (Quarto, GitHub, etc.) and methodologies.
+4. **Consistency**: Regular updates demonstrate growth and commitment  
+5. **Negotiation Leverage**: Concrete proof of skills = salary justification 
+:::
+
+::: {.column width="30%"}
+![](https://media1.tenor.com/m/tVwVHf9t1nwAAAAd/champagne.gif)
+:::
+
+::::
+
+. . .
+
+Overtime, you'll master `HTML`, `CSS`, and `JavaScript` to craft custom websites 👀 😮 Not bad!
+
+. . .
 
 
-## Examples of Strong Portfolios
+## Types of Portfolios  
 
-- Data Science: Interactive dashboards and modeling case studies.
-- Academic: Published papers, research highlights, and teaching materials.
-- Industry: Client work, key deliverables, and project timelines.
+- **Statistics**: Experimental design, Bayesian modeling, survey methodology, and applied data analysis.
+- **Data Science**: Interactive dashboards, modeling case studies, and machine learning experiments.  
+- **Academic**: Published papers, research highlights, teaching materials, and peer-reviewed work.  
+- **Industry**: Client work, key deliverables, project timelines, and business impact reports.  
+- **Creative/Design**: Data visualizations, UI/UX case studies, and storytelling through data.  
+- **Open Source**: Contributions to repositories, package development, and collaborative coding projects.   
+  
 
 
-# Showcase: My Portfolio
+# Data Science Portfolio 
 
 
-## Define Who You Are
+## Impressive Yourself & Future Recruiters With An Awesome Landing Page
+
+**Portfolio Section:** [Home](https://bcervantesalvarez.github.io/Portfolio/)
+
+<iframe src="https://bcervantesalvarez.github.io/Portfolio/" style='height:550px;width:100%' data-autoplay></iframe>
+
+
+## Define Who You Are (A Human...I think?)
 
 **Portfolio Section:** [About](https://bcervantesalvarez.github.io/Portfolio/Content/About/)
 
 <iframe src="https://bcervantesalvarez.github.io/Portfolio/Content/About/" style='height:550px;width:100%' data-autoplay></iframe>
 
-*Encourage students to define who they are in this section to create a strong personal brand.*
 
-
-## Project Highlights
+## Highlight Your Best Projects! Maybe You Built A Better Deep Seek Model (SHOW IT!)
 
 **Portfolio Section:** [Projects](https://bcervantesalvarez.github.io/Portfolio/Content/Projects/)
 
 <iframe src="https://bcervantesalvarez.github.io/Portfolio/Content/Projects/" style='height:550px;width:100%' data-autoplay></iframe>
 
 
-## Data Science/Statistics Projects & Blog
+## Update Your Network Thru Mini-Projects or Articles! 
 
 **Portfolio Section:** [Blog](https://bcervantesalvarez.github.io/Portfolio/Content/Blog/)
 
 <iframe src="https://bcervantesalvarez.github.io/Portfolio/Content/Blog/"style='height:550px;width:100%' data-autoplay></iframe>
 
 
-## Previous Talks and Presentations
+## Yapper? Great! Put on your Website!
 
 **Portfolio Section:** [Talks](https://bcervantesalvarez.github.io/Portfolio/Content/Talks/)
 
 <iframe src="https://bcervantesalvarez.github.io/Portfolio/Content/Talks/" style='height:550px;width:100%' data-autoplay></iframe>
 
 
+# Public Health Portfolio 
+
+
+## Not Convinced? Take a Peek at This!
+
+**Portfolio Section:** [Home](https://girlnamedcassie.github.io/Portfolio/)
+
+<iframe src="https://girlnamedcassie.github.io/Portfolio/" style='height:550px;width:100%' data-autoplay></iframe>
+
 
 # Questions?
+
+![](https://media1.tenor.com/m/DFfCL02_DCcAAAAC/cat-look.gif)
+
+
+# [Epic Transition Slide]
+
+![](https://media1.tenor.com/m/p7nVBn2zoNcAAAAC/beaver-carrying.gif)
+
+
+
+# Portfolio Time!
+
+
+# Part 1: Github 
+
+
+## GitHub Pages Workflow
+
+
+1. **Clone**: Create local copy of your repository  
+   ```bash
+   git clone https://github.com/yourusername/yourrepo.git
+   ```
+2. **Modify**: Add Quarto files (.qmd) and content
+3. `Commit`: Save changes with descriptive messages  
+   ```bash
+   git commit -m "Added project showcase section"
+   ```
+4. `Push`: Sync to GitHub  
+   ```bash
+   git push origin main
+   ```
+
+. . .
+
+*Always `pull` before pushing to avoid conflicts!*
+
+. . .
+
+## Essential Git Concepts
+
+:::: {.columns}
+
+::: {.column width="70%"}
+
+
+- **Key Operations**
+  - `Commit`: Snapshots changes with a timestamp and message
+  - `Push`: Uploads commits to GitHub
+  - `Pull`: Downloads others' changes (critical for collaboration)
+
+- **Danger Zone**  
+  - ❌ Never use `git push --force`  
+  - ❌ Never commit sensitive data (PATs, credentials)  
+
+:::
+
+::: {.column width="30%"}
+
+- ![](https://media1.tenor.com/m/yxoxEKvNqMIAAAAC/bpk-crazy.gif)
+- ![](https://media1.tenor.com/m/yxoxEKvNqMIAAAAC/bpk-crazy.gif)
+:::
+
+::::
+
+## GitHub Pages Pro Tips
+
+1. **PAT Security**  
+   - Store tokens with `gitcreds_set()` in R
+   - Never include in code or commit messages
+2. **Atomic Commits**  
+   - One logical change per commit
+   - Example: "Fixed mobile layout" vs "Updated stuff"
+3. **.gitignore**  
+   - Always exclude: .env, .Rdata, .DS_Store
+   - Quarto-specific: _site/, _cache/
+
+## Troubleshooting Checklist
+
+1. Authentication issues?  
+   - Refresh PAT with `usethis::create_github_token()`
+2. Merge conflicts?  
+   - Use `git pull --rebase` to integrate changes cleanly
+3. Site not updating?  
+   - Check GitHub Actions logs
+   - Verify gh-pages branch exists
+
+
+# Part 2: Quarto + GitHub Pages Setup
+
+## Step 1: Create Your Quarto Website {auto-animate=true}
+
+:::: {.columns}
+
+::: {.column width="65%"}
+**Using RStudio:**
+
+- **Start a New Project:**
+   - Navigate to `File` → `New Project` → `New Directory` → `Quarto Website`.
+
+**Using Terminal:**
+
+- ```bash
+  quarto create-project mysite --type website
+  ```
+
+:::
+
+::: {.column width="35%"}
+**Essential Files:**
+
+- `_quarto.yml` – Configuration settings
+- `index.qmd` – Homepage content
+- `about.qmd` - About page content
+- `styles.css` – Custom styling for your site
+:::
+
+::::
+
+
+## Step 2: Understand Project Structure & Key Files {auto-animate=true}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+**Typical Repository Structure:**
+```bash
+📁 yourRepoName/
+├── 📁 _site/          # Auto-generated site files (exclude from repo)
+├── 📄 _quarto.yml     # Main configuration file
+├── 📄 index.qmd       # Homepage content
+├── 📄 about.qmd       # About page
+└── 📄 styles.css      # Custom CSS styles
+```
+
+:::
+
+::: {.column width="50%"}
+**Important `.gitignore` Entries:**
+```
+_site/
+_cache/
+.Rproj.user
+.DS_Store
+```
+*Ensure sensitive and auto-generated files are excluded.*
+:::
+
+::::
+
+
+## Step 3: Configure `_quarto.yml` {auto-animate=true}
+
+:::: {.columns}
+
+::: {.column width="55%"}
+**Core Configuration:**
+```yaml
+project:
+  type: website
+  output-dir: docs  # Required for GitHub Pages
+
+website:
+  title: "My Professional Portfolio"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: about.qmd
+        text: About
+    right:
+      - icon: github
+        href: https://github.com/yourusername
+format:
+  html:
+    theme: cosmo # Bootstrap Theming (automatic, simple)
+    css: styles.css # Customize it to your hearts content
+    toc: true
+```
+
+:::
+
+::: {.column width="45%"}
+**Key Points:**
+
+- `output-dir` set to `docs` aligns with GitHub Pages requirements.
+- Customize the `navbar` to include relevant sections.
+- Choose a Bootswatch theme for aesthetic consistency.
+:::
+
+::::
+
+
+## Step 4: Configure GitHub Pages {auto-animate=true}
+
+**Configure GitHub Pages:**
+
+1. **Navigate to Settings:**
+   - Go to `Settings` → `Pages`.
+2. **Set Source:**
+   - Choose the `main` branch and `/docs` folder as the source.
+3. **Save Configuration:**
+   - GitHub will provide a link to your live site once deployed.
+
+
+
+## Step 5: Deploy & Customize Your Site {auto-animate=true}
+
+:::: {.columns}
+
+::: {.column width="55%"}
+**Initial Deployment Steps:**
+
+1. **Render Locally:**
+   ```bash
+   quarto render
+   ```
+   - Ensure the `docs/` directory is generated with your site files.
+2. **Commit Changes:**
+   ```bash
+   git add .
+   git commit -m "Initial site setup"
+   ```
+3. **Push to GitHub:**
+   ```bash
+   git push origin main
+   ```
+
+:::
+
+::: {.column width="45%"}
+
+**Customize Your Site:**
+
+- **Update Navigation:**
+  - Modify the `navbar` section in `_quarto.yml` to include new pages.
+- **Apply Custom Styles:**
+  - Edit `styles.css` to personalize the appearance.
+- **Add Content:**
+  - Create new `.qmd` files for additional sections like Blog or Contact.
+:::
+
+::::
+
+
+# References
+
+- **Quarto Documentation:**  
+  [Quarto Projects](https://quarto.org/docs/projects/quarto-projects.html)
+
+- **GitHub Pages Guides:**  
+  [GitHub Pages Documentation](https://docs.github.com/en/pages)
+
+- **GitHub Actions for Quarto:**  
+  [Quarto GitHub Actions](https://quarto.org/docs/github-actions/)
+
+- **RStudio Quarto Support:**  
+  [RStudio Quarto](https://www.rstudio.com/products/quarto/)
+
+- **Bootswatch Themes:**  
+  [Bootswatch Themes](https://bootswatch.com/)
