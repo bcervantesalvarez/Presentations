@@ -247,12 +247,12 @@ Overtime, you'll master `HTML`, `CSS`, and `JavaScript` to craft custom websites
 **Using RStudio:**
 
 - **Start a New Project:**
-   - Navigate to `File` → `New Project` → `New Directory` → `Quarto Website`.
+   - Navigate to `File` → `New Project` → `Version Control` → `Git` →`Input your Repo Link` → `Create Project` .
 
-**Using Terminal:**
+**Add your Website files with the Terminal:**
 
 - ```bash
-  quarto create-project mysite --type website
+  quarto create-project . --type website
   ```
 
 :::
