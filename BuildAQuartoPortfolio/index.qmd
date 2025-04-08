@@ -112,30 +112,30 @@ Overtime, you'll master `HTML`, `CSS`, and `JavaScript` to craft custom websites
 
 ## Define Who You Are (A Human...I think?)
 
-**Portfolio Section:** [About](https://www.datascienceyapper.com/Content/About/)
+**Portfolio Section:** [About](https://www.datascienceyapper.com/content/about/)
 
-<iframe src="https://www.datascienceyapper.com/Content/About/" style='height:550px;width:100%' data-autoplay></iframe>
+<iframe src="https://www.datascienceyapper.com/content/about/" style='height:550px;width:100%' data-autoplay></iframe>
 
 
 ## Highlight Your Best Projects! Maybe You Built A Better Deep Seek Model (SHOW IT!)
 
-**Portfolio Section:** [Projects](https://www.datascienceyapper.com/Content/Projects/)
+**Portfolio Section:** [Projects](https://www.datascienceyapper.com/content/projects/)
 
-<iframe src="https://www.datascienceyapper.com/Content/Projects/" style='height:550px;width:100%' data-autoplay></iframe>
+<iframe src="https://www.datascienceyapper.com/content/projects/" style='height:550px;width:100%' data-autoplay></iframe>
 
 
 ## Update Your Network Thru Mini-Projects or Articles! 
 
-**Portfolio Section:** [Blog](https://www.datascienceyapper.com/Content/Blog/)
+**Portfolio Section:** [Blog](https://www.datascienceyapper.com/content/blog/)
 
-<iframe src="https://www.datascienceyapper.com/Content/Blog/"style='height:550px;width:100%' data-autoplay></iframe>
+<iframe src="https://www.datascienceyapper.com/content/blog/"style='height:550px;width:100%' data-autoplay></iframe>
 
 
 ## Yapper? Great! Put on your Website!
 
-**Portfolio Section:** [Talks](https://www.datascienceyapper.com/Content/Talks/)
+**Portfolio Section:** [Talks](https://www.datascienceyapper.com/content/talks/)
 
-<iframe src="https://www.datascienceyapper.com/Content/Talks/" style='height:550px;width:100%' data-autoplay></iframe>
+<iframe src="https://www.datascienceyapper.com/content/talks/" style='height:550px;width:100%' data-autoplay></iframe>
 
 
 # Public Health Portfolio 
