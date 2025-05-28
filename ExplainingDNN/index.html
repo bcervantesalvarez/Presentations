@@ -896,24 +896,15 @@ Adapt the SRAE architecture and sparse‐reconstruction loss to handle large fea
 <li><strong>Maintaining Explanation Consistency</strong><br>
 Ensure orthogonality and sparsity persist when the backbone is fine-tuned or updated incrementally.</li>
 </ul>
-</section></section>
-<section id="ethical-considerations" class="title-slide slide level1 smaller center">
-<h1>Ethical Considerations</h1>
-<ul>
-<li><strong>Transparency &amp; Informed Consent</strong><br>
-Clearly document what each concept represents and obtain user agreement before generating explanations.<br>
-</li>
-<li><strong>Fairness &amp; Bias Mitigation</strong><br>
-Audit concept activations across demographic groups to detect and correct any systematic biases.<br>
-</li>
-<li><strong>Privacy &amp; Data Protection</strong><br>
-Ensure that feature‐importance maps cannot be reverse‐engineered to reveal sensitive attributes.<br>
-</li>
-<li><strong>Accountability &amp; Auditability</strong><br>
-Log explanation outputs and model versions so that decisions can be traced and reviewed.</li>
-</ul>
 </section>
-
+<section id="ethical-considerations" class="slide level2 smaller">
+<h2>Ethical Considerations</h2>
+<ul>
+<li><p><strong>Concept fidelity &amp; over‑trust</strong> XNN concepts are <em>proxies</em> for high‑dimensional CNN activations—not ground truth. Treat them as hypotheses and corroborate with domain experts <em>before</em> acting on them.</p></li>
+<li><p><strong>Bias amplification through faithful explanations</strong> Because the faithfulness loss <span class="math inline">\(L_{\text{faith}}\)</span> makes the SRAE mimic the backbone’s logits, any demographic or sampling bias already present in the CNN will be faithfully preserved—and may even be <em>spot‑lit</em>—in the concept activations.</p></li>
+<li><p><strong>Privacy leakage via latent reconstruction</strong> The encoder–decoder pathway can potentially reconstruct sensitive input regions from the concept space. When dealing with medical or biometric data, apply feature masking, differential privacy, or concept‑sanitisation layers to prevent re‑identification.</p></li>
+</ul>
+</section></section>
 <section>
 <section id="questions-and-discussion" class="title-slide slide level1 smaller center" data-background-color="#004a6d">
 <h1>Questions and Discussion</h1>
@@ -1599,7 +1590,7 @@ Log explanation outputs and model versions so that decisions can be traced and r
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"loop":false,"selector":".lightbox","openEffect":"zoom","descPosition":"bottom","closeEffect":"zoom"});
+    <script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","loop":false,"openEffect":"zoom","closeEffect":"zoom"});
     (function() {
       let previousOnload = window.onload;
       window.onload = () => {

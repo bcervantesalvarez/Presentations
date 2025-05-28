@@ -414,16 +414,16 @@ To do this, I built an R package (`xnnR`) that faithfully replicates the Fuxin L
 
 
 
-# Ethical Considerations {.smaller}
+## Ethical Considerations {.smaller}
 
-* **Transparency & Informed Consent**  
-  Clearly document what each concept represents and obtain user agreement before generating explanations.  
-* **Fairness & Bias Mitigation**  
-  Audit concept activations across demographic groups to detect and correct any systematic biases.  
-* **Privacy & Data Protection**  
-  Ensure that feature‐importance maps cannot be reverse‐engineered to reveal sensitive attributes.  
-* **Accountability & Auditability**  
-  Log explanation outputs and model versions so that decisions can be traced and reviewed.  
+* **Concept fidelity & over‑trust**
+  XNN concepts are *proxies* for high‑dimensional CNN activations—not ground truth. Treat them as hypotheses and corroborate with domain experts *before* acting on them.
+
+* **Bias amplification through faithful explanations**
+  Because the faithfulness loss $L_{\text{faith}}$ makes the SRAE mimic the backbone’s logits, any demographic or sampling bias already present in the CNN will be faithfully preserved—and may even be *spot‑lit*—in the concept activations.
+
+* **Privacy leakage via latent reconstruction**
+  The encoder–decoder pathway can potentially reconstruct sensitive input regions from the concept space. When dealing with medical or biometric data, apply feature masking, differential privacy, or concept‑sanitisation layers to prevent re‑identification.
 
 
 # Questions and Discussion {data-background-color="#004a6d" .smaller}
