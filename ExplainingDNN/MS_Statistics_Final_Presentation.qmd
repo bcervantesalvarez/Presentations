@@ -1,0 +1,708 @@
+---
+title: "An R Implementation of Explanation Neural Networks for Interpreting CNN Decisions"
+author: "Brian Cervantes Alvarez"
+date: "2025-05-28"
+format:
+    revealjs:
+        theme: simple
+        slide-number: true
+        scrollable: true
+html-math-method: mathjax
+lightbox: true
+crossref:
+  fig-title: Fig     # (default is "Figure")
+  tbl-title: Tbl     # (default is "Table")
+  title-delim: "—"   # (default is ":")
+---
+
+## Agenda {data-background-color="#004a6d" .smaller} 
+
+1. *Motivation and risk*—Why care about explanations?
+2. **Convolutional neural network (CNN) architecture** overview  
+   * Layers and operations  
+   * Training considerations
+3. **XNN + SRAE**—concept extraction
+4. **Causal localisation** (I‑GOS++)
+7. **Applying the workflow to new data**
+8. **Future research & Ethical considerations**
+9. **Questions and discussion**
+
+
+# Why Do We Need Explanations? {.smaller}
+
+> “Trust follows from understanding.” — *NIST AI RMF (2023)*
+
+* **Safety‑critical decisions**  
+  * Autonomous vehicles: distinguish a **red traffic light** from a red billboard  
+  * Medical diagnostics: pathologists must identify the specific cells that trigger a cancer flag
+* **Legal and ethical compliance** (EU AI Act, FDA SaMD guidelines)
+* **Model debugging and improvement**  
+  * Detect shortcut learning (e.g., background colour in bird identification)  
+  * Reveal dataset bias and temporal drift  
+
+Opaque decision pathways can introduce risk, undermine confidence, and complicate audits.
+
+
+# CNN Architecture Refresher {data-background-color="#004a6d"}
+
+## Building Blocks of a CNN {.smaller}
+
+:::: {.columns}
+::: {.column width="40%"}
+1. **Convolution** (+ ReLU)  
+2. **Stride / Padding**  
+3. **Pooling** (max & average)  
+4. **Normalisation** (batch / layer)  
+5. **Residual connections**  
+6. **Flatten → dense head**  
+7. **Regularisation** (dropout)
+:::
+::: {.column width="60%"}
+![Figure 1. High‑level CNN pipeline](images/article-hero-cnn.webp)
+:::
+::::
+
+## Convolution Kernels {.smaller}
+
+![Figure 2. Kernel illustration](images/kernel_filter.webp)
+
+A **kernel** (filter) traverses the image, computing local dot‑products to detect edges, textures, or colour blobs.  
+Output spatial size: $\bigl[i - k\bigr] + 1$
+
+## Stride & Padding {.smaller}
+
+:::: {.columns}
+::: {.column width="50%"}
+![Figure 3. Stride illustration](images/stride.webp)
+
+Stride $s$ controls down‑sampling:  
+$\bigl[i - k\bigr] / s + 1$
+:::
+::: {.column width="50%"}
+![Figure 4. Padding illustration](images/padding.webp)
+
+Zero‑padding $p$ preserves border context:  
+$\bigl[i - k + 2p\bigr] / s + 1$
+:::
+::::
+
+## Pooling Layers {.smaller}
+
+![Figure 5. Max vs average pooling](images/pooling.webp)
+
+* **Max pooling:** retains dominant activation, emphasising edge detectors  
+* **Average pooling:** provides a smoother summary, capturing global context  
+
+Both improve translation invariance and reduce computation.
+
+
+
+## Normalization in CNNs {.smaller}
+
+**Why normalize?**
+After each convolution, the distribution of activations can shift (“internal covariate shift”), slowing learning. Normalization keeps activations on a stable scale so the network converges faster. For each channel and each mini-batch:
+
+:::: {.columns}
+::: {.column width="33.3%"}
+Compute the batch mean
+   $$
+   \mu = \frac{1}{m}\sum_{i=1}^m x_i
+   $$
+
+:::
+
+::: {.column width="33.3%"}
+Compute the batch variance
+
+   $$
+   \sigma^2 = \frac{1}{m}\sum_{i=1}^m (x_i - \mu)^2
+   $$
+
+:::
+
+::: {.column width="33.3%"}
+
+Standardize and re‐scale
+
+   $$
+   \hat{x}_i = \frac{x_i - \mu}{\sqrt{\sigma^2 + \epsilon}}, \quad
+   $$
+   $$
+   y_i = \gamma\,\hat{x}_i + \beta
+   $$
+
+:::
+
+::::
+
+$\epsilon$ avoids division by zero & $\gamma,\beta$ are learnable scale and shift.
+
+* **Faster convergence:** gradients stay well‐scaled
+* **Milder sensitivity** to initialization and learning rate
+* **Regularization effect:** slight noise from batch estimates helps generalization
+
+
+## Residual Connections (ResNets) {.smaller}
+
+Deep networks suffer from vanishing gradients; stacking more layers can *worsen* training accuracy. Hence, we introduce a shortcut (identity) path so the block learns a *residual* function:
+
+$$
+\mathbf{y} = \mathcal{F}(\mathbf{x}) + \mathbf{x}
+$$
+
+* $\mathbf{x}$: input to the block
+* $\mathcal{F}(\mathbf{x})$: the “residual” (e.g., Conv → ReLU → Conv)
+
+
+* Enables gradients to flow directly through the identity branch
+* Lets layers fit small corrections ($\mathcal{F}$) rather than full mappings
+* Empirically allows networks of hundreds of layers to train
+
+
+## Flatten & Fully Connected Layers {.smaller}
+
+![Figure 6. Flatten illustration](images/flatten.webp)
+
+The three‑dimensional tensor ($H\times W\times K$) is flattened and passed to dense layers, which integrate global context and output class probabilities via softmax.
+
+## Regularization: Dropout {.smaller}
+
+![Figure 7. Dropout mask](images/dropout.webp)
+
+Randomly deactivates units during training to discourage co‑adaptation and mitigate overfitting.
+
+
+# From Architecture to Explanation {data-background-color="#004a6d"}
+
+## What is XNN? {.smaller}
+
+- **XNN** = e**X**planation **N**eural **N**etwork  
+- A compact network **attached** to a frozen, pre-trained CNN  
+- **Encoder** $E_\theta$: compresses the CNN’s feature vector  
+  $\displaystyle \mathbf{z}\in\mathbb{R}^D \longmapsto \mathbf{e}=E_\theta(\mathbf{z})\in\mathbb{R}^L$  
+- **Projection** $v$: lifts $\mathbf{e}$ back to the original output space  
+  $\displaystyle \hat{\mathbf{y}}=v^\top\mathbf{e}$  
+- Trained with three losses to enforce:  
+  1. **Faithfulness** (match original predictions)  
+  2. **Sparsity** (keep concepts concise)  
+  3. **Orthogonality** (make concepts distinct)  
+- **Gives us:** sparse, stable, and interpretable “concept activations” you can visualize and audit 
+
+
+:::: {.columns}
+::: {.column width="50%"}
+![Figure 8.](images/mainPaper1.png)
+
+:::
+::: {.column width="50%"}
+![Figure 9.](images/mainPaper2.png)
+:::
+::::
+
+
+
+## XNN + SRAE Loss Components {.smaller}
+
+For a batch of $M$ inputs, we train the explanation network by minimizing the composite objective
+
+$$
+\boxed{
+\mathcal{L} \;=\; L_{\mathrm{faith}} \;+\; L_{\mathrm{SR}} \;+\; L_{\mathrm{PT}}
+}
+$$
+
+balancing  
+
+1. **Faithfulness** $\;\bigl(L_{\rm faith}\bigr)$  
+2. **Sparse-Reconstruction** $\;\bigl(L_{\rm SR}\bigr)$  
+3. **Orthogonality (Pull-Away Term)** $\;\bigl(L_{\rm PT}\bigr)$  
+
+## (1) Faithfulness Loss $\;L_{\mathrm{faith}}$ {.smaller}
+
+$$
+L_{\mathrm{faith}}
+\;=\;
+\frac{1}{M}\sum_{i=1}^{M}\sum_{c=1}^{C}
+\Bigl(\bar y_{i,c} \;-\;\hat y_{i,c}\Bigr)^{2},
+$$
+where  
+
+- $\bar y_{i,c}$ is the **backbone’s** output for class $c$ on sample $i$.  
+- $\hat y_{i,c} = v^\top E_\theta\bigl(Z^{(i)}\bigr)$ is the **projection head**’s prediction from the explanation vector $E_\theta(Z^{(i)})$.  
+
+This term enforces **predictive fidelity** by treating the explanation space as a linear surrogate for the original model’s logits (or probabilities).  Minimizing it aligns the geometry of $E_\theta(Z)$ with the decision boundary of the backbone, thereby ensuring explanations do not distort the model’s learned mapping.
+
+## (2) Sparse-Reconstruction Loss $\;L_{\mathrm{SR}}$ {.smaller}
+
+$$
+L_{\mathrm{SR}}
+\;=\;
+\underbrace{\frac{\beta}{D_z}}_{\substack{\text{trade-off}\\\text{weight}}}
+\sum_{k=1}^{D_z}
+\log\!\Biggl(
+1 \;+\;
+q \;\frac{1}{M}\sum_{i=1}^{M}
+\bigl(\,\tilde Z^{(i)}_{k} - Z^{(i)}_{k}\bigr)^{2}
+\Biggr),
+$$
+where  
+
+- $Z^{(i)}_k$ is the $k$th coordinate of the backbone activation,  
+- $\tilde Z^{(i)}_k$ is its reconstruction via the decoder,  
+- $\beta$ scales the overall sparsity penalty,  
+- $q$ controls **log-penalty sharpness**,  
+- $D_z$ is the activation dimensionality.  
+
+
+By using $\log(1 + q\,\mathrm{MSE})$, we impose a **sub-linear penalty** on reconstruction error, which encourages **few but significant** reconstruction deviations.  The result is a sparse set of active reconstruction errors—i.e. only a handful of dimensions carry the explanatory burden.
+
+## (3) Pull-Away (Orthogonality) Loss $\;L_{\mathrm{PT}}$ {.smaller}
+
+$$
+L_{\mathrm{PT}}
+\;=\;
+\frac{\eta}{L(L-1)}
+\sum_{\substack{l,l'=1\\l\neq l'}}^{L}
+\Biggl(\frac{h_{l}^{\top}h_{l'}}{\|h_{l}\|\;\|h_{l'}\|}\Biggr)^{2},
+$$
+where  
+
+- $h_{l}\in\mathbb{R}^M$ is the vector of activations for concept $l$ across the batch,  
+- $L$ is the **explanation dimensionality**,  
+- $\eta$ determines how strongly we **discourage correlated** concepts.  
+
+This is the classic **pull-away term**: by penalizing squared cosine similarities between every pair of concept activations, we force the learned concepts to occupy **orthogonal subspaces**.  The result is a set of **distinct**, non-redundant explanations that collectively cover different facets of the model’s reasoning.
+
+
+## Putting It All Together {.smaller}
+
+1. **Freeze** the backbone and attach the SRAE module at a chosen layer.  
+2. **Minimize** $\mathcal{L} = L_{\rm faith} + L_{\rm SR} + L_{\rm PT}$ via SGD/Adam.  
+3. **Extract** sparse, orthogonal explanation vectors $E_\theta(Z)$.  
+4. **Project** via $v$ for faithful approximation of original outputs.  
+
+From here, one can visualize each concept’s **heat-map**, compute human-in the-loop metrics, or integrate into downstream interpretability pipelines.
+
+
+
+## The Algorithm in Practice {.smaller}
+
+1. **Start with a pre-trained CNN**  
+   - Train your backbone on the target task (e.g. digit classification)  
+   - **Freeze** all CNN weights: $\nabla_{\theta_{\rm CNN}}\mathcal{L}=0$
+
+2. **Select an insertion point**  
+   - Choose an intermediate feature map  
+     $$
+       \mathbf{F}\;\in\;\mathbb{R}^{H\times W\times C}
+     $$
+     (e.g. the output of the final convolutional block)
+
+3. **Vectorize the feature map**  
+   - **Global average pooling**  
+     $$
+       z_c \;=\;\frac{1}{H\,W}\sum_{h=1}^H\sum_{w=1}^W F_{h,w,c}
+       \quad\Longrightarrow\quad
+       \mathbf{z}\in\mathbb{R}^{C}
+     $$
+   - _Or_ **flatten**  
+     $\displaystyle \mathbf{z}=\mathrm{vec}(\mathbf{F})\in\mathbb{R}^{D}$
+
+4. **Attach the XNN/SRAE head**  
+   - **Encoder**:  
+     $$
+       \mathbf{e} \;=\; E_{\theta}(\mathbf{z}) \;\in\;\mathbb{R}^{L}
+     $$
+   - **Projection**:  
+     $$
+       \hat{\mathbf{y}}
+       \;=\;
+       v^{\top}\,\mathbf{e}
+       \quad(\text{faithful approximation of original logits})
+     $$
+
+5. **Train only the explanation network**  
+   - Minimize  
+     $\displaystyle
+       \mathcal{L}
+       = L_{\mathrm{faith}} + L_{\mathrm{SR}} + L_{\mathrm{PT}}
+     $  
+   - **Backpropagate** through $E_\theta$ and $v$ only; CNN remains fixed  
+
+
+
+
+# From Theory to Practice! {data-background-color="#004a6d"}
+
+## Implementing XNN + SRAE for MNIST Dataset {.smaller}
+
+In the previous section we saw how the XNN + SRAE framework defines three principled losses  
+—faithfulness, sparsity, and orthogonality—  
+to embed interpretable concepts into a trained network.  
+Now we turn to **testing** one of the paper’s core claims:
+
+> *High-level concepts should manifest consistently across small input variants.*
+
+To do this, I built an R package (`xnnR`) that faithfully replicates the Fuxin Li et.al. explanation-extraction pipeline on MNIST.  
+
+
+## Results: Concept Stability on MNIST Variants {.smaller}
+
+### (a) Variants of “4”
+
+![Figure 10: Variants of “4” and their top-5 concept activations](images/Mnist_Example1.png)
+
+- **Concept X19** is consistently the strongest (weights 0.10–0.15) across all five “4” variants.  
+- **Concept X3** follows (0.06–0.09), capturing the short diagonal stroke.  
+- **Concept X1** (0.04–0.07) highlights the vertical segment.  
+- Lower-weight concepts (X17, X7, X20) appear only weakly.  
+- **Stability:** the same top-3 concepts appear in the same order for each variant, despite stroke-thickness and slant changes.  
+
+> **Takeaway:** The explanation network has learned a small set of **stable**, **sparse** features that reliably represent the “4” shape under minor perturbations.
+
+
+## Results: Cross-Digit Concept Consistency {.smaller}
+
+### (b) Digits 2, 3, 6, 7, 8, 9
+
+![Figure 11: Top-5 concepts for digits 2, 3, 6, 7, 8, 9](images/Mnist_Example2.png)
+
+- **Digit 2** → X3 (0.07), X1 (0.07), X6 (0.06) capture the upper curve and diagonal leg.  
+- **Digit 3** → X5 (0.08), X19 (0.06), X13 (0.04) focus on its two loops.  
+- **Digit 6** → X5 (0.11), X3 (0.09), X1 (0.09) identify the closed loop and tail.  
+- **Digit 7** → X1 (0.10), X5 (0.09), X17 (0.05) attend to the horizontal stroke and slanted leg.  
+- **Digits 8 & 9** recruit loops (X5, X16) and down-strokes (X3, X10).  
+- **Consistency across classes:** each digit’s top concepts align with the human-recognizable strokes that define its shape.
+
+> **Takeaway:** Different digits recruit **distinct**, yet **consistent**, sparse and orthogonal features under small perturbations.
+
+
+## Measured Metrics {.smaller}
+
+- **Faithfulness** (top-class match):  
+  $\displaystyle 9.16\%$  
+- **Sparsity** (fraction of active pixels per concept):  
+  $\displaystyle 0.8970\;\bigl(89.7\%\bigr)$  
+- **Orthogonality** (mean $\lvert\cos\rvert$ among concepts):  
+  $\displaystyle 0.0269$
+
+
+## Conclusion {.smaller}
+
+- Our R package (`xnnR`) **faithfully replicates** the XNN + SRAE pipeline.  
+- **Stability:** top concepts remain fixed across variants.  
+- **Sparsity:** on average **89.7 %** of pixels are active per concept (adjust β/q to tighten).  
+- **Orthogonality:** concepts are highly distinct ($\lvert\cos\rvert\approx0.027$).  
+- **Faithfulness:** current settings yield **9.16 %** label‐match—indicating the need to tune β, η, or learning‐rate for better fidelity.  
+
+> These results confirm that interpretable, stable, and non-redundant concepts can be extracted—but also highlight the trade-offs among faithfulness, sparsity, and orthogonality when reproducing the paper’s claims in practice.  
+
+
+# Future Directions {data-background-color="#004a6d" .smaller}
+
+## Research Opportunities {.smaller} 
+
+* **Interactive Explanation Dashboards**  
+  Develop user interfaces where stakeholders can tweak β/η/q and immediately see how concept activations change.  
+* **Continual & Online Learning**  
+  Extend XNN so it can update explanations on the fly as the backbone model continues to learn.
+
+## Technical Challenges {.smaller}
+
+* **Scaling to High-Resolution Images**  
+  Adapt the SRAE architecture and sparse‐reconstruction loss to handle large feature vectors efficiently.  
+* **Maintaining Explanation Consistency**  
+  Ensure orthogonality and sparsity persist when the backbone is fine-tuned or updated incrementally.  
+
+
+
+# Ethical Considerations {.smaller}
+
+* **Transparency & Informed Consent**  
+  Clearly document what each concept represents and obtain user agreement before generating explanations.  
+* **Fairness & Bias Mitigation**  
+  Audit concept activations across demographic groups to detect and correct any systematic biases.  
+* **Privacy & Data Protection**  
+  Ensure that feature‐importance maps cannot be reverse‐engineered to reveal sensitive attributes.  
+* **Accountability & Auditability**  
+  Log explanation outputs and model versions so that decisions can be traced and reviewed.  
+
+
+# Questions and Discussion {data-background-color="#004a6d" .smaller}
+
+
+## References {.smaller}
+
+1. Qi Z., Khorram S., & Fuxin L. (2021). *Embedding Deep Networks into Visual Explanations*. *Artificial Intelligence*, 292, 103435.  
+2. Li F., Qi Z., Khorram S., *et al.* (2021). *From Heatmaps to Structured Explanations of Image Classifiers*. *arXiv preprint* arXiv:2109.06365.  
+3. Schmidhuber J. (2014). *Deep Learning in Neural Networks: An Overview* (Technical Report IDSIA‑03‑14). The Swiss AI Lab IDSIA.  
+4. Dharmaraj D. (2022, June 1). *Convolutional Neural Networks (CNN) — Architecture Explained*. Medium. https://medium.com/@draj0718/convolutional-neural-networks-cnn-architectures-explained-716fb197b243
+
+
+
+# Appendix
+
+## R-script using xnnR
+
+Repo to be published on June 10th
+
+
+```r
+# testCNNwithXNN.R
+# A script to train a LeNet-5 CNN, distill it into an eXplanatory Neural Network (XNN),
+# and visualize feature importances on MNIST digits.
+
+# -
+# 1. Load Required Libraries
+# -
+library(keras)
+library(tensorflow)
+library(xnnR)
+library(fields)
+
+# -
+# 2. Data Loading & Preprocessing
+# -
+mnist        <- dataset_mnist()
+train_images <- mnist$train$x      # [60000,28,28]
+train_labels <- mnist$train$y
+test_images  <- mnist$test$x
+test_labels  <- mnist$test$y
+
+# Normalize pixel intensities to [0,1]
+train_images <- train_images / 255
+test_images  <- test_images  / 255
+
+# Reshape for CNN (add channel dim) and for XNN (flatten pixels)
+train_x_cnn  <- array_reshape(train_images,  c(nrow(train_images), 28, 28, 1))
+test_x_cnn   <- array_reshape(test_images,   c(nrow(test_images),   28, 28, 1))
+train_x_flat <- array_reshape(train_images,  c(nrow(train_images), 28 * 28))
+test_x_flat  <- array_reshape(test_images,   c(nrow(test_images),   28 * 28))
+
+# One-hot encode labels
+train_y <- to_categorical(train_labels, 10)
+test_y  <- to_categorical(test_labels,  10)
+
+
+# -
+# 3. LeNet-5 Definition & Training
+# -
+lenet <- keras_model_sequential() %>%
+  # 1st conv block
+  layer_conv_2d(
+    input_shape = c(28, 28, 1),
+    filters     = 6,
+    kernel_size = 5,
+    activation  = "tanh",
+    padding     = "same"
+  ) %>%
+  layer_average_pooling_2d(pool_size = 2) %>%
+  # 2nd conv block
+  layer_conv_2d(
+    filters     = 16,
+    kernel_size = 5,
+    activation  = "tanh"
+  ) %>%
+  layer_average_pooling_2d(pool_size = 2) %>%
+  # classifier head
+  layer_flatten() %>%
+  layer_dense(units = 120, activation = "tanh") %>%
+  layer_dense(units = 84,  activation = "tanh", name = "penultimate") %>%
+  layer_dense(units = 10,  activation = "softmax")
+
+lenet %>% compile(
+  optimizer = optimizer_sgd(learning_rate = 0.01, momentum = 0.9),
+  loss      = "categorical_crossentropy",
+  metrics   = "accuracy"
+)
+
+history_lenet <- lenet %>% fit(
+  x                = train_x_cnn,
+  y                = train_y,
+  batch_size       = 128,
+  epochs           = 5,
+  validation_split = 0.1
+)
+
+# Extract teacher (CNN) predictions for XNN distillation
+cnn_preds_train <- predict(lenet, train_x_cnn)
+cnn_preds_test  <- predict(lenet, test_x_cnn)
+
+
+# -
+# 4. XNN Initialization, Training & Metrics
+# -
+# 4.1 Set hyperparameters
+input_dim       <- 784
+explanation_dim <- 20
+num_classes     <- 10
+beta            <- 5.0   # sparsity weight
+eta             <- 0.1   # orthogonality weight
+q               <- 20.0  # log‐penalty scale
+
+# 4.2 Initialize SRAE (XNN)
+srae <- initialize_srae(
+  input_dim       = input_dim,
+  explanation_dim = explanation_dim,
+  num_classes     = num_classes,
+  beta            = beta,
+  eta             = eta,
+  q               = q
+)
+
+# 4.3 Train XNN to mimic CNN predictions
+trainXNN(
+  srae,
+  z_batch        = train_x_flat,
+  original_preds = cnn_preds_train,
+  num_epochs     = 10,
+  learning_rate  = 0.001,
+  batch_size     = 64,
+  verbose        = TRUE
+)
+
+# 4.4 Compute faithfulness (% correct top-class)
+probs      <- predictXNN(srae, test_x_flat)    # returns N × C
+xnn_labels <- max.col(probs)                  # 1…C
+faith      <- mean(xnn_labels == (test_labels + 1)) * 100
+
+# 4.5 Compute sparsity (avg active pixels per concept)
+sparsity <- computeSparsity(srae, eps = 1e-3) / 784
+
+# 4.6 Compute orthogonality (mean |cosine| over distinct pairs)
+params    <- .Call("R_get_srae_params", srae, PACKAGE = "xnnR")
+We        <- params$encoder_weights        # explanation_dim × input_dim
+row_norms <- sqrt(rowSums(We^2))           # length = explanation_dim
+Wn        <- We / row_norms                # row-normalized
+cos_mat   <- abs(Wn %*% t(Wn))             # L × L
+L         <- nrow(cos_mat)
+pairs     <- L * (L - 1) / 2
+orth      <- sum(cos_mat[upper.tri(cos_mat)]) / pairs
+
+# 4.7 Report metrics
+metrics <- list(
+  faithfulness_pct = faith,
+  sparsity_pct     = sparsity,
+  orthogonality    = orth
+)
+print(metrics)
+
+
+# -
+# 5. Pixel-Level Heatmaps
+# -
+# Select a sample and its top-5 explanation features
+sample_index <- 1
+z            <- as.numeric(train_x_flat[sample_index, ])
+h            <- encodeXNN(srae, z)
+top5         <- order(h, decreasing = TRUE)[1:5]
+
+# Prepare original image matrix (rotated for plotting)
+orig_mat <- matrix(z, 28, 28, byrow = TRUE)
+rot_orig <- t(apply(orig_mat, 2, rev))
+
+# Set up black-background plotting
+op <- par(
+  mfrow    = c(1, 6),
+  mar      = c(1, 1, 2, 1),
+  bg       = "black",
+  fg       = "white",
+  col.main = "white", col.lab = "white", col.axis = "white",
+  xaxs     = "i", yaxs = "i", pty = "s"
+)
+
+# Plot original image
+image(1:28, 1:28, rot_orig,
+      col   = gray.colors(256, 0, 1),
+      axes  = FALSE, ann = FALSE)
+title("Original Image", line = 0.5, cex.main = 1.2)
+
+# Plot mist “heatmaps” for each top feature
+theta_blur <- 2  # controls blur spread
+for (f in top5) {
+  fi_mat <- matrix(generateFeatureImportance(srae, f, z), 28, 28, byrow = TRUE)
+  sm     <- image.smooth(fi_mat, theta = theta_blur)$z
+  cutoff <- quantile(sm, 0.95)
+  sm[sm < cutoff] <- 0
+  sm <- sm / max(sm)
+  rot_s <- t(apply(sm, 2, rev))
+  image(1:28, 1:28, rot_s,
+        col   = gray.colors(256, 0, 1),
+        zlim  = c(0, 1),
+        axes  = FALSE, ann = FALSE)
+  title(sprintf("X%d: %.4f", f, h[f]), line = 0.5, cex.main = 1.0)
+}
+
+# Restore plotting parameters
+par(op)
+
+
+# -
+# 6. Multi-Sample Visualization
+# -
+plot_panel_bw_peaks <- function(idxs, panel_title,
+                                gap               = 0.2,
+                                blur_sigma        = 2.2,
+                                peak_pct          = 0.95,
+                                final_blur_factor = 0.4) {
+  top_k <- 5
+  n     <- length(idxs)
+  R     <- 2 * n - 1
+  C     <- top_k + 1
+  layout(matrix(seq_len(R * C), nrow = R, byrow = TRUE),
+         heights = rep(c(1, gap), length.out = R),
+         widths  = rep(1, C))
+  
+  op2 <- par(
+    bg       = "black",
+    fg       = "white",
+    col.main = "white", col.lab = "white", col.axis = "white",
+    mar      = c(0, 0, 2, 0),
+    oma      = c(4, 1, 1, 1),
+    pty      = "s"
+  )
+  
+  for (r in seq_len(n)) {
+    i    <- idxs[r]
+    z    <- as.numeric(train_x_flat[i, ])
+    mat_o <- matrix(z, 28, 28, byrow = TRUE)
+    
+    # Original image
+    image(1:28, 1:28, t(apply(mat_o, 2, rev)),
+          col   = gray.colors(256, 0, 1),
+          axes  = FALSE, ann = FALSE)
+    title("Original Image", line = 1, cex.main = 1.2)
+    
+    # Top-k feature maps
+    h     <- encodeXNN(srae, z)
+    feats <- order(h, decreasing = TRUE)[1:top_k]
+    for (f in feats) {
+      fi_mat <- matrix(generateFeatureImportance(srae, f, z), 28, 28, byrow = TRUE)
+      sm1    <- image.smooth(fi_mat, theta = blur_sigma)$z
+      cutoff <- quantile(sm1, peak_pct)
+      sm1[sm1 < cutoff] <- 0
+      sm2    <- image.smooth(sm1, theta = blur_sigma * 0.5)$z
+      sm3    <- image.smooth(sm2, theta = blur_sigma * final_blur_factor)$z
+      sm3    <- (sm3 - min(sm3)) / diff(range(sm3))
+      rot_s  <- t(apply(sm3, 2, rev))
+      image(1:28, 1:28, rot_s,
+            col   = gray.colors(256, 0, 1),
+            zlim  = c(0, 1),
+            axes  = FALSE, ann = FALSE)
+      title(sprintf("X%d: %.2f", f, h[f]), line = 1, cex.main = 1.2)
+    }
+    
+    if (r < n) for (col in seq_len(C)) plot.new()
+  }
+  
+  mtext(panel_title, side = 1, outer = TRUE, line = 2, font = 3, cex = 1.3)
+  par(op2)
+}
+
+# Example usage:
+four_idxs  <- which(train_labels == 4)[1:5]
+other_idxs <- sapply(c(2,3,6,7,8,9), function(d) which(train_labels == d)[1])
+
+plot_panel_bw_peaks(four_idxs,  "(a) Variants of “4”")
+plot_panel_bw_peaks(other_idxs, "(b) Digits 2,3,6,7,8,9")
+```
