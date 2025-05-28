@@ -30,8 +30,6 @@ crossref:
 
 # Why Do We Need Explanations? {.smaller}
 
-> “Trust follows from understanding.” — *NIST AI RMF (2023)*
-
 * **Safety‑critical decisions**  
   * Autonomous vehicles: distinguish a **red traffic light** from a red billboard  
   * Medical diagnostics: pathologists must identify the specific cells that trigger a cancer flag
