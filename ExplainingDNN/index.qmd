@@ -191,6 +191,7 @@ where
   1. **Faithfulness** (match original predictions)  
   2. **Sparsity** (keep concepts concise)  
   3. **Orthogonality** (make concepts distinct)  
+  
 **Gives us:** sparse, stable, and interpretable “concept activations” you can visualize and audit  
 
 
