@@ -15,7 +15,11 @@ https://bcervantesalvarez.github.io/Presentations/LoanApproval/
 
 https://bcervantesalvarez.github.io/Presentations/Itinerary/
 
-https://bcervantesalvarez.github.io/Presentations/BuildAQuartoPortfolio/
+https://bcervantesalvarez.github.io/Presentations/BuildAQuartoPortfolio
+
+https://bcervantesalvarez.github.io/Presentations/Consulting
+
+https://bcervantesalvarez.github.io/Presentations/ExplainingDNN
 
 
 
